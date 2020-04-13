@@ -1,6 +1,6 @@
 package com.agh.introwertycznelosie.data;
 
-public enum Faculties {
+public enum Faculty {
 
     WGiG,
     WIMIP,

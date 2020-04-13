@@ -9,13 +9,16 @@ public class Major {
   @GeneratedValue
   private int id;
 
-  private Faculties faculty;
+  private Faculty faculty;
   private String fullName;
-  private String shortName; // czy to jest w ogóle potrzebne? Że np informatyka to będzie inf?
+  private String shortName;
   private ModeOfStudy mode;
   private int numberOfPlaces;
-  private String contactPerson1; // tu ma byc klasa zamiast stringa
+
+  // TODO - klasa zamiast stringa, ale klasy jeszcze nie ma
+  private String contactPerson1;
   private String contactPerson2;
+
   private boolean mixedField;
   private String annotations;
 
@@ -27,11 +30,11 @@ public class Major {
     this.id = id;
   }
 
-  public Faculties getFaculty() {
+  public Faculty getFaculty() {
     return faculty;
   }
 
-  public void setFaculty(Faculties faculty) {
+  public void setFaculty(Faculty faculty) {
     this.faculty = faculty;
   }
 
