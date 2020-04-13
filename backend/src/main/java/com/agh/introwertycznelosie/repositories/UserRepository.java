@@ -1,6 +1,6 @@
-package com.agh.introwertycznelosie.repositories;
+package main.java.com.agh.introwertycznelosie.repositories;
 
-import com.agh.introwertycznelosie.data.User;
+import main.java.com.agh.introwertycznelosie.data.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Integer> {

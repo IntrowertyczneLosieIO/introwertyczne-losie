@@ -1,4 +1,4 @@
-package com.agh.introwertycznelosie.data;
+package main.java.com.agh.introwertycznelosie.data;
 
 public enum Faculty {
 
