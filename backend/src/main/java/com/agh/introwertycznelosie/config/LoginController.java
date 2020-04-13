@@ -1,9 +1,9 @@
-package com.agh.introwertycznelosie.config;
+package main.java.com.agh.introwertycznelosie.config;
 
 import com.agh.introwertycznelosie.Validators.UserValidator;
-import com.agh.introwertycznelosie.data.Role;
-import com.agh.introwertycznelosie.data.User;
-import com.agh.introwertycznelosie.repositories.RoleRepository;
+import main.java.com.agh.introwertycznelosie.data.Role;
+import main.java.com.agh.introwertycznelosie.data.User;
+import main.java.com.agh.introwertycznelosie.repositories.RoleRepository;
 import com.agh.introwertycznelosie.services.SecurityService;
 import com.agh.introwertycznelosie.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
