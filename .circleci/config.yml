@@ -7,9 +7,10 @@ jobs:
       - image: circleci/openjdk:11.0.3-jdk-stretch
     steps:
       - run:
-          name: Code Has Arrived
+          name: List Files
           command: |
             ls -al
+            cd /circleci
             echo '^^^That should look familiar^^^'
       - checkout
       - restore_cache:
