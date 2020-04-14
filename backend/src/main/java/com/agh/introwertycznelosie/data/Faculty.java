@@ -17,5 +17,5 @@ public enum Faculty {
     WEiP,
     WFiIS,
     WMS,
-    WH;
+    WH
 }
