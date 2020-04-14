@@ -1,7 +1,7 @@
-package main.java.com.agh.introwertycznelosie.data;
+package com.agh.introwertycznelosie.data;
 
-import main.java.com.agh.introwertycznelosie.data.Faculty;
-import main.java.com.agh.introwertycznelosie.data.ModeOfStudy;
+import com.agh.introwertycznelosie.data.Faculty;
+import com.agh.introwertycznelosie.data.ModeOfStudy;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

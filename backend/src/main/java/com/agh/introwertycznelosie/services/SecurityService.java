@@ -1,4 +1,4 @@
-package main.java.com.agh.introwertycznelosie.services;
+package com.agh.introwertycznelosie.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

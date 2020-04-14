@@ -1,7 +1,7 @@
-package main.java.com.agh.introwertycznelosie.Validators;
+package com.agh.introwertycznelosie.Validators;
 
-import main.java.com.agh.introwertycznelosie.data.User;
-import main.java.com.agh.introwertycznelosie.services.UserService;
+import com.agh.introwertycznelosie.data.User;
+import com.agh.introwertycznelosie.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

@@ -1,8 +1,8 @@
-package main.java.com.agh.introwertycznelosie.services;
+package com.agh.introwertycznelosie.services;
 
-import main.java.com.agh.introwertycznelosie.data.User;
-import main.java.com.agh.introwertycznelosie.repositories.RoleRepository;
-import main.java.com.agh.introwertycznelosie.repositories.UserRepository;
+import com.agh.introwertycznelosie.data.User;
+import com.agh.introwertycznelosie.repositories.RoleRepository;
+import com.agh.introwertycznelosie.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
