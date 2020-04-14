@@ -114,9 +114,9 @@
                         <configuration>
                             <target>
                                 <delete includeemptydirs="true">
-                                    <fileset dir="${project.basedir}/src/main/resources/static" includes="**/*"/>
+                                    <fileset dir="${project.basedir}/src/main/resources/templates" includes="**/*"/>
                                 </delete>
-                                <copy todir="${project.basedir}/src/main/resources/static">
+                                <copy todir="${project.basedir}/src/main/resources/templates">
                                     <fileset dir="${project.basedir}/../frontend/build"/>
                                 </copy>
                             </target>
