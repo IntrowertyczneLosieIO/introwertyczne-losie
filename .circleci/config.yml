@@ -7,9 +7,10 @@ jobs:
       - image: circleci/openjdk:11.0.3-jdk-stretch
     steps:
       - run:
-        name: List Files
-        command: |
-          ls -al
+          name: Code Has Arrived
+          command: |
+            ls -al
+            echo '^^^That should look familiar^^^'
       - checkout
       - restore_cache:
           key: introwertyczne-losie/backend-{{ checksum "pom.xml" }}
