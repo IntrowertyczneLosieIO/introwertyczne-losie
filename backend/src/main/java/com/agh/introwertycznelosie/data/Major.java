@@ -1,11 +1,9 @@
 package com.agh.introwertycznelosie.data;
 
-import com.agh.introwertycznelosie.data.Faculty;
-import com.agh.introwertycznelosie.data.ModeOfStudy;
-
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
+@Entity
 public class Major {
 
     @Id

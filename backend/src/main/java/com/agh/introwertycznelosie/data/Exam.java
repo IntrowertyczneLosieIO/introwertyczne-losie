@@ -1,9 +1,10 @@
 package com.agh.introwertycznelosie.data;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
-
+@Entity
 public class Exam {
 
     @Id
