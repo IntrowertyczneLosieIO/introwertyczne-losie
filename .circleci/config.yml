@@ -9,7 +9,8 @@ jobs:
       - run:
           name: List Files
           command: |
-            cd ../backend
+            cd ../
+            cd ../
             ls -al
             echo '^^^That should look familiar^^^'
       - checkout
