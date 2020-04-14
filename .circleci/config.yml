@@ -9,7 +9,7 @@ jobs:
       - run:
           name: List Files
           command: |
-            cd /circleci
+            cd ../
             ls -al
             echo '^^^That should look familiar^^^'
       - checkout
