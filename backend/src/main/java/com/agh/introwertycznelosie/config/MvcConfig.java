@@ -1,4 +1,4 @@
-package main.java.com.agh.introwertycznelosie.config;
+package com.agh.introwertycznelosie.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
