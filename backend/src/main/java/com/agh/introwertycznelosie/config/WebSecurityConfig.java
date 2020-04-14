@@ -1,4 +1,4 @@
-package main.java.com.agh.introwertycznelosie.config;
+package com.agh.introwertycznelosie.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

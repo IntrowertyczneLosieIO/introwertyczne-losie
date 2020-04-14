@@ -1,4 +1,4 @@
-package main.java.com.agh.introwertycznelosie.data;
+package com.agh.introwertycznelosie.data;
 
 import javax.persistence.*;
 import java.util.Set;

@@ -1,13 +1,13 @@
-package main.java.com.agh.introwertycznelosie.services;
+package com.agh.introwertycznelosie.services;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import main.java.com.agh.introwertycznelosie.data.Role;
-import main.java.com.agh.introwertycznelosie.data.User;
-import main.java.com.agh.introwertycznelosie.repositories.UserRepository;
+import com.agh.introwertycznelosie.data.Role;
+import com.agh.introwertycznelosie.data.User;
+import com.agh.introwertycznelosie.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

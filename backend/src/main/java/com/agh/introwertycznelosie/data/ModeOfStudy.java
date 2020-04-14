@@ -1,6 +1,6 @@
-package main.java.com.agh.introwertycznelosie.data;
+package com.agh.introwertycznelosie.data;
 
 public enum ModeOfStudy {
 
-    fullTime, partTime;
+    fullTime, partTime
 }

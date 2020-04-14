@@ -16,6 +16,15 @@ public class Exam {
     private Date endDate;
     //TODO Add Recrutation Cycle field after it has been implemented
 
+
+    public Exam(String name, Faculty faculty, ModeOfStudy modeOfStudy, Date startDate, Date endDate) {
+        this.name = name;
+        this.faculty = faculty;
+        this.modeOfStudy = modeOfStudy;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     public long getId() {
         return id;
     }
@@ -63,11 +72,4 @@ public class Exam {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-
-    public Exam(String name, Faculty faculty, ModeOfStudy modeOfStudy, Date startDate, Date endDate)
-    {
-
-    }
-
-
 }
