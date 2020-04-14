@@ -9,8 +9,8 @@ jobs:
       - run:
           name: List Files
           command: |
-            ls -al
             cd /circleci
+            ls -al
             echo '^^^That should look familiar^^^'
       - checkout
       - restore_cache:
