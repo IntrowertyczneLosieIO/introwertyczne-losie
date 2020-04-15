@@ -112,10 +112,8 @@
                             generate-resources
                         </phase>
                         <configuration>
-                            <tasks>
-                                <mkdir dir="${project.basedir}/src/main/resources/static"/>
-                            </tasks>
                             <target>
+                                <mkdir dir="${project.basedir}/src/main/resources/static"/>
                                 <delete includeemptydirs="true">
                                     <fileset dir="${project.basedir}/src/main/resources/static" includes="**/*"/>
                                 </delete>
