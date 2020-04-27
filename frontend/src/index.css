@@ -11,3 +11,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.dashboard-container {
+  background-color: white;
+  margin-left: 0;
+}
+
+.navbar-style {
+  background-color: steelblue;
+}
+
+.custom-sidenav-bg {
+  background-color: honeydew;
+}
+
+.custom-width-modal {
+  width: 90%;
+  max-width: 100%;
+}
+
+.bdcustm {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.modal-content {
+  background-color: mintcream;
+}
