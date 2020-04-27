@@ -3,6 +3,7 @@ package com.agh.introwertycznelosie.data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.util.Date;
 import java.time.LocalTime;
 
@@ -12,10 +13,14 @@ public class Subexam {
     @Id
     @GeneratedValue
     private long id;
+    @OneToOne
     private Exam exam;
+    @OneToOne
     private Room room;
     private Date date;
     private LocalTime time;
+
+    public Subexam() {}
 
     public Subexam(long id, Exam exam, Room room, Date date, LocalTime time) {
         this.id = id;
@@ -29,7 +34,7 @@ public class Subexam {
 
     public long getId() { return this.id; }
 
-    public void setExam(long exam) { this.exam = exam; }
+    public void setExam(Exam exam) { this.exam = exam; }
 
     public Exam getExam() { return this.exam; }
 

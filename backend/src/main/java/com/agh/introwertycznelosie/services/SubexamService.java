@@ -19,8 +19,6 @@ public class SubexamService {
         return subexamRepository.getOne(id);
     }
 
-    public void delete(Long id){
-        SubexamRepository.delete(get(id));
-    }
+    public void delete(Subexam subexam){ subexamRepository.delete(subexam); }
 
 }
