@@ -88,11 +88,33 @@ class AddMajor extends React.Component {
         }
         else {
             this.props.handleHide();
-            this.setState({
-                userData: this.getInitialState()
-            });
-            this.setValidated(false);
-            resolve();
+            let userDataToSend = {
+                faculty: "WIEiT",
+                fullName: this.state.userData.major,
+                shortName: this.state.userData.major,
+                mode: "fullTime",
+                numberOfPlaces: 100,
+                contactPerson1: this.state.userData.name1 + " " + this.state.userData.surname1,
+                contactPerson2: this.state.userData.name2 + " " + this.state.userData.surname2,
+                mixedField: true,
+                annotations: this.state.userData.annotations
+            }
+            fetch("/new-major", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userDataToSend)
+            })
+                .then((response) => response.json())
+                .then(() => {
+                    this.setState({
+                        userData: this.getInitialState()
+                    });
+                    this.setValidated(false);
+                    resolve();
+                })
+                .catch((error) => console.log(error));
         }
     }
 

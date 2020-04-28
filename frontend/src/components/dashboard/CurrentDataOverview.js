@@ -30,8 +30,8 @@ class CurrentDataOverview extends React.Component {
             [this.state.Majors]: {
                 firstColumn: "Nazwa",
                 secondColumn: "Wydział",
-                thirdColumn: "Kierunek łączony",
-                fourthColumn: "Rodzaj studiów"
+                thirdColumn: "Osoba kontaktowa 1",
+                fourthColumn: "Osoba kontaktowa 2"
             },
             [this.state.Rooms]: {
                 firstColumn: "Nazwa",

@@ -6,27 +6,34 @@ class DataTable extends React.Component {
         super(props);
         this.state = {
             name: "",
-            tableData: [
-                {
-                    firstColumn: "kierunek1",
-                    secondColumn: "wydział1",
-                    thirdColumn: "TAK",
-                    fourthColumn: "stacjonarne",
-                    key: "1"
-                },
-                {
-                    firstColumn: "kierunek2",
-                    secondColumn: "wydział2",
-                    thirdColumn: "TAK",
-                    fourthColumn: "stacjonarne",
-                    key: "2"
-                }
-            ]
+            tableData: []
         };
     }
 
     componentDidMount() {
-        //TODO: getting data from database
+        fetch("/majors")
+            .then((response) => {
+                return response.json();
+            })
+            .then((response) => {
+                this.setState({
+                    tableData: [
+                        {
+                            firstColumn: response[0] ? response[0].fullName : "",
+                            secondColumn: response[0] ? response[0].faculty : "",
+                            thirdColumn: response[0] ? response[0].contactPerson1 : "",
+                            fourthColumn: response[0] ? response[0].contactPerson2 : ""
+                            },
+                        {
+                            firstColumn: response[1] ? response[1].fullName : "",
+                            secondColumn: response[1] ? response[1].faculty : "",
+                            thirdColumn: response[1] ? response[1].contactPerson1 : "",
+                            fourthColumn: response[1] ? response[1].contactPerson2 : ""
+                        }
+                    ]
+                });
+                console.log(this.state.tableData);
+            })
     }
 
     render() {
