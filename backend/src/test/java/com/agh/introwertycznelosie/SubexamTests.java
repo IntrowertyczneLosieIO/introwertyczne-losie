@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 public class SubexamTests {
+
 //    private static Subexam s1;
 //    private static Subexam s2;
 //    private static Exam e1;
@@ -58,5 +59,6 @@ public class SubexamTests {
 //    void testDelete(){
 //        subexamService.delete(s1);
 //    }
+
 
 }
