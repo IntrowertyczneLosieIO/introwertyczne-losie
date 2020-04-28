@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import DataTable from "./DataTable";
 import Button from "react-bootstrap/Button";
-// import AddMajor from "../forms/AddMajor";
+import AddMajor from "../forms/AddMajor";
 
 class CurrentDataOverview extends React.Component {
     constructor(props) {
@@ -63,11 +63,11 @@ class CurrentDataOverview extends React.Component {
                     <Col xs={2}>
                         <Button variant={"success"} className={"mb-3"} size={"sm"} block
                                 onClick={this.handleShow}>{this.props.addNew}</Button>
-                        {/*<AddMajor*/}
-                        {/*    handleShow={this.handleShow}*/}
-                        {/*    handleHide={this.handleHide}*/}
-                        {/*    show={this.state.showAddNewMajor}*/}
-                        {/*    options={10}/>*/}
+                        <AddMajor
+                            handleShow={this.handleShow}
+                            handleHide={this.handleHide}
+                            show={this.state.showAddNewMajor}
+                            options={10}/>
                     </Col>
                 </Row>
             </div>

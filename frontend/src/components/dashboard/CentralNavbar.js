@@ -13,7 +13,7 @@ class CentralNavbar extends React.Component {
                 </Navbar.Brand>
                 <Nav className={"mr-auto text-light"}>
                     <Col>
-                        Akademia Górniczo-Hutnicza im. Stanisława Staszica w Krakowie
+                        AGH
                         <h5>Centrum Rekrutacji</h5>
                     </Col>
                 </Nav>
