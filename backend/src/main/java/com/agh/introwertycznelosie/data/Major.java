@@ -3,8 +3,38 @@ package com.agh.introwertycznelosie.data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Objects;
+
 @Entity
 public class Major {
+
+    public Major() {}
+
+    public Major(Faculty faculty, String fullName, String shortName, ModeOfStudy mode, int numberOfPlaces)
+    {
+        this.faculty = faculty;
+        this.fullName = fullName;
+        this.shortName = shortName;
+        this.mode = mode;
+        this.numberOfPlaces = numberOfPlaces;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Major major = (Major) o;
+        return id == major.id &&
+                faculty == major.faculty &&
+                fullName.equals(major.fullName) &&
+                mode == major.mode &&
+                numberOfPlaces == major.numberOfPlaces;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, faculty, fullName, mode, numberOfPlaces);
+    }
 
     @Id
     @GeneratedValue

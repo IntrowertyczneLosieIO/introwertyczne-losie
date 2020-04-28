@@ -11,8 +11,9 @@ public class MajorService {
     @Autowired
     MajorRepository majorRepository;
 
-    public void save(Major major) {
-        majorRepository.save(major);
+    public long save(Major major) {
+        return majorRepository.save(major).getId();
+
     }
 
     public Major get(Long id) {
@@ -20,10 +21,22 @@ public class MajorService {
     }
 
     public void delete(Long id) {
-        majorRepository.delete(get(id));
+        majorRepository.deleteById(id);
     }
 
     public Major findByFullName(String fullname) {
         return majorRepository.findByFullName(fullname);
+    }
+
+    public void deleteIfExists(Long id)
+    {
+        try
+        {
+            delete(id);
+        }
+        catch (NullPointerException ex)
+        {
+
+        }
     }
 }
