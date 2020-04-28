@@ -8,8 +8,8 @@ import java.util.List;
 public class Room {
 
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private int recommendedCapacity;
     private int maximalCapacity;
@@ -28,11 +28,11 @@ public class Room {
         this.setAvailableDates(availableDates);
     }
 
-    public int getId() {
+public Long getId(){
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
