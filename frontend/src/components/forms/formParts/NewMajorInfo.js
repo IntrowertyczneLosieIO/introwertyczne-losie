@@ -5,14 +5,6 @@ import Col from "react-bootstrap/Col";
 
 class NewMajorInfo extends React.Component {
 
-    constructor(props) {
-        super(props);
-        // this.facultyRef = React.createRef();
-        // this.modeRef = React.createRef();
-        // this.typeRef = React.createRef();
-        // this.mixedRef = React.createRef();
-    }
-
     handleControlChange = (event) => {
         this.props.getFormData(event.target.id, event.target.value);
     }
