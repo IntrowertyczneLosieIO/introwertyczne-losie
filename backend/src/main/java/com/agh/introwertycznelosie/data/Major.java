@@ -8,7 +8,7 @@ public class Major {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
 
     private Faculty faculty;
     private String fullName;
@@ -23,11 +23,11 @@ public class Major {
     private boolean mixedField;
     private String annotations;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
