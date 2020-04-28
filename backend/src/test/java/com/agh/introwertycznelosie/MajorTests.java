@@ -3,65 +3,41 @@ package com.agh.introwertycznelosie;
 import com.agh.introwertycznelosie.data.Faculty;
 import com.agh.introwertycznelosie.data.Major;
 import com.agh.introwertycznelosie.data.ModeOfStudy;
+import com.agh.introwertycznelosie.repositories.MajorRepository;
 import com.agh.introwertycznelosie.services.MajorService;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.event.annotation.AfterTestMethod;
-import org.springframework.test.context.event.annotation.BeforeTestMethod;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
+@Transactional
 public class MajorTests {
-    @Test
-    void contextLoads() {
-    }
 
     @Test
     void saveAndGetMajorTest()
     {
-        System.out.println(m1.getId());
         m1 = majorService.save(m1);
-        Major testMajor = majorService.findByFullName(m1.getFullName());
-        System.out.println(testMajor.getId());
+        Major testMajor = majorService.get(m1.getId());
         Assertions.assertEquals(m1, testMajor);
         Assertions.assertNotEquals(m2, testMajor);
-    }
-
-    @BeforeTestMethod("editMajorTest")
-    void setupEdit()
-    {
-        majorService.save(m1);
     }
 
     @Test
     void editMajorTest()
     {
-        Major testMajor = majorService.findByFullName(m1.getFullName());
+        Major testMajor = majorService.get(m1.getId());
         testMajor.setNumberOfPlaces(42);
-        majorService.delete(m1.getId());
         majorService.save(testMajor);
-        testMajor = majorService.findByFullName(m1.getFullName());
-        Assertions.assertEquals(42, testMajor.getNumberOfPlaces());
-    }
-    @AfterTestMethod("editMajorTest")
-    void cleanupEdit()
-    {
-        majorService.delete(majorService.findByFullName(m1.getFullName()).getId());
-    }
-
-    @BeforeTestMethod("deleteTest")
-    void setupDelete()
-    {
-        majorService.save(m1);
-        majorService.save(m2);
+        Assertions.assertEquals(42, majorService.get(m1.getId()).getNumberOfPlaces());
     }
 
     @Test
     void deleteTest()
     {
-        majorService.delete(m1.getId());
+        Assertions.assertDoesNotThrow(() -> majorService.delete(m1.getId()));
+        Assertions.assertThrows(EmptyResultDataAccessException.class, () ->majorService.delete(m1.getId()));
     }
 
     @Autowired
@@ -71,10 +47,43 @@ public class MajorTests {
     private static Major m2;
 
     @BeforeAll
-    static void setup()
+    static void setupAll()
     {
-        m1 = new Major(Faculty.WIEiT, "InformatykaTest", "Infa-TEST", ModeOfStudy.fullTime, 200);
-        m2 = new Major(Faculty.WEAiIB, "ElektrotechnikaTest", "ET-TEST", ModeOfStudy.partTime, 150);
+        m1 = new Major();
+
+        m1.setFaculty(Faculty.WIEiT);
+        m1.setFullName("InformatykaTest");
+        m1.setShortName("Infa-TEST");
+        m1.setMode(ModeOfStudy.fullTime);
+        m1.setNumberOfPlaces(200);
+
+        m2 = new Major();
+
+        m2.setFaculty(Faculty.WIEiT);
+        m2.setFullName("ElektrotechnikaTest");
+        m2.setShortName("ET-TEST");
+        m2.setMode(ModeOfStudy.partTime);
+        m2.setNumberOfPlaces(150);
+
+    }
+    @BeforeEach
+    void setupEach()
+    {
+        m1 = majorService.save(m1);
+        m2 = majorService.save(m2);
+    }
+    @AfterEach
+    void cleanupEach()
+    {
+        try
+        {
+            majorService.delete(m1.getId());
+            majorService.delete(m2.getId());
+        }
+        catch (EmptyResultDataAccessException ex)
+        {
+
+        }
     }
 
 
