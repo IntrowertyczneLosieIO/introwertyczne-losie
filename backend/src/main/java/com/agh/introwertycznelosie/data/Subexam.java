@@ -22,8 +22,7 @@ public class Subexam {
 
     public Subexam() {}
 
-    public Subexam(long id, Exam exam, Room room, Date date, LocalTime time) {
-        this.id = id;
+    public Subexam(Exam exam, Room room, Date date, LocalTime time) {
         this.exam = exam;
         this.room = room;
         this.date = date;

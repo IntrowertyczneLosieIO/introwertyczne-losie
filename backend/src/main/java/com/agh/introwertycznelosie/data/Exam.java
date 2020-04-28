@@ -17,6 +17,7 @@ public class Exam {
     private Date endDate;
     //TODO Add Recrutation Cycle field after it has been implemented
 
+    public Exam(){}
 
     public Exam(String name, Faculty faculty, ModeOfStudy modeOfStudy, Date startDate, Date endDate) {
         this.name = name;

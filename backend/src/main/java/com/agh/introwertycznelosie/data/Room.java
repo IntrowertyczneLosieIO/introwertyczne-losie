@@ -28,7 +28,7 @@ public class Room {
         this.setAvailableDates(availableDates);
     }
 
-    public Long getId() {
+public Long getId(){
         return id;
     }
 
