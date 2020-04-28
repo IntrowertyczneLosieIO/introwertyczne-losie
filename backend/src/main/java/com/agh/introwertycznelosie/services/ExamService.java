@@ -11,16 +11,16 @@ public class ExamService {
     @Autowired
     ExamRepository examRepository;
 
-    public void save(Exam exam){
-        examRepository.save(exam);
+    public Exam save(Exam exam){
+        return examRepository.save(exam);
     }
 
     public Exam get(Long id){
         return examRepository.getOne(id);
     }
 
-    public void delete(Long id){
-        examRepository.delete(get(id));
-    }
+    public void delete(Long id){ examRepository.deleteById(id); }
+
+    public void delete(Exam exam){ examRepository.delete(exam); }
 
 }

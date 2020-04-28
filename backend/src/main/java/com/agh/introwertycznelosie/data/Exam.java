@@ -9,7 +9,7 @@ public class Exam {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String name;
     private Faculty faculty;
     private ModeOfStudy modeOfStudy;
@@ -17,6 +17,7 @@ public class Exam {
     private Date endDate;
     //TODO Add Recrutation Cycle field after it has been implemented
 
+    public Exam(){}
 
     public Exam(String name, Faculty faculty, ModeOfStudy modeOfStudy, Date startDate, Date endDate) {
         this.name = name;
@@ -26,11 +27,11 @@ public class Exam {
         this.endDate = endDate;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

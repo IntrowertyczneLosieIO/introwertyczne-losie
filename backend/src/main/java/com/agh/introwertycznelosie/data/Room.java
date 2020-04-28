@@ -8,8 +8,8 @@ import java.util.List;
 public class Room {
 
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private int recommendedCapacity;
     private int maximalCapacity;
@@ -18,11 +18,21 @@ public class Room {
     @OneToMany(mappedBy = "room")
     private List<DateRange> availableDates = new ArrayList<>();
 
-    public int getId() {
+    public Room(){}
+
+    public Room(int recommendedCapacity, int maximalCapacity, String localization, String number, List availableDates){
+        this.setRecommendedCapacity(recommendedCapacity);
+        this.setMaximalCapacity(maximalCapacity);
+        this.setLocalization(localization);
+        this.setNumber(number);
+        this.setAvailableDates(availableDates);
+    }
+
+public Long getId(){
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

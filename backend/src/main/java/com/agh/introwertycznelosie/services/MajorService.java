@@ -13,8 +13,8 @@ public class MajorService {
     @Autowired
     MajorRepository majorRepository;
 
-    public void save(Major major) {
-        majorRepository.save(major);
+    public Major save(Major major) {
+        return majorRepository.save(major);
     }
 
     public List<Major> get() {
@@ -26,8 +26,10 @@ public class MajorService {
     }
 
     public void delete(Long id) {
-        majorRepository.delete(get(id));
+        majorRepository.deleteById(id);
     }
+
+    public void delete(Major major) { majorRepository.delete(major); }
 
     public Major findByFullName(String fullname) {
         return majorRepository.findByFullName(fullname);
