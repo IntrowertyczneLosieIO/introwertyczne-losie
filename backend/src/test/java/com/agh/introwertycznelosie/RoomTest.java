@@ -10,13 +10,16 @@ import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.event.annotation.AfterTestMethod;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Transactional
 public class RoomTest {
     private static Room r1;
     private static Room r2;
@@ -36,28 +39,23 @@ public class RoomTest {
     @Test
     void testRoomSave(){
         roomService.save(r1);
-        roomService.save(r2);
     }
     @Test
     void testRoomGet(){
+        roomService.save(r2);
         assertEquals(roomService.get(r1.getId()).getId(), r1.getId());
         assertEquals(roomService.get(r2.getId()).getId(), r2.getId());
     }
 
-    @Test
-    void testFindRoomByNumber(){
-        //assertEquals(roomService.findByNumber("3.42").getId(), r1.getId());
-        //assertEquals(roomService.findByNumber("1.11").getId(), r2.getId());
-    }
 
     @Test
-    @AfterTestMethod("testFindRoomByNumber")
+    @AfterTestMethod("testRoomSave")
     void testDeleteById(){
         roomService.delete(r2.getId());
     }
 
     @Test
-    @AfterTestMethod("testFindRoomByNumber")
+    @AfterTestMethod("testRoomSave")
     void testDeleteByObject(){
         roomService.delete(r1);
     }
