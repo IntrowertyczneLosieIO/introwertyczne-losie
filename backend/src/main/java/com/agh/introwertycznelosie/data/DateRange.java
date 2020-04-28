@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 public class DateRange {
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
 
     private static final String DATE_PATTERN = "yyyy-MM-dd HH:mm";
     private LocalDateTime dateFrom;
@@ -46,11 +46,11 @@ public class DateRange {
         this.room = room;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

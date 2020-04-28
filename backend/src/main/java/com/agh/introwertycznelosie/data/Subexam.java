@@ -12,7 +12,7 @@ public class Subexam {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     @OneToOne
     private Exam exam;
     @OneToOne
@@ -29,9 +29,9 @@ public class Subexam {
         this.time = time;
     }
 
-    public void setId(long id) { this.id = id; }
+    public void setId(Long id) { this.id = id; }
 
-    public long getId() { return this.id; }
+    public Long getId() { return this.id; }
 
     public void setExam(Exam exam) { this.exam = exam; }
 

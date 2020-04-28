@@ -13,9 +13,9 @@ public class RoomService {
 
     public Room save(Room room) { return roomRepository.save(room);}
 
-    public Room get(Long id) {return roomRepository.getOne(id);}
+    public Room get(Long id) { return roomRepository.getOne(id);}
 
-    public void delete(Long id) {roomRepository.deleteById(id);}
+    public void delete(Long id) { roomRepository.deleteById(id);}
 
     public void delete(Room room) { roomRepository.delete(room);}
 

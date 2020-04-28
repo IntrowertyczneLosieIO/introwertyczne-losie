@@ -11,8 +11,8 @@ public class SubexamService {
     @Autowired
     SubexamRepository subexamRepository;
 
-    public void save(Subexam subexam){
-        subexamRepository.save(subexam);
+    public Subexam save(Subexam subexam){
+        return subexamRepository.save(subexam);
     }
 
     public Subexam get(Long id){
@@ -20,5 +20,7 @@ public class SubexamService {
     }
 
     public void delete(Subexam subexam){ subexamRepository.delete(subexam); }
+
+    public void delete(Long id){ subexamRepository.deleteById(id); }
 
 }
