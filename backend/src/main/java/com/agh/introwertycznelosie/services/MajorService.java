@@ -5,15 +5,20 @@ import com.agh.introwertycznelosie.repositories.MajorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MajorService {
 
     @Autowired
     MajorRepository majorRepository;
 
-    public long save(Major major) {
-        return majorRepository.save(major).getId();
+    public Major save(Major major) {
+        return majorRepository.save(major);
+    }
 
+    public List<Major> get() {
+        return majorRepository.findTop2ByOrderByIdDesc();
     }
 
     public Major get(Long id) {
@@ -24,19 +29,9 @@ public class MajorService {
         majorRepository.deleteById(id);
     }
 
+    public void delete(Major major) { majorRepository.delete(major); }
+
     public Major findByFullName(String fullname) {
         return majorRepository.findByFullName(fullname);
-    }
-
-    public void deleteIfExists(Long id)
-    {
-        try
-        {
-            delete(id);
-        }
-        catch (NullPointerException ex)
-        {
-
-        }
     }
 }

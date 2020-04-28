@@ -11,13 +11,11 @@ public class RoomService {
     @Autowired
     RoomRepository roomRepository;
 
-    public void save(Room room) { roomRepository.save(room);}
+    public Room save(Room room) { return roomRepository.save(room);}
 
-    public Room get(Long id) {return roomRepository.getOne(id);}
+    public Room get(Long id) { return roomRepository.getOne(id);}
 
-    public Room findByNumber(String number) { return roomRepository.findByNumber(number);}
-
-    public void delete(Long id) {roomRepository.delete(get(id));}
+    public void delete(Long id) { roomRepository.deleteById(id);}
 
     public void delete(Room room) { roomRepository.delete(room);}
 
