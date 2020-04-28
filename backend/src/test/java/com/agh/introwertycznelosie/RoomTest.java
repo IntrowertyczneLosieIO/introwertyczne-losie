@@ -25,9 +25,11 @@ public class RoomTest {
     private static Room r2;
     @Autowired
     private RoomService roomService;
+    @Autowired
+    private RoomRepository roomRepository;
 
     @BeforeAll
-    public static void setup(){
+    public static void setup() {
         LinkedList<DateRange> availableDates = new LinkedList<>();
         availableDates.add(new DateRange());
         availableDates.add(new DateRange());
@@ -37,12 +39,13 @@ public class RoomTest {
     }
 
     @Test
-    void testRoomSave(){
-        roomService.save(r1);
+    void testRoomSave() {
+        r1 = roomService.save(r1);
     }
+
     @Test
-    void testRoomGet(){
-        roomService.save(r2);
+    void testRoomGet() {
+        r2 = roomService.save(r2);
         assertEquals(roomService.get(r1.getId()).getId(), r1.getId());
         assertEquals(roomService.get(r2.getId()).getId(), r2.getId());
     }
@@ -50,13 +53,16 @@ public class RoomTest {
 
     @Test
     @AfterTestMethod("testRoomSave")
-    void testDeleteById(){
-        roomService.delete(r2.getId());
+    void testDeleteById() {
+        assertThrows(org.springframework.dao.EmptyResultDataAccessException.class, () -> {
+            roomService.delete(r2.getId());
+            roomService.get(r2.getId());
+        });
     }
 
     @Test
     @AfterTestMethod("testRoomSave")
-    void testDeleteByObject(){
+    void testDeleteByObject() {
         roomService.delete(r1);
     }
 }
