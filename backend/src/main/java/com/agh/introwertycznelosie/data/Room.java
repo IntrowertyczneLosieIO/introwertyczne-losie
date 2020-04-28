@@ -18,6 +18,16 @@ public class Room {
     @OneToMany(mappedBy = "room")
     private List<DateRange> availableDates = new ArrayList<>();
 
+    public Room(){}
+
+    public Room(int recommendedCapacity, int maximalCapacity, String localization, String number, List availableDates){
+        this.setRecommendedCapacity(recommendedCapacity);
+        this.setMaximalCapacity(maximalCapacity);
+        this.setLocalization(localization);
+        this.setNumber(number);
+        this.setAvailableDates(availableDates);
+    }
+
     public int getId() {
         return id;
     }
