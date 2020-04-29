@@ -1,5 +1,6 @@
-package com.agh.introwertycznelosie.data;
+package com.agh.introwertycznelosie;
 
+import com.agh.introwertycznelosie.data.Exam;
 import com.agh.introwertycznelosie.services.ExamService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class ExamTest {
 
-    private static Exam exam1, exam2;
+    private static Exam exam1, exam2, exam1Test;
 
     @Autowired
     private ExamService examService;
@@ -31,7 +32,7 @@ class ExamTest {
 
     @Test
     void testAddingExamToDatabase(){
-        Exam exam1Test = examService.save(exam1);
+        exam1Test = examService.save(exam1);
         assertNotNull(exam1Test);
     }
 
@@ -39,7 +40,7 @@ class ExamTest {
     void testGettingExamFromDatabase() {
         Exam exam2Test = examService.save(exam2);
         Exam exam2GetTest = examService.get(exam2Test.getId());
-        assertEquals(exam2Test, exam2GetTest);
+        assertEquals(exam2Test.getId(), exam2GetTest.getId());
     }
 
 }
