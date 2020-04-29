@@ -44,7 +44,7 @@ public class SubexamTests {
     }
 
     @Test
-    void testRoomSave(){
+    void testSubexamSave(){
         roomService.save(r1);
         System.out.println(s1.getId());
         s1 = subexamService.save(s1);
@@ -52,7 +52,7 @@ public class SubexamTests {
     }
 
     @Test
-    void testRoomGet(){
+    void testSubexamGet(){
         s2 = subexamService.save(s2);
         assertEquals(subexamService.get(s1.getId()).getId(), s1.getId());
         assertEquals(subexamService.get(s2.getId()).getId(), s2.getId());
