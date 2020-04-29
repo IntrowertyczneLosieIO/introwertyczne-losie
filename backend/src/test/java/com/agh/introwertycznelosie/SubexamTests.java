@@ -22,6 +22,7 @@ public class SubexamTests {
     private static Subexam s1;
     private static Subexam s2;
     private static Exam e1;
+    private static Exam e2;
     private static Room r1;
     @Autowired
     private SubexamService subexamService;
@@ -37,14 +38,14 @@ public class SubexamTests {
         availableDates.add(new DateRange());
         r1 = new Room(100, 200, "d17", "3.42", availableDates);
         e1 = new Exam("analiza", Faculty.WIEiT, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13));
+        e2 = new Exam("analiza", Faculty.WIEiT, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13));
         s1 = new Subexam(e1, r1, new Date(2020, 10, 10), LocalTime.NOON);
-        s2 = new Subexam(e1, r1, new Date(2020, 10, 12), LocalTime.MIDNIGHT);
+        s2 = new Subexam(e2, r1, new Date(2020, 10, 12), LocalTime.MIDNIGHT);
     }
 
     @Test
     void testRoomSave(){
         roomService.save(r1);
-        examService.save(e1);
         System.out.println(s1.getId());
         s1 = subexamService.save(s1);
         System.out.println(s1.getId());

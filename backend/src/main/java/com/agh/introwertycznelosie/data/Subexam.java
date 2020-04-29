@@ -1,9 +1,6 @@
 package com.agh.introwertycznelosie.data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.Date;
 import java.time.LocalTime;
 
@@ -13,9 +10,10 @@ public class Subexam {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Exam exam;
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id")
     private Room room;
     private Date date;
     private LocalTime time;
