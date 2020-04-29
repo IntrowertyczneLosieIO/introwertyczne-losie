@@ -9,5 +9,4 @@ class IntrowertyczneLosieApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

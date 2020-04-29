@@ -6,6 +6,10 @@ import javax.persistence.Id;
 @Entity
 public class Major {
 
+    public Major() {
+
+    }
+
     @Id
     @GeneratedValue
     private Long id;
