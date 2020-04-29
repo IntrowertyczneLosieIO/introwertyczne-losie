@@ -5,6 +5,8 @@ import com.agh.introwertycznelosie.repositories.MajorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MajorService {
 
@@ -13,6 +15,10 @@ public class MajorService {
 
     public Major save(Major major) {
         return majorRepository.save(major);
+    }
+
+    public List<Major> get() {
+        return majorRepository.findTop2ByOrderByIdDesc();
     }
 
     public Major get(Long id) {
