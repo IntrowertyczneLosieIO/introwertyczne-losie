@@ -18,7 +18,6 @@ public class MajorTests {
     @Test
     void saveAndGetMajorTest()
     {
-        m1 = majorService.save(m1);
         Major testMajor = majorService.get(m1.getId());
         Assertions.assertEquals(m1, testMajor);
         Assertions.assertNotEquals(m2, testMajor);
@@ -34,10 +33,23 @@ public class MajorTests {
     }
 
     @Test
-    void deleteTest()
+    void deleteByIdTest()
     {
         Assertions.assertDoesNotThrow(() -> majorService.delete(m1.getId()));
         Assertions.assertThrows(EmptyResultDataAccessException.class, () ->majorService.delete(m1.getId()));
+    }
+
+    @Test
+    void getByFullNameTest()
+    {
+        Assertions.assertEquals(m1.getFullName(), majorService.findByFullName(m1.getFullName()).getFullName());
+    }
+
+    @Test
+    void deleteTest()
+    {
+        Assertions.assertDoesNotThrow(() -> majorService.delete(m1));
+        Assertions.assertThrows(EmptyResultDataAccessException.class, () -> majorService.delete(m1.getId()));
     }
 
     @Autowired
