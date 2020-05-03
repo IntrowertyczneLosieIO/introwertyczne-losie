@@ -17,7 +17,7 @@ public class MajorController {
     @Autowired
     MajorService majorService;
 
-    @GetMapping(value="/majors", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value="/newest-majors", produces = MediaType.APPLICATION_JSON_VALUE)
     List<Major> getMajors() {
         return majorService.get();
     }

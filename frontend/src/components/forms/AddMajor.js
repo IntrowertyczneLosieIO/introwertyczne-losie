@@ -13,7 +13,16 @@ class AddMajor extends React.Component {
         this.state = {
             validated: false,
             showConfirmationModal: false,
-            userData: this.getInitialState()
+            userData: this.getInitialState(),
+            faculties: ["WGiG", "WIMIP", "WEAiIB", "WIEiT", "WIMiR", "WGGiOS", "WGGiIS", "WIMiC", "WO", "WMN", "WWNiG", "WZ", "WEiP", "WFiIS", "WMS", "WH"],
+            modesMapping: {
+                "stacjonarne": "fullTime",
+                "niestacjonarne": "partTime"
+            },
+            mixedMapping: {
+                "Tak": true,
+                "Nie": false
+            }
         };
     }
 
@@ -44,7 +53,7 @@ class AddMajor extends React.Component {
     getInitialState = () => {
         return {
             major: "",
-            faculty: "1",
+            faculty: "WIEiT",
             modeOfStudy: "stacjonarne",
             type: "pisemny",
             mixed: "Tak",
@@ -89,16 +98,17 @@ class AddMajor extends React.Component {
         else {
             this.props.handleHide();
             let userDataToSend = {
-                faculty: "WIEiT",
+                faculty: this.state.userData.faculty,
                 fullName: this.state.userData.major,
                 shortName: this.state.userData.major,
-                mode: "fullTime",
+                mode: this.state.modesMapping[this.state.userData.modeOfStudy],
                 numberOfPlaces: 100,
                 contactPerson1: this.state.userData.name1 + " " + this.state.userData.surname1,
                 contactPerson2: this.state.userData.name2 + " " + this.state.userData.surname2,
-                mixedField: true,
+                mixedField: this.state.mixedMapping[this.state.userData.mixed],
                 annotations: this.state.userData.annotations
             }
+            console.log(userDataToSend);
             fetch("/new-major", {
                 method: 'POST',
                 headers: {
@@ -131,32 +141,34 @@ class AddMajor extends React.Component {
             <>
             <Modal show={this.props.show} dialogClassName={"custom-width-modal"} onHide={this.hideAndClearState}
                    backdrop={"static"} keyboard={false}>
-                <Modal.Header closeButton>
-                    <Modal.Title className={"custom-margins"}>Dodawanie nowego kierunku</Modal.Title>
+                <Modal.Header closeButton className={"modal-form-bg-color"}>
+                    <Modal.Title className={"custom-margins custom-font text-light"}>Dodawanie nowego kierunku</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className={"custom-margins"}>
                     <Form noValidate validated={this.state.validated} ref={this.formRef}>
-                        <NewMajorInfo options={this.props.options} getFormData={this.getFormData}/>
+                        <NewMajorInfo getFormData={this.getFormData} faculties={this.state.faculties}/>
                         <ContactPersonInfo order={1} getFormData={this.getFormData}/>
                         <ContactPersonInfo order={2} getFormData={this.getFormData}/>
-                        <h4 className={"mt-3 text-center"}>Uwagi</h4>
+                        <h5 className={"mt-4 text-secondary mb-3"}>Uwagi</h5>
                         <FormGroup controlId={"annotations"}>
                             <Form.Control as={"textarea"} rows={"4"} onChange={this.handleInputChange}/>
                         </FormGroup>
                     </Form>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant={"primary"} className={"custom-margins"} onClick={this.handleSaveAndOpenConfirm}>
+                <Modal.Footer className={"modal-form-bg-color"}>
+                    <Button variant={"danger"} onClick={this.hideAndClearState}>Anuluj
+                    </Button>
+                    <Button variant={"success"} className={"custom-margins"} onClick={this.handleSaveAndOpenConfirm}>
                         Dodaj kierunek
                     </Button>
                 </Modal.Footer>
             </Modal>
-                <Modal show={this.state.showConfirmationModal} onHide={this.handleCloseConfirmationModal}>
+                <Modal show={this.state.showConfirmationModal} onHide={this.handleCloseConfirmationModal} size={"lg"}>
                     <Modal.Body>
                         <h4 className={"text-center"}>Kierunek został dodany pomyślnie</h4>
                     </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant={"success"} onClick={this.handleCloseConfirmationModal}>OK</Button>
+                    <Modal.Footer className={"modal-form-bg-color"}>
+                        <Button variant={"success"} onClick={this.handleCloseConfirmationModal} block size={"sm"}>OK</Button>
                     </Modal.Footer>
                 </Modal>
             </>

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface MajorRepository extends JpaRepository<Major, Long> {
     Major findByFullName(String fullname);
-    List<Major> findTop2ByOrderByIdDesc();
+    List<Major> findTop3ByOrderByIdDesc();
 }

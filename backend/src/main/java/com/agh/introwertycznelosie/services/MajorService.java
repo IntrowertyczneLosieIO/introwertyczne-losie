@@ -18,7 +18,7 @@ public class MajorService {
     }
 
     public List<Major> get() {
-        return majorRepository.findTop2ByOrderByIdDesc();
+        return majorRepository.findTop3ByOrderByIdDesc();
     }
 
     public Major get(Long id) {

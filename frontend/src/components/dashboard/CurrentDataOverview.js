@@ -10,9 +10,21 @@ class CurrentDataOverview extends React.Component {
         super(props);
         this.state = {
             showAddNewMajor: false,
-            Majors: "Kierunki",
-            Rooms: "Sale",
-            Exams: "Egzaminy"
+            Majors: {
+                displayName: "Kierunki",
+                headers: ["Nazwa", "Wydział", "Osoba kontaktowa nr 1", "Osoba kontaktowa nr 2"],
+                values: ["fullName", "faculty", "contactPerson1", "contactPerson2"]
+            },
+            Rooms: {
+                displayName: "Sale",
+                headers: ["Nazwa", "Nazwa", "Nazwa", "Nazwa"],
+                values: []
+            },
+            Exams: {
+                displayName: "Egzaminy",
+                headers: ["Nazwa", "Nazwa", "Nazwa", "Nazwa"],
+                values: []
+            }
         }
     }
 
@@ -26,34 +38,15 @@ class CurrentDataOverview extends React.Component {
     handleHide = () => this.setShowAddNewMajor(false);
 
     render() {
-        let data = {
-            [this.state.Majors]: {
-                firstColumn: "Nazwa",
-                secondColumn: "Wydział",
-                thirdColumn: "Osoba kontaktowa 1",
-                fourthColumn: "Osoba kontaktowa 2"
-            },
-            [this.state.Rooms]: {
-                firstColumn: "Nazwa",
-                secondColumn: "Nazwa",
-                thirdColumn: "Nazwa",
-                fourthColumn: "Nazwa"
-            },
-            [this.state.Exams]: {
-                firstColumn: "Nazwa",
-                secondColumn: "Nazwa",
-                thirdColumn: "Nazwa",
-                fourthColumn: "Nazwa"
-            }
-        }
         return (
             <div>
                 <Row>
-                    <Col><h4 className={"mb-3"}>{this.props.name}</h4></Col>
+                    <Col><h4 className={"mb-3"}>{this.state[this.props.name].displayName}</h4></Col>
                 </Row>
                 <Row>
                     <Col>
-                        <DataTable tableHeader={data[this.props.name]} name={this.props.name}/>
+                        <DataTable tableHeader={this.state[this.props.name].headers} name={this.props.name}
+                                   tableValues={this.state[this.props.name].values}/>
                     </Col>
                 </Row>
                 <Row className={"mb-4"}>

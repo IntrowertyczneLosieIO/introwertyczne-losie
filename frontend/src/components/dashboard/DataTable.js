@@ -10,55 +10,55 @@ class DataTable extends React.Component {
         };
     }
 
-    componentDidMount() {
-        fetch("/majors")
+    fetchMajors = () => {
+        fetch("/newest-majors")
             .then((response) => {
                 return response.json();
             })
             .then((response) => {
+                let newTableData = response.map((responseValue, responseIndex) => {
+                    let rows = {};
+                    this.props.tableValues.forEach((tableValue, tableIndex) => {
+                        rows["column" + (tableIndex + 1)] = response[responseIndex] ? response[responseIndex][tableValue] : "";
+                    })
+
+                    return rows;
+                })
                 this.setState({
-                    tableData: [
-                        {
-                            firstColumn: response[0] ? response[0].fullName : "",
-                            secondColumn: response[0] ? response[0].faculty : "",
-                            thirdColumn: response[0] ? response[0].contactPerson1 : "",
-                            fourthColumn: response[0] ? response[0].contactPerson2 : ""
-                            },
-                        {
-                            firstColumn: response[1] ? response[1].fullName : "",
-                            secondColumn: response[1] ? response[1].faculty : "",
-                            thirdColumn: response[1] ? response[1].contactPerson1 : "",
-                            fourthColumn: response[1] ? response[1].contactPerson2 : ""
-                        }
-                    ]
+                    tableData: newTableData
                 });
                 console.log(this.state.tableData);
             })
     }
 
+    componentDidMount() {
+        if (this.props.name === "Majors") {
+            this.fetchMajors();
+        }
+    }
+
     render() {
         let rowList = this.state.tableData.map((row) => {
-            return <tr key={row.key}>
-                <td>{row.firstColumn}</td>
-                <td>{row.secondColumn}</td>
-                <td>{row.thirdColumn}</td>
-                <td>{row.fourthColumn}</td>
+            return <tr>
+                <td>{row.column1}</td>
+                <td>{row.column2}</td>
+                <td>{row.column3}</td>
+                <td>{row.column4}</td>
             </tr>
         })
 
-        const {secondColumn, firstColumn, thirdColumn, fourthColumn} = this.props.tableHeader;
+        let thList = this.props.tableHeader.map((value, index) => {
+            return <th key={index}>{value}</th>
+        })
         return (
             <Table striped bordered hover size={"sm"}>
                 <thead>
                 <tr>
-                    <th>{firstColumn}</th>
-                    <th>{secondColumn}</th>
-                    <th>{thirdColumn}</th>
-                    <th>{fourthColumn}</th>
+                    {thList}
                 </tr>
                 </thead>
                 <tbody>
-                {rowList}
+                    {rowList}
                 </tbody>
             </Table>
         );

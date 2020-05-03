@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 class Sidenav extends React.Component {
     render() {
         let objectsList = this.props.objects.map((object) => {
-            return <Nav.Link href={"#"} key={object.key}><Button variant={"outline-dark"} block>{object.objectsSetName}</Button></Nav.Link>
+            return <Nav.Link href={"#"} key={object.key}><Button variant={"outline-dark"} block>{object.displayName}</Button></Nav.Link>
         })
 
         return (

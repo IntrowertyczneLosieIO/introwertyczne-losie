@@ -11,13 +11,13 @@ class NewMajorInfo extends React.Component {
 
     render() {
         let componentList = [];
-        for (let i=0; i<this.props.options; i++) {
-            componentList.push(<option key={i+1}>{i+1}</option>);
-        }
+        componentList = this.props.faculties.map((faculty, index) => {
+            return <option key={index} value={faculty}>{faculty}</option>
+        });
 
         return (
             <>
-                <h4 className={"mt-4 text-center mb-3"}>Informacje o kierunku</h4>
+                <h5 className={"mt-4 text-secondary mb-3"}>Informacje o kierunku</h5>
                 <Form.Row>
                     <FormGroup as={Col} controlId={"major"}>
                         <Form.Label>Kierunek</Form.Label>
@@ -25,7 +25,7 @@ class NewMajorInfo extends React.Component {
                     </FormGroup>
                     <FormGroup as={Col} controlId={"faculty"}>
                         <Form.Label>Wydział</Form.Label>
-                        <Form.Control as={"select"} onChange={this.handleControlChange} required>
+                        <Form.Control as={"select"} onChange={this.handleControlChange} required defaultValue={"WIEiT"}>
                             {/*<option hidden disabled value={"default"} />*/}
                             {componentList}
                         </Form.Control>
@@ -33,16 +33,16 @@ class NewMajorInfo extends React.Component {
                 </Form.Row>
                 <Form.Row>
                     <FormGroup as={Col} controlId={"modeOfStudy"}>
-                        <Form.Label>Rodzaj</Form.Label>
-                        <Form.Control as={"select"} onChange={this.handleControlChange} required>
+                        <Form.Label>Tryb studiów</Form.Label>
+                        <Form.Control as={"select"} onChange={this.handleControlChange} required defaultValue={"stacjonarne"}>
                             {/*<option hidden disabled value={"default"} />*/}
-                            <option>stacjonarne</option>
+                            <option value={"stacjonarne"}>stacjonarne</option>
                             <option>niestacjonarne</option>
                         </Form.Control>
                     </FormGroup>
                     <FormGroup as={Col} controlId={"type"}>
                         <Form.Label>Typ egzaminu</Form.Label>
-                        <Form.Control as={"select"} onChange={this.handleControlChange} required>
+                        <Form.Control as={"select"} onChange={this.handleControlChange} required defaultValue={"pisemny"}>
                             {/*<option hidden disabled value={"default"}/>*/}
                             <option value={"pisemny"}>pisemny</option>
                             <option>ustny</option>
@@ -50,9 +50,9 @@ class NewMajorInfo extends React.Component {
                     </FormGroup>
                     <FormGroup as={Col} controlId={"mixed"}>
                         <Form.Label>Kierunek łączony</Form.Label>
-                        <Form.Control as={"select"} onChange={this.handleControlChange} required>
+                        <Form.Control as={"select"} onChange={this.handleControlChange} required defaultValue={"Tak"}>
                             {/*<option hidden disabled value={"default"}/>*/}
-                            <option>Tak</option>
+                            <option value={"Tak"}>Tak</option>
                             <option>Nie</option>
                         </Form.Control>
                     </FormGroup>

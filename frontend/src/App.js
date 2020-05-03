@@ -16,9 +16,10 @@ class App extends React.Component {
         }
     }
 
-    addNewObject(objectsSetName, expandData, addNewObject, key) {
+    addNewObject(objectsSetName, displayName, expandData, addNewObject, key) {
         return {
             objectsSetName,
+            displayName,
             expandData,
             addNewObject,
             key
@@ -29,9 +30,9 @@ class App extends React.Component {
         let currentObjects = this.state.objects;
         this.setState({
             objects: [...currentObjects,
-                this.addNewObject("Kierunki", "Więcej kierunków...", "Dodaj kierunek", 1),
-                this.addNewObject("Sale", "Więcej sal...", "Dodaj salę", 2),
-                this.addNewObject("Egzaminy", "Więcej egzaminów...", "Dodaj egzamin", 3)
+                this.addNewObject("Majors", "Kierunki", "Więcej kierunków...", "Dodaj kierunek", 1),
+                this.addNewObject("Rooms", "Sale", "Więcej sal...", "Dodaj salę", 2),
+                this.addNewObject("Exams", "Egzaminy", "Więcej egzaminów...", "Dodaj egzamin", 3)
             ]
         })
     }

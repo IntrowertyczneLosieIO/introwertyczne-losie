@@ -12,7 +12,7 @@ class ContactPersonInfo extends React.Component {
     render() {
         return (
           <>
-              <h4 className={"mt-3 text-center"}>Osoba kontaktowa {this.props.order}</h4>
+              <h5 className={"mt-4 text-secondary mb-3"}>Osoba kontaktowa nr {this.props.order}</h5>
               <Form.Row>
                   <FormGroup as={Col} controlId={"name"+this.props.order}>
                       <Form.Label>Imię</Form.Label>
@@ -25,8 +25,8 @@ class ContactPersonInfo extends React.Component {
               </Form.Row>
               <Form.Row>
                   <FormGroup as={Col} controlId={"email"+this.props.order}>
-                      <Form.Label>e-mail</Form.Label>
-                      <Form.Control type={"email"} onChange={this.handleControlChange} required/>
+                      <Form.Label>E-mail</Form.Label>
+                      <Form.Control type={"email"} onChange={this.handleControlChange} required />
                   </FormGroup>
                   <FormGroup as={Col} controlId={"phone"+this.props.order}>
                       <Form.Label>Telefon</Form.Label>
