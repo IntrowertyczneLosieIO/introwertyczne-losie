@@ -9,7 +9,7 @@ class CurrentDataOverview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showAddNewMajor: false,
+            showAddNew: false,
             Majors: {
                 displayName: "Kierunki",
                 headers: ["Nazwa", "Wydział", "Osoba kontaktowa nr 1", "Osoba kontaktowa nr 2"],
@@ -28,16 +28,28 @@ class CurrentDataOverview extends React.Component {
         }
     }
 
-    setShowAddNewMajor = (show) => {
+    setShowAddNew = (show) => {
         this.setState({
-            showAddNewMajor: show
+            showAddNew: show
         });
     }
 
-    handleShow = () => this.setShowAddNewMajor(true);
-    handleHide = () => this.setShowAddNewMajor(false);
+    handleShow = () => this.setShowAddNew(true);
+    handleHide = () => this.setShowAddNew(false);
 
     render() {
+        const nameComponentMapping = {
+            "Majors": AddMajor,
+            "Rooms": AddMajor,
+            "Exams": AddMajor
+        };
+
+        const nameRequestMapping = {
+            "Majors": "/newest-majors",
+            "Rooms": "/newest-majors",
+            "Exams": "/newest-majors"
+        }
+        const FormToRender = nameComponentMapping[this.props.name];
         return (
             <div>
                 <Row>
@@ -45,7 +57,9 @@ class CurrentDataOverview extends React.Component {
                 </Row>
                 <Row>
                     <Col>
-                        <DataTable tableHeader={this.state[this.props.name].headers} name={this.props.name}
+                        <DataTable tableHeader={this.state[this.props.name].headers}
+                                   name={this.props.name}
+                                   mapping={nameRequestMapping[this.props.name]}
                                    tableValues={this.state[this.props.name].values}/>
                     </Col>
                 </Row>
@@ -56,11 +70,11 @@ class CurrentDataOverview extends React.Component {
                     <Col xs={2}>
                         <Button variant={"success"} className={"mb-3"} size={"sm"} block
                                 onClick={this.handleShow}>{this.props.addNew}</Button>
-                        <AddMajor
-                            handleShow={this.handleShow}
-                            handleHide={this.handleHide}
-                            show={this.state.showAddNewMajor}
-                            options={10}/>
+
+                        <FormToRender handleShow={this.handleShow}
+                                      handleHide={this.handleHide}
+                                      show={this.state.showAddNew}
+                                      options={10}/>
                     </Col>
                 </Row>
             </div>
