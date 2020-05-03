@@ -2,15 +2,16 @@ package com.agh.introwertycznelosie;
 
 import com.agh.introwertycznelosie.data.*;
 import com.agh.introwertycznelosie.services.MajorService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.event.annotation.AfterTestMethod;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Transactional
@@ -67,14 +68,12 @@ class MajorTest {
     @AfterTestMethod("testMajorSave")
     void testDeleteById() {
         m1 = majorService.save(m1);
-        assertThrows(org.springframework.dao.EmptyResultDataAccessException.class, () -> {
-            majorService.delete(m1.getId());
-            majorService.get(m1.getId());
-        });
+        Assertions.assertDoesNotThrow(() -> majorService.delete(m1.getId()));
+        Assertions.assertThrows(EmptyResultDataAccessException.class, () ->majorService.delete(m1.getId()));
     }
 
     @Test
-    @AfterTestMethod("testRoomSave")
+    @AfterTestMethod("testMajorSave")
     void testDeleteByObject() {
         majorService.delete(m1);
     }
