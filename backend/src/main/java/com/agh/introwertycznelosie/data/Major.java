@@ -15,17 +15,32 @@ public class Major {
     private Long id;
 
     private Faculty faculty;
+
     private String fullName;
     private String shortName;
     private ModeOfStudy mode;
     private int numberOfPlaces;
-
     // TODO - klasa zamiast stringa, ale klasy jeszcze nie ma
+
     private String contactPerson1;
     private String contactPerson2;
-
     private boolean mixedField;
+
     private String annotations;
+
+    public Major(Faculty faculty, String fullName, String shortName, ModeOfStudy mode,
+                 int numberOfPlaces, String contactPerson1, String contactPerson2,
+                 boolean mixedField, String annotations) {
+        this.faculty = faculty;
+        this.fullName = fullName;
+        this.shortName = shortName;
+        this.mode = mode;
+        this.numberOfPlaces = numberOfPlaces;
+        this.contactPerson1 = contactPerson1;
+        this.contactPerson2 = contactPerson2;
+        this.mixedField = mixedField;
+        this.annotations = annotations;
+    }
 
     public Long getId() {
         return id;

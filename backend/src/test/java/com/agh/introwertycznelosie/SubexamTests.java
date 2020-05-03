@@ -13,6 +13,8 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.LinkedList;
 
+import static com.agh.introwertycznelosie.data.Faculty.WIEiT;
+import static com.agh.introwertycznelosie.data.ModeOfStudy.fullTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -36,9 +38,10 @@ public class SubexamTests {
         LinkedList<DateRange> availableDates = new LinkedList<>();
         availableDates.add(new DateRange());
         availableDates.add(new DateRange());
+        Major major1 = new Major(WIEiT, "Computer Science", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
         r1 = new Room(100, 200, "d17", "3.42", availableDates);
-        e1 = new Exam("analiza", Faculty.WIEiT, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13));
-        e2 = new Exam("analiza", Faculty.WIEiT, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13));
+        e1 = new Exam("analiza", major1, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13));
+        e2 = new Exam("analiza", major1, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13));
         s1 = new Subexam(e1, r1, new Date(2020, 10, 10), LocalTime.NOON);
         s2 = new Subexam(e2, r1, new Date(2020, 10, 12), LocalTime.MIDNIGHT);
     }

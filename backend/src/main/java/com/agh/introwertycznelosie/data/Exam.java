@@ -3,6 +3,7 @@ package com.agh.introwertycznelosie.data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 @Entity
 public class Exam {
@@ -11,7 +12,8 @@ public class Exam {
     @GeneratedValue
     private Long id;
     private String name;
-    private Faculty faculty;
+    @ManyToOne
+    private Major major;
     private ModeOfStudy modeOfStudy;
     private Date startDate;
     private Date endDate;
@@ -19,9 +21,9 @@ public class Exam {
 
     public Exam(){}
 
-    public Exam(String name, Faculty faculty, ModeOfStudy modeOfStudy, Date startDate, Date endDate) {
+    public Exam(String name, Major major, ModeOfStudy modeOfStudy, Date startDate, Date endDate) {
         this.name = name;
-        this.faculty = faculty;
+        this.major = major;
         this.modeOfStudy = modeOfStudy;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -43,12 +45,12 @@ public class Exam {
         this.name = name;
     }
 
-    public Faculty getFaculty() {
-        return faculty;
+    public Major getMajor() {
+        return major;
     }
 
-    public void setFaculty(Faculty faculty) {
-        this.faculty = faculty;
+    public void setMajor(Major major) {
+        this.major = major;
     }
 
     public ModeOfStudy getModeOfStudy() {

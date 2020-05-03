@@ -1,6 +1,8 @@
 package com.agh.introwertycznelosie;
 
 import com.agh.introwertycznelosie.data.Exam;
+import com.agh.introwertycznelosie.data.Faculty;
+import com.agh.introwertycznelosie.data.Major;
 import com.agh.introwertycznelosie.services.ExamService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -25,8 +27,10 @@ class ExamTest {
 
     @BeforeAll
     public static void createClasses() {
-        exam1 = new Exam("Computer Science", WIEiT, fullTime, new Date(2021, Calendar.SEPTEMBER, 1), new Date(2021, Calendar.SEPTEMBER, 8));
-        exam2 = new Exam("Cultural Studies", WH, fullTime, new Date(2021, Calendar.SEPTEMBER, 8), new Date(2021, Calendar.SEPTEMBER, 16));
+        Major major1 = new Major(WIEiT, "Computer Science", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
+        Major major2 = new Major(WIEiT, "Electronics", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
+        exam1 = new Exam("Computer Science", major1, fullTime, new Date(2021, Calendar.SEPTEMBER, 1), new Date(2021, Calendar.SEPTEMBER, 8));
+        exam2 = new Exam("Electronics", major2, fullTime, new Date(2021, Calendar.SEPTEMBER, 8), new Date(2021, Calendar.SEPTEMBER, 16));
 
     }
 
