@@ -2,6 +2,7 @@ package com.agh.introwertycznelosie;
 
 import com.agh.introwertycznelosie.data.*;
 import com.agh.introwertycznelosie.services.ExamService;
+import com.agh.introwertycznelosie.services.MajorService;
 import com.agh.introwertycznelosie.services.RoomService;
 import com.agh.introwertycznelosie.services.SubexamService;
 import org.junit.jupiter.api.BeforeAll;
@@ -26,19 +27,22 @@ public class SubexamTests {
     private static Exam e1;
     private static Exam e2;
     private static Room r1;
+    private static Major major1;
     @Autowired
     private SubexamService subexamService;
     @Autowired
     private ExamService examService;
     @Autowired
     private RoomService roomService;
+    @Autowired
+    private MajorService majorService;
 
     @BeforeAll
     public static void setup(){
         LinkedList<DateRange> availableDates = new LinkedList<>();
         availableDates.add(new DateRange());
         availableDates.add(new DateRange());
-        Major major1 = new Major(WIEiT, "Computer Science", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
+        major1 = new Major(WIEiT, "Computer Science", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
         r1 = new Room(100, 200, "d17", "3.42", availableDates);
         e1 = new Exam("analiza", major1, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13));
         e2 = new Exam("analiza", major1, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13));
@@ -48,6 +52,8 @@ public class SubexamTests {
 
     @Test
     void testSubexamSave(){
+        major1 = majorService.save(major1);
+        System.out.println("==============================" + major1.getId());
         roomService.save(r1);
         System.out.println(s1.getId());
         s1 = subexamService.save(s1);

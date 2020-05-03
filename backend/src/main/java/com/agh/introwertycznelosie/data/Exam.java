@@ -9,7 +9,7 @@ public class Exam {
     @GeneratedValue
     private Long id;
     private String name;
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.MERGE})
     private Major major;
     private ModeOfStudy modeOfStudy;
     private Date startDate;
