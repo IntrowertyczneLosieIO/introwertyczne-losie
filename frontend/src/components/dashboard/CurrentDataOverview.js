@@ -3,8 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import DataTable from "./DataTable";
 import Button from "react-bootstrap/Button";
-import AddMajor from "../forms/AddMajor";
-//import AddExam from "../forms/AddExam";
+import AddExam from "../forms/AddExam";
 
 class CurrentDataOverview extends React.Component {
     constructor(props) {
