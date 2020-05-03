@@ -6,6 +6,10 @@ import javax.persistence.Id;
 @Entity
 public class Major {
 
+    public Major() {
+
+    }
+
     @Id
     @GeneratedValue
     private Long id;
@@ -21,19 +25,6 @@ public class Major {
     private String contactPerson2;
 
     private boolean mixedField;
-
-    public Major(Faculty f, String fn, String sn, ModeOfStudy m, int numberOfPlaces, String cp1, String cp2, boolean mf, String a) {
-        this.faculty = f;
-        this.fullName = fn;
-        this.shortName = sn;
-        this.mode = m;
-        this.numberOfPlaces = numberOfPlaces;
-        this.contactPerson1 = cp1;
-        this.contactPerson2 = cp2;
-        this.mixedField = mf;
-        this.annotations = a;
-    }
-
     private String annotations;
 
     public Long getId() {
@@ -115,5 +106,4 @@ public class Major {
     public void setAnnotations(String annotations) {
         this.annotations = annotations;
     }
-
 }
