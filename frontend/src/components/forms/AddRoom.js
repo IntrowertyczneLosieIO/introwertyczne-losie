@@ -72,7 +72,7 @@ class AddRoom extends React.Component {
                 recommendedCapacity: this.state.userData.recommendedCapacity,
                 maximalCapacity: this.state.userData.maximalCapacity
             }
-            // console.log(userDataToSend);
+            console.log(userDataToSend);
             fetch("/new-room", {
                 method: 'POST',
                 headers: {
@@ -80,7 +80,7 @@ class AddRoom extends React.Component {
                 },
                 body: JSON.stringify(userDataToSend)
             })
-                // .then((response) => response.json())
+                .then((response) => response.json())
                 .then(() => {
                     this.setState({
                         userData: this.getInitialState()
