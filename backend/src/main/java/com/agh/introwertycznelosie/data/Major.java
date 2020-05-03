@@ -1,8 +1,9 @@
 package com.agh.introwertycznelosie.data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Major {
 
@@ -15,6 +16,8 @@ public class Major {
     private Long id;
 
     private Faculty faculty;
+    @OneToMany(mappedBy = "major")
+    private List<Exam> exams = new ArrayList<>();
 
     private String fullName;
     private String shortName;
@@ -120,5 +123,13 @@ public class Major {
 
     public void setAnnotations(String annotations) {
         this.annotations = annotations;
+    }
+
+    public List<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<Exam> exams) {
+        this.exams = exams;
     }
 }

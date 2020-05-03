@@ -9,8 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static com.agh.introwertycznelosie.data.Faculty.WH;
 import static com.agh.introwertycznelosie.data.Faculty.WIEiT;
@@ -31,7 +33,6 @@ class ExamTest {
         Major major2 = new Major(WIEiT, "Electronics", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
         exam1 = new Exam("Computer Science", major1, fullTime, new Date(2021, Calendar.SEPTEMBER, 1), new Date(2021, Calendar.SEPTEMBER, 8));
         exam2 = new Exam("Electronics", major2, fullTime, new Date(2021, Calendar.SEPTEMBER, 8), new Date(2021, Calendar.SEPTEMBER, 16));
-
     }
 
     @Test

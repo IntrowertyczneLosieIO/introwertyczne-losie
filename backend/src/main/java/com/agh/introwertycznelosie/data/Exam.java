@@ -1,9 +1,6 @@
 package com.agh.introwertycznelosie.data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 @Entity
 public class Exam {
@@ -12,7 +9,7 @@ public class Exam {
     @GeneratedValue
     private Long id;
     private String name;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Major major;
     private ModeOfStudy modeOfStudy;
     private Date startDate;
