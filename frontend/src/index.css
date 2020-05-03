@@ -23,6 +23,7 @@ code {
 
 .custom-sidenav-bg {
   background-color: honeydew;
+  height: 100vh;
 }
 
 .custom-width-modal {
