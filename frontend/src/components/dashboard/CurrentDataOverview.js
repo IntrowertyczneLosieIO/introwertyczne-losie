@@ -4,12 +4,14 @@ import Col from "react-bootstrap/Col";
 import DataTable from "./DataTable";
 import Button from "react-bootstrap/Button";
 import AddMajor from "../forms/AddMajor";
+import AddExam from "../forms/AddExam";
 
 class CurrentDataOverview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             showAddNewMajor: false,
+            showAddNewExam: false,
             Majors: {
                 displayName: "Kierunki",
                 headers: ["Nazwa", "Wydział", "Osoba kontaktowa nr 1", "Osoba kontaktowa nr 2"],
@@ -22,8 +24,8 @@ class CurrentDataOverview extends React.Component {
             },
             Exams: {
                 displayName: "Egzaminy",
-                headers: ["Nazwa", "Nazwa", "Nazwa", "Nazwa"],
-                values: []
+                headers: ["Nazwa", "Kierunek", "Forma studiów", "Data rozpoczęcia", "Data zakończenia"],
+                values: ["name", "faculty", "modeOfStudy", "startDate", "endDate"]
             }
         }
     }
@@ -33,9 +35,16 @@ class CurrentDataOverview extends React.Component {
             showAddNewMajor: show
         });
     }
+    setShowAddNewExam = (show) => {
+        this.setState({
+            showAddNewExam: show
+        });
+    }
 
-    handleShow = () => this.setShowAddNewMajor(true);
-    handleHide = () => this.setShowAddNewMajor(false);
+    handleShowMajor = () => this.setShowAddNewMajor(true);
+    handleHideMajor = () => this.setShowAddNewMajor(false);
+    handleShowExam = () => this.setShowAddNewExam(true);
+    handleHideExam = () => this.setShowAddNewExam(false);
 
     render() {
         return (
@@ -54,12 +63,19 @@ class CurrentDataOverview extends React.Component {
                         <Button variant={"outline-primary"} size={"sm"} block>{this.props.more}</Button>
                     </Col>
                     <Col xs={2}>
-                        <Button variant={"success"} className={"mb-3"} size={"sm"} block
-                                onClick={this.handleShow}>{this.props.addNew}</Button>
+                        {/*<Button variant={"success"} className={"mb-3"} size={"sm"} block
+                                onClick={this.handleShowMajor}>{this.props.addNew}</Button>
                         <AddMajor
-                            handleShow={this.handleShow}
-                            handleHide={this.handleHide}
+                            handleShow={this.handleShowMajor}
+                            handleHide={this.handleHideMajor}
                             show={this.state.showAddNewMajor}
+                            options={10}/>*/}
+                        <Button variant={"success"} className={"mb-3"} size={"sm"} block
+                                onClick={this.handleShowExam}>{this.props.addNew}</Button>
+                        <AddExam
+                            handleShow={this.handleShowExam}
+                            handleHide={this.handleHideExam}
+                            show={this.state.showAddNewExam}
                             options={10}/>
                     </Col>
                 </Row>
