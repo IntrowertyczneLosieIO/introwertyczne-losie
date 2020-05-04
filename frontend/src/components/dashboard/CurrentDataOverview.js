@@ -11,8 +11,7 @@ class CurrentDataOverview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showAddNewMajor: false,
-            showAddNewRoom: false,
+            showAddNew: false,
 
             Majors: {
                 displayName: "Kierunki",
@@ -45,7 +44,7 @@ class CurrentDataOverview extends React.Component {
         const nameComponentMapping = {
             "Majors": AddMajor,
             "Rooms": AddRoom,
-            "Exams": AddMajor
+            "Exams": AddExam
         };
 
         const nameRequestMapping = {
