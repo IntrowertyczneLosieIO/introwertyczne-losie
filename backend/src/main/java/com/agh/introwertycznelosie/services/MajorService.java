@@ -34,4 +34,8 @@ public class MajorService {
     public Major findByFullName(String fullname) {
         return majorRepository.findByFullName(fullname);
     }
+
+    public List<Major> getAll() {
+        return majorRepository.findAllByOrderByIdDesc();
+    }
 }

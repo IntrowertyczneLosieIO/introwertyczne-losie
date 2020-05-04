@@ -10,8 +10,8 @@ class DataTable extends React.Component {
         };
     }
 
-    fetchMajors = () => {
-        fetch("/newest-majors")
+    fetchData = () => {
+        fetch(this.props.mapping)
             .then((response) => {
                 return response.json();
             })
@@ -32,18 +32,16 @@ class DataTable extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.name === "Majors") {
-            this.fetchMajors();
-        }
+        this.fetchData();
     }
 
     render() {
         let rowList = this.state.tableData.map((row) => {
+            let cellList = Object.values(row).map((columnValue, index) => {
+                return <td key={index}>{columnValue}</td>
+            })
             return <tr>
-                <td>{row.column1}</td>
-                <td>{row.column2}</td>
-                <td>{row.column3}</td>
-                <td>{row.column4}</td>
+                {cellList}
             </tr>
         })
 
