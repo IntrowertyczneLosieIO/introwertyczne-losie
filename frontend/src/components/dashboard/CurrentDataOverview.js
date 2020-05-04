@@ -31,23 +31,14 @@ class CurrentDataOverview extends React.Component {
         }
     }
 
-    setShowAddNewMajor = (show) => {
+    setShowAddNew = (show) => {
         this.setState({
-            showAddNewMajor: show
+            showAddNew: show
         });
     }
 
-    setShowAddNewRoom = (show) => {
-        this.setState({
-            showAddNewRoom: show
-        });
-    }
-
-    handleShowMajor = () => this.setShowAddNewMajor(true);
-    handleHideMajor = () => this.setShowAddNewMajor(false);
-
-    handleShowRoom = () => this.setShowAddNewRoom(true);
-    handleHideRoom = () => this.setShowAddNewRoom(false);
+    handleShow = () => this.setShowAddNew(true);
+    handleHide = () => this.setShowAddNew(false);
 
     render() {
         const nameComponentMapping = {
@@ -80,20 +71,14 @@ class CurrentDataOverview extends React.Component {
                         <Button variant={"outline-primary"} size={"sm"} block>{this.props.more}</Button>
                     </Col>
                     <Col xs={2}>
-                        {/*<Button variant={"success"} className={"mb-3"} size={"sm"} block*/}
-                        {/*        onClick={this.handleShowMajor}>{this.props.addNew}</Button>*/}
-                        {/*<AddMajor*/}
-                        {/*    handleShow={this.handleShowMajor}*/}
-                        {/*    handleHide={this.handleHideMajor}*/}
-                        {/*    show={this.state.showAddNewMajor}*/}
-                        {/*    options={10}/>*/}
+
                         <Button variant={"success"} className={"mb-3"} size={"sm"} block
-                                onClick={this.handleShowRoom}>{this.props.addNew}</Button>
-                        <AddRoom
-                            handleShow={this.handleShowRoom}
-                            handleHide={this.handleHideRoom}
-                            show={this.state.showAddNewRoom}
-                            options={10}/>
+                                onClick={this.handleShow}>{this.props.addNew}</Button>
+
+                        <FormToRender handleShow={this.handleShow}
+                                      handleHide={this.handleHide}
+                                      show={this.state.showAddNew}
+                                      options={10}/>
                     </Col>
                 </Row>
             </div>
