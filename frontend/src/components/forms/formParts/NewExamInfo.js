@@ -2,6 +2,7 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import FormGroup from "react-bootstrap/FormGroup";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 class NewExamInfo extends React.Component {
 
@@ -25,7 +26,7 @@ class NewExamInfo extends React.Component {
 
         return (
             <>
-                <h4 className={"mt-4 text-center mb-3"}>Informacje o egzaminie</h4>
+                <h5 className={"mt-4 text-secondary mb-3"}>Informacje o egzaminie</h5>
                 <Form.Row>
                     <FormGroup as={Col} controlId={"name"}>
                         <Form.Label>Egzamin</Form.Label>
@@ -59,7 +60,7 @@ class NewExamInfo extends React.Component {
                         </Form.Control>
                     </FormGroup>
                 </Form.Row>
-                <h4 className={"mt-4 text-center mb-3"}>Informacje o subegzaminie</h4>
+                <h5 className={"mt-4 text-secondary mb-3"}>Informacje o subegzaminie</h5>
                 <Form.Row>
                     <FormGroup as={Col} controlId={"building"}>
                         <Form.Label>Budynek</Form.Label>
@@ -86,6 +87,10 @@ class NewExamInfo extends React.Component {
                         <Form.Control type={"time"} onChange={this.handleControlChange} required/>
                     </FormGroup>
                 </Form.Row>
+
+                    <Button variant={"secondary"} className={"custom-margins"} onClick={this.handleSaveAndOpenConfirm}>
+                        Dodaj subegzamin
+                    </Button>
             </>
         );
     }

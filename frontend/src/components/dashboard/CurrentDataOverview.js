@@ -4,13 +4,13 @@ import Col from "react-bootstrap/Col";
 import DataTable from "./DataTable";
 import Button from "react-bootstrap/Button";
 import AddExam from "../forms/AddExam";
+import AddMajor from "../forms/AddMajor";
 
 class CurrentDataOverview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showAddNewMajor: false,
-            showAddNewExam: false,
+            showAddNew: false,
             Majors: {
                 displayName: "Kierunki",
                 headers: ["Nazwa", "Wydział", "Osoba kontaktowa nr 1", "Osoba kontaktowa nr 2"],
@@ -29,23 +29,28 @@ class CurrentDataOverview extends React.Component {
         }
     }
 
-    setShowAddNewMajor = (show) => {
+    setShowAddNew = (show) => {
         this.setState({
-            showAddNewMajor: show
-        });
-    }
-    setShowAddNewExam = (show) => {
-        this.setState({
-            showAddNewExam: show
+            showAddNew: show
         });
     }
 
-    handleShowMajor = () => this.setShowAddNewMajor(true);
-    handleHideMajor = () => this.setShowAddNewMajor(false);
-    handleShowExam = () => this.setShowAddNewExam(true);
-    handleHideExam = () => this.setShowAddNewExam(false);
+    handleShow = () => this.setShowAddNew(true);
+    handleHide = () => this.setShowAddNew(false);
 
     render() {
+        const nameComponentMapping = {
+            "Majors": AddMajor,
+            "Rooms": AddExam,
+            "Exams": AddExam,
+        };
+
+        const nameRequestMapping = {
+            "Majors": "/newest-majors",
+            "Rooms": "/newest-exams",
+            "Exams": "/newest-exams"
+        }
+        const FormToRender = nameComponentMapping[this.props.name];
         return (
             <div>
                 <Row>
@@ -53,7 +58,9 @@ class CurrentDataOverview extends React.Component {
                 </Row>
                 <Row>
                     <Col>
-                        <DataTable tableHeader={this.state[this.props.name].headers} name={this.props.name}
+                        <DataTable tableHeader={this.state[this.props.name].headers}
+                                   name={this.props.name}
+                                   mapping={nameRequestMapping[this.props.name]}
                                    tableValues={this.state[this.props.name].values}/>
                     </Col>
                 </Row>
@@ -62,20 +69,13 @@ class CurrentDataOverview extends React.Component {
                         <Button variant={"outline-primary"} size={"sm"} block>{this.props.more}</Button>
                     </Col>
                     <Col xs={2}>
-                        {/*<Button variant={"success"} className={"mb-3"} size={"sm"} block
-                                onClick={this.handleShowMajor}>{this.props.addNew}</Button>
-                        <AddMajor
-                            handleShow={this.handleShowMajor}
-                            handleHide={this.handleHideMajor}
-                            show={this.state.showAddNewMajor}
-                            options={10}/>*/}
                         <Button variant={"success"} className={"mb-3"} size={"sm"} block
-                                onClick={this.handleShowExam}>{this.props.addNew}</Button>
-                        <AddExam
-                            handleShow={this.handleShowExam}
-                            handleHide={this.handleHideExam}
-                            show={this.state.showAddNewExam}
-                            options={10}/>
+                                onClick={this.handleShow}>{this.props.addNew}</Button>
+
+                        <FormToRender handleShow={this.handleShow}
+                                      handleHide={this.handleHide}
+                                      show={this.state.showAddNew}
+                                      options={10}/>
                     </Col>
                 </Row>
             </div>

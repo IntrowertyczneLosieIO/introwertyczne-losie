@@ -15,7 +15,11 @@ class AddExam extends React.Component {
             userData: this.getInitialState(),
             majors: ["Informatyka", "Informatyka Społeczna", "Humanistyka", "Telekomunikacja", "Elektronika"],
             buildings: ["D17", "D10", "A0", "B1", "D11", "C2"],
-            rooms: ["1.38", "2.41", "3.22", "3.23", "3.27A", "3.27B", "3.27C"]
+            rooms: ["1.38", "2.41", "3.22", "3.23", "3.27A", "3.27B", "3.27C"],
+            modesMapping: {
+                "stacjonarne": "fullTime",
+                "niestacjonarne": "partTime"
+            },
         };
     }
 
@@ -50,8 +54,6 @@ getInitialState = () => {
         modeOfStudy: "stacjonarne",
         startDate: "",
         endDate: "",
-        building: "D17",
-        room: "1.38"
     }
 }
 
@@ -86,11 +88,9 @@ handleSave = (resolve, reject) => {
         let userDataToSend = {
             name: this.state.userData.name,
             major: this.state.userData.major,
-            modeOfStudy: this.set.userData.modeOfStudy,
+            modeOfStudy: this.state.modesMapping[this.state.userData.modeOfStudy],
             startDate: this.state.userData.startDate,
             endDate: this.state.userData.endDate,
-            building: this.state.userData.building,
-            room: this.state.userData.room
         }
         fetch("/new-exam", {
             method: 'POST',
@@ -124,9 +124,9 @@ render() {
         <>
         <Modal show={this.props.show} dialogClassName={"custom-width-modal"} onHide={this.hideAndClearState}
     backdrop={"static"} keyboard={false}>
-        <Modal.Header closeButton>
-    <Modal.Title className={"custom-margins"}>Dodawanie nowego egzaminu</Modal.Title>
-    </Modal.Header>
+            <Modal.Header closeButton className={"modal-form-bg-color"}>
+                <Modal.Title className={"custom-margins custom-font text-light"}>Dodawanie nowego egzaminu</Modal.Title>
+            </Modal.Header>
     <Modal.Body className={"custom-margins"}>
         <Form noValidate validated={this.state.validated} ref={this.formRef}>
         <NewExamInfo options={this.props.options} getFormData={this.getFormData} majors={this.state.majors} buildings={this.state.buildings} rooms={this.state.rooms}/>
