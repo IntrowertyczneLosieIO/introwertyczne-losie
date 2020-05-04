@@ -56,7 +56,7 @@ class DataTable extends React.Component {
                 </tr>
                 </thead>
                 <tbody>
-                    {rowList}
+                {rowList}
                 </tbody>
             </Table>
         );

@@ -3,6 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import DataTable from "./DataTable";
 import Button from "react-bootstrap/Button";
+import AddExam from "../forms/AddExam";
 import AddMajor from "../forms/AddMajor";
 import AddRoom from "../forms/AddRoom";
 
@@ -10,8 +11,7 @@ class CurrentDataOverview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showAddNewMajor: false,
-            showAddNewRoom: false,
+            showAddNew: false,
 
             Majors: {
                 displayName: "Kierunki",
@@ -25,8 +25,8 @@ class CurrentDataOverview extends React.Component {
             },
             Exams: {
                 displayName: "Egzaminy",
-                headers: ["Nazwa", "Nazwa", "Nazwa", "Nazwa"],
-                values: []
+                headers: ["Nazwa", "Kierunek", "Forma studiów", "Data rozpoczęcia", "Data zakończenia"],
+                values: ["name", "faculty", "modeOfStudy", "startDate", "endDate"]
             }
         }
     }
@@ -44,13 +44,13 @@ class CurrentDataOverview extends React.Component {
         const nameComponentMapping = {
             "Majors": AddMajor,
             "Rooms": AddRoom,
-            "Exams": AddMajor
+            "Exams": AddExam
         };
 
         const nameRequestMapping = {
             "Majors": "/newest-majors",
             "Rooms": "/newest-rooms",
-            "Exams": "/newest-majors"
+            "Exams": "/newest-exams"
         }
         const FormToRender = nameComponentMapping[this.props.name];
         return (

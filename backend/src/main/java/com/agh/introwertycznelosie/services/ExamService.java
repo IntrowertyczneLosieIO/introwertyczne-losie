@@ -5,6 +5,8 @@ import com.agh.introwertycznelosie.repositories.ExamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ExamService {
 
@@ -18,6 +20,8 @@ public class ExamService {
     public Exam get(Long id){
         return examRepository.getOne(id);
     }
+
+    public List<Exam> get() { return examRepository.findTop3ByOrderByIdDesc(); }
 
     public void delete(Long id){ examRepository.deleteById(id); }
 
