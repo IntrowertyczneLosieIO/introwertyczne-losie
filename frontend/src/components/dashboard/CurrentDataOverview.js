@@ -52,13 +52,13 @@ class CurrentDataOverview extends React.Component {
     render() {
         const nameComponentMapping = {
             "Majors": AddMajor,
-            "Rooms": AddMajor,
+            "Rooms": AddRoom,
             "Exams": AddMajor
         };
 
         const nameRequestMapping = {
             "Majors": "/newest-majors",
-            "Rooms": "/newest-majors",
+            "Rooms": "/newest-rooms",
             "Exams": "/newest-majors"
         }
         const FormToRender = nameComponentMapping[this.props.name];

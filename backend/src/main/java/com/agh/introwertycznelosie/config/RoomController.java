@@ -23,7 +23,7 @@ public class RoomController {
     }
 
     @PostMapping("/new-room")
-    public ResponseEntity<HttpStatus> postNewMajor(@RequestBody Room room) {
+    public ResponseEntity<HttpStatus> postNewRoom(@RequestBody Room room) {
         roomService.save(room);
         return ResponseEntity.ok(HttpStatus.OK);
     }
