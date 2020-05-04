@@ -1,11 +1,13 @@
 package com.agh.introwertycznelosie.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

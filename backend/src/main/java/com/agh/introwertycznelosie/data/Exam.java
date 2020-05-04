@@ -1,10 +1,13 @@
 package com.agh.introwertycznelosie.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Exam {
 
     @Id

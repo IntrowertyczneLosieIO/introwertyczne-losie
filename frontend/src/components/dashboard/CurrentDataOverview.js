@@ -40,6 +40,7 @@ class CurrentDataOverview extends React.Component {
     handleShow = () => this.setShowAddNew(true);
     handleHide = () => this.setShowAddNew(false);
 
+
     render() {
         const nameComponentMapping = {
             "Majors": AddMajor,
