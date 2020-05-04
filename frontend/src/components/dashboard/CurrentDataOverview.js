@@ -4,12 +4,15 @@ import Col from "react-bootstrap/Col";
 import DataTable from "./DataTable";
 import Button from "react-bootstrap/Button";
 import AddMajor from "../forms/AddMajor";
+import AddRoom from "../forms/AddRoom";
 
 class CurrentDataOverview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showAddNew: false,
+            showAddNewMajor: false,
+            showAddNewRoom: false,
+
             Majors: {
                 displayName: "Kierunki",
                 headers: ["Nazwa", "Wydział", "Osoba kontaktowa nr 1", "Osoba kontaktowa nr 2"],
@@ -17,8 +20,8 @@ class CurrentDataOverview extends React.Component {
             },
             Rooms: {
                 displayName: "Sale",
-                headers: ["Nazwa", "Nazwa", "Nazwa", "Nazwa"],
-                values: []
+                headers: ["Budynek", "Numer sali", "Rekomendowana pojemność", "Maksymalna pojemność"],
+                values: ["localization", "number", "recommendedCapacity", "maximalCapacity"]
             },
             Exams: {
                 displayName: "Egzaminy",
@@ -40,13 +43,13 @@ class CurrentDataOverview extends React.Component {
     render() {
         const nameComponentMapping = {
             "Majors": AddMajor,
-            "Rooms": AddMajor,
+            "Rooms": AddRoom,
             "Exams": AddMajor
         };
 
         const nameRequestMapping = {
             "Majors": "/newest-majors",
-            "Rooms": "/newest-majors",
+            "Rooms": "/newest-rooms",
             "Exams": "/newest-majors"
         }
         const FormToRender = nameComponentMapping[this.props.name];
@@ -68,6 +71,7 @@ class CurrentDataOverview extends React.Component {
                         <Button variant={"outline-primary"} size={"sm"} block>{this.props.more}</Button>
                     </Col>
                     <Col xs={2}>
+
                         <Button variant={"success"} className={"mb-3"} size={"sm"} block
                                 onClick={this.handleShow}>{this.props.addNew}</Button>
 
