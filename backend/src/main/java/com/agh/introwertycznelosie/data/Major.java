@@ -1,8 +1,9 @@
 package com.agh.introwertycznelosie.data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Major {
 
@@ -15,17 +16,34 @@ public class Major {
     private Long id;
 
     private Faculty faculty;
+    @OneToMany(mappedBy = "major")
+    private List<Exam> exams = new ArrayList<>();
+
     private String fullName;
     private String shortName;
     private ModeOfStudy mode;
     private int numberOfPlaces;
-
     // TODO - klasa zamiast stringa, ale klasy jeszcze nie ma
+
     private String contactPerson1;
     private String contactPerson2;
-
     private boolean mixedField;
+
     private String annotations;
+
+    public Major(Faculty faculty, String fullName, String shortName, ModeOfStudy mode,
+                 int numberOfPlaces, String contactPerson1, String contactPerson2,
+                 boolean mixedField, String annotations) {
+        this.faculty = faculty;
+        this.fullName = fullName;
+        this.shortName = shortName;
+        this.mode = mode;
+        this.numberOfPlaces = numberOfPlaces;
+        this.contactPerson1 = contactPerson1;
+        this.contactPerson2 = contactPerson2;
+        this.mixedField = mixedField;
+        this.annotations = annotations;
+    }
 
     public Long getId() {
         return id;
@@ -105,5 +123,13 @@ public class Major {
 
     public void setAnnotations(String annotations) {
         this.annotations = annotations;
+    }
+
+    public List<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<Exam> exams) {
+        this.exams = exams;
     }
 }
