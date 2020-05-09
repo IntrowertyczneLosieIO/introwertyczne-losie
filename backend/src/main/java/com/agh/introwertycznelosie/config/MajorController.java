@@ -29,8 +29,7 @@ public class MajorController {
     }
 
     @GetMapping(value = "/major/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Major getMajor(@PathVariable(name = "id") String id)
-    {
+    public Major getMajor(@PathVariable(name = "id") String id) {
         return majorService.get(Long.parseLong(id));
     }
 }

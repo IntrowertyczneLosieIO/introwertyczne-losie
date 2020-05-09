@@ -13,7 +13,7 @@ class AddExam extends React.Component {
             validated: false,
             showConfirmationModal: false,
             userData: this.getInitialState(),
-            majors: ["Informatyka", "Informatyka Społeczna", "Humanistyka", "Telekomunikacja", "Elektronika"],
+            majors: [],
             buildings: ["D17", "D10", "A0", "B1", "D11", "C2"],
             rooms: ["1.38", "2.41", "3.22", "3.23", "3.27A", "3.27B", "3.27C"],
             modesMapping: {
@@ -119,6 +119,22 @@ hideAndClearState = () => {
     this.props.handleHide();
 }
 
+componentDidMount() {
+    this.findMajors()
+}
+
+findMajors() {
+    fetch("/newest-majors/")
+        .then(res => {
+            const major = res.data;
+            console.log(major);
+            this.setState({
+                majors: major,
+            });
+        });
+    return this.majors;
+}
+
 render() {
     return (
         <>
@@ -129,7 +145,7 @@ render() {
             </Modal.Header>
     <Modal.Body className={"custom-margins"}>
         <Form noValidate validated={this.state.validated} ref={this.formRef}>
-        <NewExamInfo options={this.props.options} getFormData={this.getFormData} majors={this.state.majors} buildings={this.state.buildings} rooms={this.state.rooms}/>
+        <NewExamInfo options={this.props.options} getFormData={this.getFormData} majors={this.findMajors()} buildings={this.state.buildings} rooms={this.state.rooms}/>
     <h4 className={"mt-3 text-center"}>Uwagi</h4>
         <FormGroup controlId={"annotations"}>
     <Form.Control as={"textarea"} rows={"4"} onChange={this.handleInputChange}/>
