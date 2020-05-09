@@ -18,7 +18,7 @@ public class MajorController {
     MajorService majorService;
 
     @GetMapping(value="/newest-majors", produces = MediaType.APPLICATION_JSON_VALUE)
-    List<Major> getMajors() {
+    public List<Major> getMajors() {
         return majorService.get();
     }
 
@@ -26,5 +26,11 @@ public class MajorController {
     public ResponseEntity<HttpStatus> postNewMajor(@RequestBody Major major) {
         majorService.save(major);
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/major/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Major getMajor(@PathVariable(name = "id") String id)
+    {
+        return majorService.get(Long.parseLong(id));
     }
 }

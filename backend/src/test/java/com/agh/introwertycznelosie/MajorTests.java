@@ -3,7 +3,6 @@ package com.agh.introwertycznelosie;
 import com.agh.introwertycznelosie.data.Faculty;
 import com.agh.introwertycznelosie.data.Major;
 import com.agh.introwertycznelosie.data.ModeOfStudy;
-import com.agh.introwertycznelosie.repositories.MajorRepository;
 import com.agh.introwertycznelosie.services.MajorService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
