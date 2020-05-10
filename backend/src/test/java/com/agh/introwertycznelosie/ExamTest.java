@@ -41,7 +41,7 @@ class ExamTest {
     }
 
     @Test
-    void testAddingExamToDatabase(){
+    void testAddingExamToDatabase() {
         major1 = majorService.save(major1);
         major2 = majorService.save(major2);
         exam1Test = examService.save(exam1);
