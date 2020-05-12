@@ -1,11 +1,7 @@
 package com.agh.introwertycznelosie.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +17,9 @@ public class Major {
     @GeneratedValue
     private Long id;
 
+    @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Faculty faculty;
+
     @OneToMany(mappedBy = "major")
     private List<Exam> exams = new ArrayList<>();
 
