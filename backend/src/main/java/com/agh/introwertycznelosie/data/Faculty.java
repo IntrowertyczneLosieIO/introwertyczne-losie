@@ -37,7 +37,6 @@ public class Faculty {
     }
     //TODO change this method after adding dynamic Faculties on frontend
     public Faculty(String acronym) throws InvalidFacultyException {
-        this.acronym = acronym;
         switch (acronym) {
             case "WGiG":
                 this.name = "Wydział Górnictwa i Geoinżynierii";
@@ -96,8 +95,8 @@ public class Faculty {
             default:
                 this.name = "Incorrect Faculty Acronym";
                 throw new InvalidFacultyException(acronym + " is not recognized faculty acronym");
-
         }
+        this.acronym = acronym;
     }
 
     public String getName() {
