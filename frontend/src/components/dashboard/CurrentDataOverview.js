@@ -26,7 +26,7 @@ class CurrentDataOverview extends React.Component {
             Exams: {
                 displayName: "Egzaminy",
                 headers: ["Nazwa", "Kierunek", "Forma studiów", "Data rozpoczęcia", "Data zakończenia"],
-                values: ["name", "faculty", "modeOfStudy", "startDate", "endDate"]
+                values: ["name", "major", "modeOfStudy", "startDate", "endDate"]
             }
         }
     }

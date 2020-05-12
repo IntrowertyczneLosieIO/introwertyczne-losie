@@ -14,8 +14,8 @@ class AddExam extends React.Component {
             showConfirmationModal: false,
             userData: this.getInitialState(),
             majors: [],
-            buildings: ["D17", "D10", "A0", "B1", "D11", "C2"],
-            rooms: ["1.38", "2.41", "3.22", "3.23", "3.27A", "3.27B", "3.27C"],
+            buildings: [],
+            rooms: [],
             modesMapping: {
                 "stacjonarne": "fullTime",
                 "niestacjonarne": "partTime"
@@ -50,8 +50,8 @@ setValidated = (validated) => {
 getInitialState = () => {
     return {
         name: "",
-        major: "Informatyka",
-        modeOfStudy: "stacjonarne",
+        major: "ahaFajnie",
+        modeOfStudy: "",
         startDate: "",
         endDate: "",
     }
@@ -121,18 +121,40 @@ hideAndClearState = () => {
 
 componentDidMount() {
     this.findMajors()
+    this.findRooms()
+}
+
+findRooms(){
+    fetch("/newest-rooms")
+        .then((response)=>{
+            return response.json();
+        })
+        .then((response) => {
+            console.log(response);
+            let roomsValues = response.map(value => value.number);
+            let buildingsValues = response.map(value => value.localization);
+
+            this.setState({
+                rooms: roomsValues
+            });
+            this.setState({
+                buildings: buildingsValues
+            });
+        });
 }
 
 findMajors() {
-    fetch("/newest-majors/")
-        .then(res => {
-            const major = res.data;
-            console.log(major);
+    fetch("/newest-majors")
+        .then((response)=>{
+            return response.json();
+        })
+        .then((response) => {
+            console.log(response);
+
             this.setState({
-                majors: major,
+                majors: response,
             });
         });
-    return this.majors;
 }
 
 render() {
@@ -145,7 +167,7 @@ render() {
             </Modal.Header>
     <Modal.Body className={"custom-margins"}>
         <Form noValidate validated={this.state.validated} ref={this.formRef}>
-        <NewExamInfo options={this.props.options} getFormData={this.getFormData} majors={this.findMajors()} buildings={this.state.buildings} rooms={this.state.rooms}/>
+        <NewExamInfo options={this.props.options} getFormData={this.getFormData} majors={this.state.majors} buildings={this.state.buildings} rooms={this.state.rooms}/>
     <h4 className={"mt-3 text-center"}>Uwagi</h4>
         <FormGroup controlId={"annotations"}>
     <Form.Control as={"textarea"} rows={"4"} onChange={this.handleInputChange}/>
