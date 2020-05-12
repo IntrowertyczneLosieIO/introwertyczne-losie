@@ -32,7 +32,8 @@ public class RecruitmentTest {
         recruitment1 = new Recruitment("LATO-2020", 2020, Semester.summer);
         recruitment2 = new Recruitment("ZIMA-2021", 2021, Semester.winter);
         recruitment3 = new Recruitment("LATO-2021", 2021, Semester.summer);
-        recruitment2.setRecruitmentStatus(RecruitmentStatus.open);
+        recruitment2.setRecruitmentStatus(RecruitmentStatus.pending);
+        recruitment1.setRecruitmentStatus(RecruitmentStatus.closed);
     }
 
     @Test
@@ -65,9 +66,14 @@ public class RecruitmentTest {
     }
 
     @Test
-    void testAssertOpen() {
-        assertFalse(recruitment1.isOpen(), "Recruitment should be closed but is not");
-        assertTrue(recruitment2.isOpen(), "Recruitment should be open but is not");
+    void testAssertEditable() {
+        assertFalse(recruitment1.isEditable(),
+                "Recruitment should not be editable but it is");
+        assertFalse(recruitment2.isEditable(),
+                "Recruitment should not be editable but it is");
+        assertTrue(recruitment3.isEditable(),
+                "Recruitment should be editable but is not");
+
     }
 
     @Test

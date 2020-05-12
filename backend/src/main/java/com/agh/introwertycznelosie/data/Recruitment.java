@@ -24,13 +24,13 @@ public class Recruitment {
 
     public Recruitment(String acronym, int year, Semester semester) {
         this.acronym = acronym;
-        this.recruitmentStatus = RecruitmentStatus.closed;
+        this.recruitmentStatus = RecruitmentStatus.in_preparation;
         setYear(year);
         this.semester = semester;
     }
 
-    public boolean isOpen() {
-        return recruitmentStatus == RecruitmentStatus.open;
+    public boolean isEditable() {
+        return recruitmentStatus == RecruitmentStatus.in_preparation;
     }
 
     public Long getId() {
