@@ -88,8 +88,6 @@ public class MajorTests {
     {
         weaiib = facultyService.save(weaiib);
         wiet = facultyService.save(wiet);
-        m1.setFaculty(weaiib);
-        m2.setFaculty(wiet);
         m1 = majorService.save(m1);
         m2 = majorService.save(m2);
     }

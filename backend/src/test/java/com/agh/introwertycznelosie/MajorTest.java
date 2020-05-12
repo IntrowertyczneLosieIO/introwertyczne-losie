@@ -90,7 +90,6 @@ class MajorTest {
     void findByFullName() {
         String fullName = "Automatyka i Robotyka";
         weaiib = facultyService.save(weaiib);
-        m2.setFaculty(weaiib);
         m2 = majorService.save(m2);
         assertEquals(majorService.findByFullName(fullName), m2);
     }

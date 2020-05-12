@@ -54,7 +54,6 @@ public class SubexamTests {
     @Test
     void testSubexamSave(){
         wiet = facultyService.save(wiet);
-        major1.setFaculty(wiet);
         major1 = majorService.save(major1);
         System.out.println("==============================" + major1.getId());
         roomService.save(r1);

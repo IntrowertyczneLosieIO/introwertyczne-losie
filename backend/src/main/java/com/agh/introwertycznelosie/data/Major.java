@@ -18,7 +18,7 @@ public class Major {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Faculty faculty;
     @OneToMany(mappedBy = "major")
     private List<Exam> exams = new ArrayList<>();

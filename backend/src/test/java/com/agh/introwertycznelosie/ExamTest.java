@@ -48,8 +48,6 @@ class ExamTest {
     @Test
     void testAddingExamToDatabase(){
         wiet = facultyService.save(wiet);
-        major1.setFaculty(wiet);
-        major2.setFaculty(wiet);
         major1 = majorService.save(major1);
         major2 = majorService.save(major2);
         exam1Test = examService.save(exam1);
