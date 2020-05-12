@@ -2,6 +2,7 @@ import React from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import EditMajor from "../forms/EditMajor";
+import EditRoom from "../forms/EditRoom";
 
 class DataTable extends React.Component {
     constructor(props) {
@@ -54,8 +55,8 @@ class DataTable extends React.Component {
     render() {
         const nameComponentMapping = {
             "Majors": EditMajor,
-            "Rooms": EditMajor,
-            "Exams": EditMajor
+            "Rooms": EditRoom,
+            "Exams": EditRoom
         };
         const FormToRender = nameComponentMapping[this.props.name];
 

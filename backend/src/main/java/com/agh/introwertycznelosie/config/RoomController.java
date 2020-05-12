@@ -28,4 +28,19 @@ public class RoomController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    @PutMapping("edit-room/{id}")
+    Room updateRoom(@RequestBody Room room, @PathVariable Long id) {
+        Room currentRoom = roomService.get(id);
+        if (currentRoom != null) {
+            currentRoom.setLocalization(room.getLocalization());
+            currentRoom.setMaximalCapacity(room.getMaximalCapacity());
+            currentRoom.setNumber(room.getNumber());
+            currentRoom.setRecommendedCapacity(room.getRecommendedCapacity());
+            return roomService.save(currentRoom);
+        } else {
+            room.setId(id);
+            return roomService.save(room);
+        }
+    }
+
 }
