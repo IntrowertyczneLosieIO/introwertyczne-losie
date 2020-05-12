@@ -25,17 +25,20 @@ class ExamTest {
 
     private static Exam exam1, exam2, exam1Test;
     private static Major major1, major2;
-
+    private static Faculty wiet;
     @Autowired
     private ExamService examService;
 
     @Autowired
     private MajorService majorService;
 
+    @Autowired
+    private FacultyService facultyService;
+
 
     @BeforeAll
     public static void createClasses() {
-        Faculty wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT");
+        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT");
         major1 = new Major(wiet, "Computer Science", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
         major2 = new Major(wiet, "Electronics", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
         exam1 = new Exam("Computer Science", major1, fullTime, new Date(2021, Calendar.SEPTEMBER, 1), new Date(2021, Calendar.SEPTEMBER, 8));
@@ -44,6 +47,9 @@ class ExamTest {
 
     @Test
     void testAddingExamToDatabase(){
+        wiet = facultyService.save(wiet);
+        major1.setFaculty(wiet);
+        major2.setFaculty(wiet);
         major1 = majorService.save(major1);
         major2 = majorService.save(major2);
         exam1Test = examService.save(exam1);

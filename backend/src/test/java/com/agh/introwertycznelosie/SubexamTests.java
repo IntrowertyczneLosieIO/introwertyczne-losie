@@ -1,10 +1,7 @@
 package com.agh.introwertycznelosie;
 
 import com.agh.introwertycznelosie.data.*;
-import com.agh.introwertycznelosie.services.ExamService;
-import com.agh.introwertycznelosie.services.MajorService;
-import com.agh.introwertycznelosie.services.RoomService;
-import com.agh.introwertycznelosie.services.SubexamService;
+import com.agh.introwertycznelosie.services.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +24,7 @@ public class SubexamTests {
     private static Exam e2;
     private static Room r1;
     private static Major major1;
+    private static Faculty wiet;
     @Autowired
     private SubexamService subexamService;
     @Autowired
@@ -36,12 +34,15 @@ public class SubexamTests {
     @Autowired
     private MajorService majorService;
 
+    @Autowired
+    private FacultyService facultyService;
+
     @BeforeAll
     public static void setup(){
         LinkedList<DateRange> availableDates = new LinkedList<>();
         availableDates.add(new DateRange());
         availableDates.add(new DateRange());
-        Faculty wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT");
+        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT");
         major1 = new Major(wiet, "Computer Science", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
         r1 = new Room(100, 200, "d17", "3.42", availableDates);
         e1 = new Exam("analiza", major1, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13));
@@ -52,6 +53,8 @@ public class SubexamTests {
 
     @Test
     void testSubexamSave(){
+        wiet = facultyService.save(wiet);
+        major1.setFaculty(wiet);
         major1 = majorService.save(major1);
         System.out.println("==============================" + major1.getId());
         roomService.save(r1);

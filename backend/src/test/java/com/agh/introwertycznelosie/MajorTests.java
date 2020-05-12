@@ -3,6 +3,7 @@ package com.agh.introwertycznelosie;
 import com.agh.introwertycznelosie.data.Faculty;
 import com.agh.introwertycznelosie.data.Major;
 import com.agh.introwertycznelosie.data.ModeOfStudy;
+import com.agh.introwertycznelosie.services.FacultyService;
 import com.agh.introwertycznelosie.services.MajorService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,14 +55,19 @@ public class MajorTests {
     @Autowired
     private MajorService majorService;
 
+    @Autowired
+    private FacultyService facultyService;
+
     private static Major m1;
     private static Major m2;
+    private static Faculty wiet;
+    private static Faculty weaiib;
 
     @BeforeAll
     static void setupAll()
     {
         m1 = new Major();
-        Faculty wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT");
+        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT");
         m1.setFaculty(wiet);
         m1.setFullName("InformatykaTest");
         m1.setShortName("Infa-TEST");
@@ -69,7 +75,7 @@ public class MajorTests {
         m1.setNumberOfPlaces(200);
 
         m2 = new Major();
-        Faculty weaiib = new Faculty("Wydział Elektrotechniki, Automatyki, Informatyki i Inżynierii Biomedycznej", "WEAiIB");
+        weaiib = new Faculty("Wydział Elektrotechniki, Automatyki, Informatyki i Inżynierii Biomedycznej", "WEAiIB");
         m2.setFaculty(weaiib);
         m2.setFullName("ElektrotechnikaTest");
         m2.setShortName("ET-TEST");
@@ -80,6 +86,10 @@ public class MajorTests {
     @BeforeEach
     void setupEach()
     {
+        weaiib = facultyService.save(weaiib);
+        wiet = facultyService.save(wiet);
+        m1.setFaculty(weaiib);
+        m2.setFaculty(wiet);
         m1 = majorService.save(m1);
         m2 = majorService.save(m2);
     }

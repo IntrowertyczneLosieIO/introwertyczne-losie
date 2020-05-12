@@ -1,6 +1,7 @@
 package com.agh.introwertycznelosie;
 
 import com.agh.introwertycznelosie.data.*;
+import com.agh.introwertycznelosie.services.FacultyService;
 import com.agh.introwertycznelosie.services.MajorService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -19,14 +20,19 @@ class MajorTest {
 
     private static Major m1;
     private static Major m2;
+    private static Faculty wiet;
+    private static Faculty weaiib;
 
     @Autowired
     private MajorService majorService;
 
+    @Autowired
+    private FacultyService facultyService;
+
     @BeforeAll
     static void setup() {
         m1 = new Major();
-        Faculty wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT");
+        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT");
         String contact1 = "Anna Nowak, anowak@agh.edu.pl, 667452082";
         String contact2 = "Tomasz Kowalski, tkowalski@agh.edu.pl, 525908712";
         m1.setFaculty(wiet);
@@ -39,7 +45,7 @@ class MajorTest {
 
 
         m2 = new Major();
-        Faculty weaiib = new Faculty("Wydział Elektrotechniki, Automatyki, Informatyki i Inżynierii Biomedycznej", "WEAiIB");
+        weaiib = new Faculty("Wydział Elektrotechniki, Automatyki, Informatyki i Inżynierii Biomedycznej", "WEAiIB");
         String contact3 = "Maria Pisak, mpisak@agh.edu.pl, 983782130";
         String contact4 = "Karol Okno, kokno@agh.edu.pl, 782339019";
         m2.setFaculty(weaiib);
@@ -83,6 +89,8 @@ class MajorTest {
     @Test
     void findByFullName() {
         String fullName = "Automatyka i Robotyka";
+        weaiib = facultyService.save(weaiib);
+        m2.setFaculty(weaiib);
         m2 = majorService.save(m2);
         assertEquals(majorService.findByFullName(fullName), m2);
     }
