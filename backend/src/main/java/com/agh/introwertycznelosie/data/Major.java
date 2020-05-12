@@ -1,7 +1,6 @@
 package com.agh.introwertycznelosie.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +19,7 @@ public class Major {
 
     @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Faculty faculty;
+
     @OneToMany(mappedBy = "major")
     private List<Exam> exams = new ArrayList<>();
 

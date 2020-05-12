@@ -1,6 +1,8 @@
 package com.agh.introwertycznelosie.config;
 
+import com.agh.introwertycznelosie.data.Faculty;
 import com.agh.introwertycznelosie.data.Major;
+import com.agh.introwertycznelosie.services.FacultyService;
 import com.agh.introwertycznelosie.services.MajorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,9 @@ public class MajorController {
     @Autowired
     MajorService majorService;
 
+    @Autowired
+    FacultyService facultyService;
+
     @GetMapping(value="/newest-majors", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Major> getMajors() {
         return majorService.get();
@@ -24,17 +29,28 @@ public class MajorController {
 
     @PostMapping("/new-major")
     public ResponseEntity<HttpStatus> postNewMajor(@RequestBody Major major) {
+        Faculty faculty = facultyService.findByAcronym(major.getFaculty().getAcronym());
+        if(faculty==null)
+        {
+            faculty = facultyService.save(major.getFaculty());
+        }
+        major.setFaculty(faculty);
         majorService.save(major);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PutMapping("edit-major/{id}")
-    public Major updateRoom(@RequestBody Major major, @PathVariable Long id) {
+    public Major updateMajor(@RequestBody Major major, @PathVariable Long id) {
         Major majorDB = majorService.get(id);
         if (majorDB != null) {
             majorDB.setFullName(major.getFullName());
             majorDB.setShortName(major.getShortName());
-            majorDB.setFaculty(major.getFaculty());
+            Faculty faculty = facultyService.findByAcronym(major.getFaculty().getAcronym());
+            if(faculty==null)
+            {
+                faculty = facultyService.save(major.getFaculty());
+            }
+            majorDB.setFaculty(faculty);
             majorDB.setContactPerson1(major.getContactPerson1());
             majorDB.setContactPerson2(major.getContactPerson2());
             majorDB.setAnnotations(major.getAnnotations());

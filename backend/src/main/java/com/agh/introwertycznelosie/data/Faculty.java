@@ -1,18 +1,26 @@
 package com.agh.introwertycznelosie.data;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonSerialize(using = FacultySerializer.class)
+@JsonDeserialize(using = FacultyDeserializer.class)
 public class Faculty {
 
-    private class InvalidFacultyException extends Exception {
+    public class InvalidFacultyException extends Exception {
         public InvalidFacultyException(String errorMessage) {
             super(errorMessage);
         }
     }
+
 
     @Id
     @GeneratedValue
@@ -27,7 +35,7 @@ public class Faculty {
         this.name = name;
         this.acronym = acronym;
     }
-
+    //TODO change this method after adding dynamic Faculties on frontend
     public Faculty(String acronym) throws InvalidFacultyException {
         this.acronym = acronym;
         switch (acronym) {
@@ -86,6 +94,7 @@ public class Faculty {
                 this.name = "Wydział Humanistyczny";
                 break;
             default:
+                this.name = "Incorrect Faculty Acronym";
                 throw new InvalidFacultyException(acronym + " is not recognized faculty acronym");
 
         }

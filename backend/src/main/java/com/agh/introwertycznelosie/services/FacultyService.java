@@ -15,6 +15,8 @@ public class FacultyService {
         return facultyRepository.save(faculty);
     }
 
+    public Faculty findByAcronym(String acronym) { return facultyRepository.findByAcronym(acronym); }
+
     public Faculty get(Long id){
         return facultyRepository.getOne(id);
     }
