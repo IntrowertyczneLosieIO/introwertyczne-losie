@@ -2,6 +2,7 @@ import React from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import EditRoom from "../forms/EditRoom";
+import DeleteRoom from "../forms/DeleteRoom";
 
 class DataTable extends React.Component {
     constructor(props) {
@@ -9,6 +10,7 @@ class DataTable extends React.Component {
         this.state = {
             name: "",
             showEdit: {},
+            showDelete: {},
             tableData: []
         };
     }
@@ -23,8 +25,21 @@ class DataTable extends React.Component {
         });
     }
 
+    setShowDelete = (index, show) => {
+        let rest = this.state.showDelete;
+        this.setState({
+            showDelete: {
+                ...rest,
+                [index]: show
+            }
+        });
+    }
+
     handleShow = (index) => this.setShowEdit(index, true);
     handleHide = (index) => this.setShowEdit(index, false);
+
+    handleShowDelete = (index) => this.setShowDelete(index, true);
+    handleHideDelete = (index) => this.setShowDelete(index, false);
 
     fetchData = () => {
         fetch(this.props.mapping)
@@ -57,7 +72,14 @@ class DataTable extends React.Component {
             "Rooms": EditRoom,
             "Exams": EditRoom
         };
+
+        const nameComponentMappingDelete = {
+            "Majors": DeleteRoom,
+            "Rooms": DeleteRoom,
+            "Exams": DeleteRoom
+        };
         const FormToRender = nameComponentMapping[this.props.name];
+        const FormToRenderDelete = nameComponentMappingDelete[this.props.name];
 
         let rowList = this.state.tableData.map((row, rowIndex) => {
             let cellList = Object.values(row).map((columnValue, index) => {
@@ -74,6 +96,11 @@ class DataTable extends React.Component {
                               handleHide={() => this.handleHide(rowIndex)}
                               show={this.state.showEdit[rowIndex]}
                               initialInputValues={rowData}/>
+                <Button variant={"danger"} size={"sm"} onClick={() => this.handleShowDelete(rowIndex)} block>Usuń</Button>
+                <FormToRenderDelete handleShow={() => this.handleShowDelete(rowIndex)}
+                                handleHide={() => this.handleHideDelete(rowIndex)}
+                                show={this.state.showDelete[rowIndex]}
+                                initialInputValues={rowData}/>
             </tr>
         })
 
