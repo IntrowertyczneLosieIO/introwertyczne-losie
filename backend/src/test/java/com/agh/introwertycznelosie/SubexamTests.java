@@ -28,6 +28,7 @@ public class SubexamTests {
     private static Exam e2;
     private static Room r1;
     private static Major major1;
+    private static Person person1, person2;
     @Autowired
     private SubexamService subexamService;
     @Autowired
@@ -42,7 +43,10 @@ public class SubexamTests {
         LinkedList<DateRange> availableDates = new LinkedList<>();
         availableDates.add(new DateRange());
         availableDates.add(new DateRange());
-        major1 = new Major(WIEiT, "Computer Science", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
+        person1 = new Person("Adam", "Kowalik", "666555444", "a.kowalik@agh.edu.pl");
+        person2 = new Person("Janina", "Bosacka", "999888777", "j.bosacka@agh.edu.pl");
+
+        major1 = new Major(WIEiT, "Computer Science", "Inf", fullTime, 200, person1, person2, false, "");
         r1 = new Room(100, 200, "d17", "3.42", availableDates);
         e1 = new Exam("analiza", major1, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13));
         e2 = new Exam("analiza", major1, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13));

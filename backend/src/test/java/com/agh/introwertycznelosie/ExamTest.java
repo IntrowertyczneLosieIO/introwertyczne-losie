@@ -3,6 +3,7 @@ package com.agh.introwertycznelosie;
 import com.agh.introwertycznelosie.data.Exam;
 import com.agh.introwertycznelosie.data.Faculty;
 import com.agh.introwertycznelosie.data.Major;
+import com.agh.introwertycznelosie.data.Person;
 import com.agh.introwertycznelosie.services.ExamService;
 import com.agh.introwertycznelosie.services.MajorService;
 import org.junit.jupiter.api.BeforeAll;
@@ -24,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ExamTest {
 
     private static Exam exam1, exam2, exam1Test;
+    private static Person person1, person2, person3;
     private static Major major1, major2;
 
     @Autowired
@@ -34,8 +36,11 @@ class ExamTest {
 
     @BeforeAll
     public static void createClasses() {
-        major1 = new Major(WIEiT, "Computer Science", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
-        major2 = new Major(WIEiT, "Electronics", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
+        person1 = new Person("Adam", "Kowalik", "666555444", "a.kowalik@agh.edu.pl");
+        person2 = new Person("Janina", "Bosacka", "999888777", "j.bosacka@agh.edu.pl");
+        person3 = new Person("Janina", "Bosacka", "999888777", "j.bosacka@agh.edu.pl");
+        major1 = new Major(WIEiT, "Computer Science", "Inf", fullTime, 200, person1, null, false, "");
+        major2 = new Major(WIEiT, "Electronics", "Inf", fullTime, 200, person2, person3, false, "");
         exam1 = new Exam("Computer Science", major1, fullTime, new Date(2021, Calendar.SEPTEMBER, 1), new Date(2021, Calendar.SEPTEMBER, 8));
         exam2 = new Exam("Electronics", major2, fullTime, new Date(2021, Calendar.SEPTEMBER, 8), new Date(2021, Calendar.SEPTEMBER, 16));
     }

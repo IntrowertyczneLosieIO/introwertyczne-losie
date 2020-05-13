@@ -26,8 +26,8 @@ class MajorTest {
     @BeforeAll
     static void setup() {
         m1 = new Major();
-        String contact1 = "Anna Nowak, anowak@agh.edu.pl, 667452082";
-        String contact2 = "Tomasz Kowalski, tkowalski@agh.edu.pl, 525908712";
+        Person contact1 = new Person("Anna", "Nowak", "667452082", "anowak@agh.edu.pl");
+        Person contact2 = new Person("Tomasz", "Kowalski", "525908712", "tkowalski@agh.edu.pl");
         m1.setFaculty(Faculty.WIEiT);
         m1.setFullName("Elektronika i Telekomunikacja");
         m1.setShortName("EiT");
@@ -38,15 +38,14 @@ class MajorTest {
 
 
         m2 = new Major();
-        String contact3 = "Maria Pisak, mpisak@agh.edu.pl, 983782130";
-        String contact4 = "Karol Okno, kokno@agh.edu.pl, 782339019";
+        Person contact3 = new Person("Maria", "Pisak", "983782130", "mpisak@agh.edu.pl");
         m2.setFaculty(Faculty.WEAiIB);
         m2.setFullName("Automatyka i Robotyka");
         m2.setShortName("AiR");
         m2.setMode(ModeOfStudy.fullTime);
         m2.setNumberOfPlaces(90);
         m2.setContactPerson1(contact3);
-        m2.setContactPerson2(contact4);
+        m2.setContactPerson2(null);
     }
 
     @Test
@@ -62,6 +61,7 @@ class MajorTest {
         m2 = majorService.save(m2);
         assertEquals(majorService.get(m1.getId()).getId(), m1.getId());
         assertEquals(majorService.get(m2.getId()).getId(), m2.getId());
+        System.out.println("=========PERSON=======" + m2.getContactPerson1());
     }
 
     @Test
