@@ -43,6 +43,11 @@ class ExamTest {
 
     @BeforeAll
     public static void createClasses() {
+        try {
+            wiet = new Faculty("WIEiT");
+        } catch (Faculty.InvalidFacultyException e) {
+            e.printStackTrace();
+        }
         major1 = new Major(wiet, "Computer Science", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
         major2 = new Major(wiet, "Electronics", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
         recruitmentCycle = new RecruitmentCycle(null);
