@@ -1,18 +1,18 @@
 package com.agh.introwertycznelosie;
 
 
-import com.agh.introwertycznelosie.data.*;
+import com.agh.introwertycznelosie.data.Exam;
+import com.agh.introwertycznelosie.data.Recruitment;
+import com.agh.introwertycznelosie.data.RecruitmentCycle;
+import com.agh.introwertycznelosie.data.Semester;
 import com.agh.introwertycznelosie.services.RecruitmentCycleService;
 import com.agh.introwertycznelosie.services.RecruitmentService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.test.context.event.annotation.AfterTestMethod;
-import org.springframework.test.context.event.annotation.BeforeTestMethod;
 
 import javax.transaction.Transactional;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;

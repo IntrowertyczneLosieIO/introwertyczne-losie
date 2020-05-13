@@ -1,6 +1,9 @@
 package com.agh.introwertycznelosie.data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

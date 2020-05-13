@@ -1,6 +1,9 @@
 package com.agh.introwertycznelosie;
 
-import com.agh.introwertycznelosie.data.*;
+import com.agh.introwertycznelosie.data.Faculty;
+import com.agh.introwertycznelosie.data.Major;
+import com.agh.introwertycznelosie.data.ModeOfStudy;
+import com.agh.introwertycznelosie.data.Person;
 import com.agh.introwertycznelosie.services.FacultyService;
 import com.agh.introwertycznelosie.services.MajorService;
 import org.junit.jupiter.api.Assertions;
@@ -36,7 +39,6 @@ class MajorTest {
         Person contact1 = new Person("Anna", "Nowak", "667452082", "anowak@agh.edu.pl");
         Person contact2 = new Person("Tomasz", "Kowalski", "525908712", "tkowalski@agh.edu.pl");
         m1.setFaculty(wiet);
-        m1.setFaculty(Faculty.WIEiT);
         m1.setFullName("Elektronika i Telekomunikacja");
         m1.setShortName("EiT");
         m1.setMode(ModeOfStudy.fullTime);
@@ -49,7 +51,6 @@ class MajorTest {
         weaiib = new Faculty("Wydział Elektrotechniki, Automatyki, Informatyki i Inżynierii Biomedycznej", "WEAiIB");
         Person contact3 = new Person("Maria", "Pisak", "983782130", "mpisak@agh.edu.pl");
         m2.setFaculty(weaiib);
-        m2.setFaculty(Faculty.WEAiIB);
         m2.setFullName("Automatyka i Robotyka");
         m2.setShortName("AiR");
         m2.setMode(ModeOfStudy.fullTime);

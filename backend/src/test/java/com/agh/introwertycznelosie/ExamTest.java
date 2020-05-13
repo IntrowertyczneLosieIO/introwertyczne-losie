@@ -1,28 +1,21 @@
 package com.agh.introwertycznelosie;
 
-import com.agh.introwertycznelosie.data.Exam;
-import com.agh.introwertycznelosie.data.Faculty;
-import com.agh.introwertycznelosie.data.Major;
-import com.agh.introwertycznelosie.data.RecruitmentCycle;
-import com.agh.introwertycznelosie.data.Person;
+import com.agh.introwertycznelosie.data.*;
 import com.agh.introwertycznelosie.services.ExamService;
 import com.agh.introwertycznelosie.services.FacultyService;
 import com.agh.introwertycznelosie.services.MajorService;
 import com.agh.introwertycznelosie.services.RecruitmentCycleService;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
-import static com.agh.introwertycznelosie.data.Faculty.WIEiT;
 import static com.agh.introwertycznelosie.data.ModeOfStudy.fullTime;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 class ExamTest {
