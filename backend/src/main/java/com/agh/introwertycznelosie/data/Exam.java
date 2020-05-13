@@ -18,16 +18,25 @@ public class Exam {
     private Date startDate;
     private Date endDate;
     //TODO Add Recrutation Cycle field after it has been implemented
+    @ManyToOne(cascade = {CascadeType.MERGE})
+    private RecruitmentCycle recruitmentCycle;
 
     public Exam(){}
 
-    public Exam(String name, Major major, ModeOfStudy modeOfStudy, Date startDate, Date endDate) {
+    public Exam(String name, Major major, ModeOfStudy modeOfStudy, Date startDate, Date endDate, RecruitmentCycle recruitmentCycle) {
         this.name = name;
         this.major = major;
         this.modeOfStudy = modeOfStudy;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.recruitmentCycle = recruitmentCycle;
     }
+
+    public void setRecruitmentCycle(RecruitmentCycle recruitmentCycle) {
+        this.recruitmentCycle = recruitmentCycle;
+    }
+
+    public RecruitmentCycle getRecruitmentCycle() { return this.recruitmentCycle; }
 
     public Long getId() {
         return id;

@@ -51,21 +51,26 @@ class AddMajor extends React.Component {
     }
 
     getInitialState = () => {
-        return {
-            major: "",
-            faculty: "WIEiT",
-            modeOfStudy: "stacjonarne",
-            type: "pisemny",
-            mixed: "Tak",
-            name1: "",
-            surname1: "",
-            email1: "",
-            phone1: "",
-            name2: "",
-            surname2: "",
-            email2: "",
-            phone2: "",
-            annotations: ""
+        if (this.props.initialInputValues) {
+            return this.props.initialInputValues;
+        }
+        else {
+            return {
+                major: "",
+                faculty: "WIEiT",
+                modeOfStudy: "stacjonarne",
+                type: "pisemny",
+                mixed: "Tak",
+                name1: "",
+                surname1: "",
+                email1: "",
+                phone1: "",
+                name2: "",
+                surname2: "",
+                email2: "",
+                phone2: "",
+                annotations: ""
+            }
         }
     }
 
@@ -146,7 +151,7 @@ class AddMajor extends React.Component {
                 </Modal.Header>
                 <Modal.Body className={"custom-margins"}>
                     <Form noValidate validated={this.state.validated} ref={this.formRef}>
-                        <NewMajorInfo getFormData={this.getFormData} faculties={this.state.faculties}/>
+                        <NewMajorInfo getFormData={this.getFormData} faculties={this.state.faculties} inputValuesFromState={this.state.userData}/>
                         <ContactPersonInfo order={1} getFormData={this.getFormData}/>
                         <ContactPersonInfo order={2} getFormData={this.getFormData}/>
                         <h5 className={"mt-4 text-secondary mb-3"}>Uwagi</h5>

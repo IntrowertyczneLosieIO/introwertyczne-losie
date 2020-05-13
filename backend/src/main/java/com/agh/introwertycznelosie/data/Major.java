@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,9 @@ public class Major {
     @GeneratedValue
     private Long id;
 
+    @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Faculty faculty;
+
     @OneToMany(mappedBy = "major")
     private List<Exam> exams = new ArrayList<>();
 
@@ -138,6 +141,4 @@ public class Major {
     public void setExams(List<Exam> exams) {
         this.exams = exams;
     }
-
-
 }

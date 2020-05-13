@@ -1,6 +1,7 @@
 package com.agh.introwertycznelosie;
 
 import com.agh.introwertycznelosie.data.*;
+import com.agh.introwertycznelosie.services.FacultyService;
 import com.agh.introwertycznelosie.services.MajorService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -19,15 +20,22 @@ class MajorTest {
 
     private static Major m1;
     private static Major m2;
+    private static Faculty wiet;
+    private static Faculty weaiib;
 
     @Autowired
     private MajorService majorService;
 
+    @Autowired
+    private FacultyService facultyService;
+
     @BeforeAll
     static void setup() {
         m1 = new Major();
+        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT");
         Person contact1 = new Person("Anna", "Nowak", "667452082", "anowak@agh.edu.pl");
         Person contact2 = new Person("Tomasz", "Kowalski", "525908712", "tkowalski@agh.edu.pl");
+        m1.setFaculty(wiet);
         m1.setFaculty(Faculty.WIEiT);
         m1.setFullName("Elektronika i Telekomunikacja");
         m1.setShortName("EiT");
@@ -38,7 +46,9 @@ class MajorTest {
 
 
         m2 = new Major();
+        weaiib = new Faculty("Wydział Elektrotechniki, Automatyki, Informatyki i Inżynierii Biomedycznej", "WEAiIB");
         Person contact3 = new Person("Maria", "Pisak", "983782130", "mpisak@agh.edu.pl");
+        m2.setFaculty(weaiib);
         m2.setFaculty(Faculty.WEAiIB);
         m2.setFullName("Automatyka i Robotyka");
         m2.setShortName("AiR");
@@ -61,7 +71,6 @@ class MajorTest {
         m2 = majorService.save(m2);
         assertEquals(majorService.get(m1.getId()).getId(), m1.getId());
         assertEquals(majorService.get(m2.getId()).getId(), m2.getId());
-        System.out.println("=========PERSON=======" + m2.getContactPerson1());
     }
 
     @Test
@@ -81,6 +90,7 @@ class MajorTest {
     @Test
     void findByFullName() {
         String fullName = "Automatyka i Robotyka";
+        weaiib = facultyService.save(weaiib);
         m2 = majorService.save(m2);
         assertEquals(majorService.findByFullName(fullName), m2);
     }
