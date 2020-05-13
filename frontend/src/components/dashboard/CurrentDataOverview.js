@@ -15,13 +15,13 @@ class CurrentDataOverview extends React.Component {
 
             Majors: {
                 displayName: "Kierunki",
-                headers: ["Nazwa", "Wydział", "Osoba kontaktowa nr 1", "Osoba kontaktowa nr 2"],
-                values: ["fullName", "faculty", "contactPerson1", "contactPerson2"]
+                headers: ["Id", "Nazwa", "Wydział", "Osoba kontaktowa nr 1", "Osoba kontaktowa nr 2"],
+                values: ["id", "fullName", "faculty", "contactPerson1", "contactPerson2"]
             },
             Rooms: {
                 displayName: "Sale",
-                headers: ["Budynek", "Numer sali", "Rekomendowana pojemność", "Maksymalna pojemność"],
-                values: ["localization", "number", "recommendedCapacity", "maximalCapacity"]
+                headers: ["Id", "Budynek", "Numer sali", "Rekomendowana pojemność", "Maksymalna pojemność"],
+                values: ["id", "localization", "number", "recommendedCapacity", "maximalCapacity"]
             },
             Exams: {
                 displayName: "Egzaminy",
@@ -39,7 +39,6 @@ class CurrentDataOverview extends React.Component {
 
     handleShow = () => this.setShowAddNew(true);
     handleHide = () => this.setShowAddNew(false);
-
 
     render() {
         const nameComponentMapping = {
@@ -69,7 +68,7 @@ class CurrentDataOverview extends React.Component {
                 </Row>
                 <Row className={"mb-4"}>
                     <Col xs={2}>
-                        <Button variant={"outline-primary"} size={"sm"} block>{this.props.more}</Button>
+                        <Button variant={"outline-dark"} size={"sm"} block>{this.props.more}</Button>
                     </Col>
                     <Col xs={2}>
 
@@ -80,6 +79,9 @@ class CurrentDataOverview extends React.Component {
                                       handleHide={this.handleHide}
                                       show={this.state.showAddNew}
                                       options={10}/>
+                    </Col>
+                    <Col xs={{span: 2, offset: 2}}>
+                        <Button variant={"info"} className={"mb-3"} size={"sm"} block>Importuj</Button>
                     </Col>
                 </Row>
             </div>

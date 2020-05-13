@@ -16,21 +16,25 @@ class NewRoomInfo extends React.Component {
                 <Form.Row>
                     <FormGroup as={Col} controlId={"localization"}>
                         <Form.Label>Budynek</Form.Label>
-                        <Form.Control type={"text"} onChange={this.handleControlChange} required/>
+                        <Form.Control type={"text"} onChange={this.handleControlChange} required
+                                      value={this.props.inputValuesFromState.localization}/>
                     </FormGroup>
                     <FormGroup as={Col} controlId={"number"}>
                         <Form.Label>Numer sali</Form.Label>
-                        <Form.Control type={"text"} onChange={this.handleControlChange} required/>
+                        <Form.Control type={"text"} onChange={this.handleControlChange} required
+                                      value={this.props.inputValuesFromState.number}/>
                     </FormGroup>
                 </Form.Row>
                 <Form.Row>
                     <FormGroup as={Col} controlId={"recommendedCapacity"}>
                         <Form.Label>Rekomendowana pojemność sali</Form.Label>
-                        <Form.Control type={"text"} pattern="[1-9][0-9]*" onChange={this.handleControlChange} required/>
+                        <Form.Control type={"text"} pattern="[1-9][0-9]*" onChange={this.handleControlChange} required
+                                      value={this.props.inputValuesFromState.recommendedCapacity}/>
                     </FormGroup>
                     <FormGroup as={Col} controlId={"maximalCapacity"}>
                         <Form.Label>Maksymalna pojemność sali</Form.Label>
-                        <Form.Control type={"text"} pattern="[1-9][0-9]*" onChange={this.handleControlChange} required/>
+                        <Form.Control type={"text"} pattern="[1-9][0-9]*" onChange={this.handleControlChange} required
+                                      value={this.props.inputValuesFromState.maximalCapacity}/>
                     </FormGroup>
                 </Form.Row>
             </>

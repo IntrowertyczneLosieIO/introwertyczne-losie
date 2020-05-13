@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import NewRoomInfo from "./formParts/NewRoomInfo";
 
-class AddRoom extends React.Component {
+class EditRoom extends React.Component {
     constructor(props) {
         super(props);
         this.formRef = React.createRef();
@@ -78,8 +78,8 @@ class AddRoom extends React.Component {
                 maximalCapacity: this.state.userData.maximalCapacity
             }
             console.log(userDataToSend);
-            fetch("/new-room", {
-                method: 'POST',
+            fetch(`/edit-room/${this.props.initialInputValues.id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -112,7 +112,7 @@ class AddRoom extends React.Component {
                 <Modal show={this.props.show} dialogClassName={"custom-width-modal"} onHide={this.hideAndClearState}
                        backdrop={"static"} keyboard={false}>
                     <Modal.Header closeButton className={"modal-form-bg-color"}>
-                        <Modal.Title className={"custom-margins custom-font text-light"}>Dodawanie nowej sali</Modal.Title>
+                        <Modal.Title className={"custom-margins custom-font text-light"}>Edytowanie sali</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={"custom-margins"}>
                         <Form noValidate validated={this.state.validated} ref={this.formRef}>
@@ -123,13 +123,13 @@ class AddRoom extends React.Component {
                         <Button variant={"danger"} onClick={this.hideAndClearState}>Anuluj
                         </Button>
                         <Button variant={"success"} className={"custom-margins"} onClick={this.handleSaveAndOpenConfirm}>
-                            Dodaj salę
+                            Zapisz zmiany
                         </Button>
                     </Modal.Footer>
                 </Modal>
                 <Modal show={this.state.showConfirmationModal} onHide={this.handleCloseConfirmationModal} size={"lg"}>
                     <Modal.Body>
-                        <h4 className={"text-center"}>Sala została dodana pomyślnie</h4>
+                        <h4 className={"text-center"}>Sala została edytowana pomyślnie</h4>
                     </Modal.Body>
                     <Modal.Footer className={"modal-form-bg-color"}>
                         <Button variant={"success"} onClick={this.handleCloseConfirmationModal} block size={"sm"}>OK</Button>
@@ -140,4 +140,4 @@ class AddRoom extends React.Component {
     }
 }
 
-export default AddRoom;
+export default EditRoom;

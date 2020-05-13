@@ -51,21 +51,26 @@ class AddMajor extends React.Component {
     }
 
     getInitialState = () => {
-        return {
-            major: "",
-            faculty: "WIEiT",
-            modeOfStudy: "stacjonarne",
-            type: "pisemny",
-            mixed: "Tak",
-            name1: "",
-            surname1: "",
-            email1: "",
-            phone1: "",
-            name2: "",
-            surname2: "",
-            email2: "",
-            phone2: "",
-            annotations: ""
+        if (this.props.initialInputValues) {
+            return this.props.initialInputValues;
+        }
+        else {
+            return {
+                major: "",
+                faculty: "WIEiT",
+                modeOfStudy: "stacjonarne",
+                type: "pisemny",
+                mixed: "Tak",
+                name1: "",
+                surname1: "",
+                email1: "",
+                phone1: "",
+                name2: "",
+                surname2: "",
+                email2: "",
+                phone2: "",
+                annotations: ""
+            }
         }
     }
 

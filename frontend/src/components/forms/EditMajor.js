@@ -1,10 +1,14 @@
+
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import NewRoomInfo from "./formParts/NewRoomInfo";
+import NewMajorInfo from "./formParts/NewMajorInfo";
+import ContactPersonInfo from "./formParts/ContactPersonInfo";
+import FormGroup from "react-bootstrap/FormGroup";
 
-class AddRoom extends React.Component {
+class EditMajor extends React.Component {
+
     constructor(props) {
         super(props);
         this.formRef = React.createRef();
@@ -12,6 +16,15 @@ class AddRoom extends React.Component {
             validated: false,
             showConfirmationModal: false,
             userData: this.getInitialState(),
+            faculties: ["WGiG", "WIMIP", "WEAiIB", "WIEiT", "WIMiR", "WGGiOS", "WGGiIS", "WIMiC", "WO", "WMN", "WWNiG", "WZ", "WEiP", "WFiIS", "WMS", "WH"],
+            modesMapping: {
+                "stacjonarne": "fullTime",
+                "niestacjonarne": "partTime"
+            },
+            mixedMapping: {
+                "Tak": true,
+                "Nie": false
+            }
         };
     }
 
@@ -45,10 +58,20 @@ class AddRoom extends React.Component {
         }
         else {
             return {
-                localization: "",
-                number: "",
-                recommendedCapacity: "",
-                maximalCapacity: ""
+                major: "",
+                faculty: "",
+                modeOfStudy: "",
+                type: "",
+                mixed: "",
+                name1: "",
+                surname1: "",
+                email1: "",
+                phone1: "",
+                name2: "",
+                surname2: "",
+                email2: "",
+                phone2: "",
+                annotations: ""
             }
         }
     }
@@ -72,14 +95,19 @@ class AddRoom extends React.Component {
         else {
             this.props.handleHide();
             let userDataToSend = {
-                localization: this.state.userData.localization,
-                number: this.state.userData.number,
-                recommendedCapacity: this.state.userData.recommendedCapacity,
-                maximalCapacity: this.state.userData.maximalCapacity
+                faculty: this.state.userData.faculty,
+                fullName: this.state.userData.major,
+                shortName: this.state.userData.major,
+                mode: this.state.modesMapping[this.state.userData.modeOfStudy],
+                numberOfPlaces: 100,
+                contactPerson1: this.state.userData.name1 + " " + this.state.userData.surname1,
+                contactPerson2: this.state.userData.name2 + " " + this.state.userData.surname2,
+                mixedField: this.state.mixedMapping[this.state.userData.mixed],
+                annotations: this.state.userData.annotations
             }
             console.log(userDataToSend);
-            fetch("/new-room", {
-                method: 'POST',
+            fetch(`/edit-major/${this.props.initialInputValues.id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -112,24 +140,30 @@ class AddRoom extends React.Component {
                 <Modal show={this.props.show} dialogClassName={"custom-width-modal"} onHide={this.hideAndClearState}
                        backdrop={"static"} keyboard={false}>
                     <Modal.Header closeButton className={"modal-form-bg-color"}>
-                        <Modal.Title className={"custom-margins custom-font text-light"}>Dodawanie nowej sali</Modal.Title>
+                        <Modal.Title className={"custom-margins custom-font text-light"}>Edytowanie kierunku</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={"custom-margins"}>
                         <Form noValidate validated={this.state.validated} ref={this.formRef}>
-                            <NewRoomInfo getFormData={this.getFormData} inputValuesFromState={this.state.userData}/>
+                            <NewMajorInfo getFormData={this.getFormData} faculties={this.state.faculties} inputValuesFromState={this.state.userData}/>
+                            <ContactPersonInfo order={1} getFormData={this.getFormData}/>
+                            <ContactPersonInfo order={2} getFormData={this.getFormData}/>
+                            <h5 className={"mt-4 text-secondary mb-3"}>Uwagi</h5>
+                            <FormGroup controlId={"annotations"}>
+                                <Form.Control as={"textarea"} rows={"4"} onChange={this.handleInputChange}/>
+                            </FormGroup>
                         </Form>
                     </Modal.Body>
                     <Modal.Footer className={"modal-form-bg-color"}>
                         <Button variant={"danger"} onClick={this.hideAndClearState}>Anuluj
                         </Button>
                         <Button variant={"success"} className={"custom-margins"} onClick={this.handleSaveAndOpenConfirm}>
-                            Dodaj salę
+                            Zapisz zmiany
                         </Button>
                     </Modal.Footer>
                 </Modal>
                 <Modal show={this.state.showConfirmationModal} onHide={this.handleCloseConfirmationModal} size={"lg"}>
                     <Modal.Body>
-                        <h4 className={"text-center"}>Sala została dodana pomyślnie</h4>
+                        <h4 className={"text-center"}>Kierunek został edytowany pomyślnie</h4>
                     </Modal.Body>
                     <Modal.Footer className={"modal-form-bg-color"}>
                         <Button variant={"success"} onClick={this.handleCloseConfirmationModal} block size={"sm"}>OK</Button>
@@ -140,4 +174,4 @@ class AddRoom extends React.Component {
     }
 }
 
-export default AddRoom;
+export default EditMajor;
