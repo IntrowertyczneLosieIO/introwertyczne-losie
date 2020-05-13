@@ -1,12 +1,9 @@
 package com.agh.introwertycznelosie.data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.Calendar;
-import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Recruitment {
@@ -18,6 +15,9 @@ public class Recruitment {
     private RecruitmentStatus recruitmentStatus;
     private int year;
     private Semester semester;
+
+    @OneToMany(mappedBy = "recruitment")
+    private List<RecruitmentCycle> recruitmentCycles;
 
     public Recruitment() {
     }

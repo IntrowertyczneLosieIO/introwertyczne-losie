@@ -24,7 +24,9 @@ public class SubexamTests {
     private static Exam e2;
     private static Room r1;
     private static Major major1;
+    private static RecruitmentCycle recruitmentCycle;
     private static Faculty wiet;
+  
     @Autowired
     private SubexamService subexamService;
     @Autowired
@@ -33,6 +35,8 @@ public class SubexamTests {
     private RoomService roomService;
     @Autowired
     private MajorService majorService;
+    @Autowired
+    private RecruitmentCycleService recruitmentCycleService;
 
     @Autowired
     private FacultyService facultyService;
@@ -45,14 +49,16 @@ public class SubexamTests {
         wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT");
         major1 = new Major(wiet, "Computer Science", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
         r1 = new Room(100, 200, "d17", "3.42", availableDates);
-        e1 = new Exam("analiza", major1, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13));
-        e2 = new Exam("analiza", major1, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13));
+        recruitmentCycle = new RecruitmentCycle(null);
+        e1 = new Exam("analiza", major1, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13), recruitmentCycle);
+        e2 = new Exam("analiza", major1, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13), recruitmentCycle);
         s1 = new Subexam(e1, r1, new Date(2020, 10, 10), LocalTime.NOON);
         s2 = new Subexam(e2, r1, new Date(2020, 10, 12), LocalTime.MIDNIGHT);
     }
 
     @Test
     void testSubexamSave(){
+        recruitmentCycle = recruitmentCycleService.save(recruitmentCycle);
         wiet = facultyService.save(wiet);
         major1 = majorService.save(major1);
         System.out.println("==============================" + major1.getId());
