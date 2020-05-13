@@ -147,8 +147,8 @@ class AddMajor extends React.Component {
                 <Modal.Body className={"custom-margins"}>
                     <Form noValidate validated={this.state.validated} ref={this.formRef}>
                         <NewMajorInfo getFormData={this.getFormData} faculties={this.state.faculties}/>
-                        <ContactPersonInfo order={1} getFormData={this.getFormData}/>
-                        <ContactPersonInfo order={2} getFormData={this.getFormData}/>
+                        <ContactPersonInfo order={1} required={true} getFormData={this.getFormData}/>
+                        <ContactPersonInfo order={2} required={false} getFormData={this.getFormData}/>
                         <h5 className={"mt-4 text-secondary mb-3"}>Uwagi</h5>
                         <FormGroup controlId={"annotations"}>
                             <Form.Control as={"textarea"} rows={"4"} onChange={this.handleInputChange}/>

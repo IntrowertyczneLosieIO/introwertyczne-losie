@@ -16,17 +16,17 @@ class ContactPersonInfo extends React.Component {
               <Form.Row>
                   <FormGroup as={Col} controlId={"name"+this.props.order}>
                       <Form.Label>Imię</Form.Label>
-                      <Form.Control type={"text"} onChange={this.handleControlChange} required/>
+                      <Form.Control type={"text"} onChange={this.handleControlChange} required={this.props.required}/>
                   </FormGroup>
                   <FormGroup as={Col} controlId={"surname"+this.props.order}>
                       <Form.Label>Nazwisko</Form.Label>
-                      <Form.Control type={"text"} onChange={this.handleControlChange} required/>
+                      <Form.Control type={"text"} onChange={this.handleControlChange} required={this.props.required}/>
                   </FormGroup>
               </Form.Row>
               <Form.Row>
                   <FormGroup as={Col} controlId={"email"+this.props.order}>
                       <Form.Label>E-mail</Form.Label>
-                      <Form.Control type={"email"} pattern="^([a-zA-Z0-9_\-\.]+)@(agh)\.(edu)\.(pl)" onChange={this.handleControlChange} required />
+                      <Form.Control type={"email"} pattern="^([a-zA-Z0-9_\-\.]+)@(agh)\.(edu)\.(pl)" onChange={this.handleControlChange} required={this.props.required} />
                   </FormGroup>
                   <FormGroup as={Col} controlId={"phone"+this.props.order}>
                       <Form.Label>Telefon</Form.Label>
