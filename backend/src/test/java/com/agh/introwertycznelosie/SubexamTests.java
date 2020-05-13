@@ -24,9 +24,10 @@ public class SubexamTests {
     private static Exam e2;
     private static Room r1;
     private static Major major1;
+    private static Person person1, person2;
     private static RecruitmentCycle recruitmentCycle;
     private static Faculty wiet;
-  
+
     @Autowired
     private SubexamService subexamService;
     @Autowired
@@ -47,7 +48,10 @@ public class SubexamTests {
         availableDates.add(new DateRange());
         availableDates.add(new DateRange());
         wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT");
-        major1 = new Major(wiet, "Computer Science", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
+        person1 = new Person("Adam", "Kowalik", "666555444", "a.kowalik@agh.edu.pl");
+        person2 = new Person("Janina", "Bosacka", "999888777", "j.bosacka@agh.edu.pl");
+
+        major1 = new Major(wiet, "Computer Science", "Inf", fullTime, 200, person1, person2, false, "");
         r1 = new Room(100, 200, "d17", "3.42", availableDates);
         recruitmentCycle = new RecruitmentCycle(null);
         e1 = new Exam("analiza", major1, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13), recruitmentCycle);

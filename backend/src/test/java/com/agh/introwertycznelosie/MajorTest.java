@@ -1,6 +1,9 @@
 package com.agh.introwertycznelosie;
 
-import com.agh.introwertycznelosie.data.*;
+import com.agh.introwertycznelosie.data.Faculty;
+import com.agh.introwertycznelosie.data.Major;
+import com.agh.introwertycznelosie.data.ModeOfStudy;
+import com.agh.introwertycznelosie.data.Person;
 import com.agh.introwertycznelosie.services.FacultyService;
 import com.agh.introwertycznelosie.services.MajorService;
 import org.junit.jupiter.api.Assertions;
@@ -33,8 +36,8 @@ class MajorTest {
     static void setup() {
         m1 = new Major();
         wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT");
-        String contact1 = "Anna Nowak, anowak@agh.edu.pl, 667452082";
-        String contact2 = "Tomasz Kowalski, tkowalski@agh.edu.pl, 525908712";
+        Person contact1 = new Person("Anna", "Nowak", "667452082", "anowak@agh.edu.pl");
+        Person contact2 = new Person("Tomasz", "Kowalski", "525908712", "tkowalski@agh.edu.pl");
         m1.setFaculty(wiet);
         m1.setFullName("Elektronika i Telekomunikacja");
         m1.setShortName("EiT");
@@ -46,15 +49,14 @@ class MajorTest {
 
         m2 = new Major();
         weaiib = new Faculty("Wydział Elektrotechniki, Automatyki, Informatyki i Inżynierii Biomedycznej", "WEAiIB");
-        String contact3 = "Maria Pisak, mpisak@agh.edu.pl, 983782130";
-        String contact4 = "Karol Okno, kokno@agh.edu.pl, 782339019";
+        Person contact3 = new Person("Maria", "Pisak", "983782130", "mpisak@agh.edu.pl");
         m2.setFaculty(weaiib);
         m2.setFullName("Automatyka i Robotyka");
         m2.setShortName("AiR");
         m2.setMode(ModeOfStudy.fullTime);
         m2.setNumberOfPlaces(90);
         m2.setContactPerson1(contact3);
-        m2.setContactPerson2(contact4);
+        m2.setContactPerson2(null);
     }
 
     @Test
