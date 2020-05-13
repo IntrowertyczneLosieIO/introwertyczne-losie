@@ -11,7 +11,6 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.LinkedList;
 
-import static com.agh.introwertycznelosie.data.Faculty.WIEiT;
 import static com.agh.introwertycznelosie.data.ModeOfStudy.fullTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -26,6 +25,8 @@ public class SubexamTests {
     private static Room r1;
     private static Major major1;
     private static RecruitmentCycle recruitmentCycle;
+    private static Faculty wiet;
+  
     @Autowired
     private SubexamService subexamService;
     @Autowired
@@ -37,12 +38,16 @@ public class SubexamTests {
     @Autowired
     private RecruitmentCycleService recruitmentCycleService;
 
+    @Autowired
+    private FacultyService facultyService;
+
     @BeforeAll
     public static void setup(){
         LinkedList<DateRange> availableDates = new LinkedList<>();
         availableDates.add(new DateRange());
         availableDates.add(new DateRange());
-        major1 = new Major(WIEiT, "Computer Science", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
+        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT");
+        major1 = new Major(wiet, "Computer Science", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
         r1 = new Room(100, 200, "d17", "3.42", availableDates);
         recruitmentCycle = new RecruitmentCycle(null);
         e1 = new Exam("analiza", major1, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13), recruitmentCycle);
@@ -54,6 +59,7 @@ public class SubexamTests {
     @Test
     void testSubexamSave(){
         recruitmentCycle = recruitmentCycleService.save(recruitmentCycle);
+        wiet = facultyService.save(wiet);
         major1 = majorService.save(major1);
         System.out.println("==============================" + major1.getId());
         roomService.save(r1);
