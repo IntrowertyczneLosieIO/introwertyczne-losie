@@ -3,8 +3,10 @@ package com.agh.introwertycznelosie;
 import com.agh.introwertycznelosie.data.Exam;
 import com.agh.introwertycznelosie.data.Faculty;
 import com.agh.introwertycznelosie.data.Major;
+import com.agh.introwertycznelosie.data.RecruitmentCycle;
 import com.agh.introwertycznelosie.services.ExamService;
 import com.agh.introwertycznelosie.services.MajorService;
+import com.agh.introwertycznelosie.services.RecruitmentCycleService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ class ExamTest {
 
     private static Exam exam1, exam2, exam1Test;
     private static Major major1, major2;
+    private static RecruitmentCycle recruitmentCycle;
 
     @Autowired
     private ExamService examService;
@@ -32,16 +35,21 @@ class ExamTest {
     @Autowired
     private MajorService majorService;
 
+    @Autowired
+    private RecruitmentCycleService recruitmentCycleService;
+
     @BeforeAll
     public static void createClasses() {
         major1 = new Major(WIEiT, "Computer Science", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
         major2 = new Major(WIEiT, "Electronics", "Inf", fullTime, 200, "Adam Nowak", "Janina Kowalska", false, "");
-        exam1 = new Exam("Computer Science", major1, fullTime, new Date(2021, Calendar.SEPTEMBER, 1), new Date(2021, Calendar.SEPTEMBER, 8));
-        exam2 = new Exam("Electronics", major2, fullTime, new Date(2021, Calendar.SEPTEMBER, 8), new Date(2021, Calendar.SEPTEMBER, 16));
+        recruitmentCycle = new RecruitmentCycle(null);
+        exam1 = new Exam("Computer Science", major1, fullTime, new Date(2021, Calendar.SEPTEMBER, 1), new Date(2021, Calendar.SEPTEMBER, 8), recruitmentCycle);
+        exam2 = new Exam("Electronics", major2, fullTime, new Date(2021, Calendar.SEPTEMBER, 8), new Date(2021, Calendar.SEPTEMBER, 16), recruitmentCycle);
     }
 
     @Test
     void testAddingExamToDatabase() {
+        recruitmentCycle = recruitmentCycleService.save(recruitmentCycle);
         major1 = majorService.save(major1);
         major2 = majorService.save(major2);
         exam1Test = examService.save(exam1);
