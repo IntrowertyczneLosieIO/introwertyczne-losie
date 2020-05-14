@@ -15,8 +15,8 @@ class CurrentDataOverview extends React.Component {
 
             Majors: {
                 displayName: "Kierunki",
-                headers: ["Nazwa", "Wydział", "Osoba kontaktowa nr 1", "Osoba kontaktowa nr 2"],
-                values: ["fullName", "faculty", "contactPerson1", "contactPerson2"]
+                headers: ["Id", "Nazwa", "Wydział", "Osoba kontaktowa nr 1", "Osoba kontaktowa nr 2"],
+                values: ["id", "fullName", "faculty", "contactPerson1", "contactPerson2"]
             },
             Rooms: {
                 displayName: "Sale",

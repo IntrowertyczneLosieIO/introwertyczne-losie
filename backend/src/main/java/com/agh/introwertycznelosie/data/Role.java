@@ -1,7 +1,6 @@
 package com.agh.introwertycznelosie.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
 import java.util.Set;
