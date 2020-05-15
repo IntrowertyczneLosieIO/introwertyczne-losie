@@ -108,8 +108,8 @@ class AddMajor extends React.Component {
                 shortName: this.state.userData.major,
                 mode: this.state.modesMapping[this.state.userData.modeOfStudy],
                 numberOfPlaces: 100,
-                contactPerson1: this.state.userData.name1 + " " + this.state.userData.surname1,
-                contactPerson2: this.state.userData.name2 + " " + this.state.userData.surname2,
+                contactPerson1: this.state.userData.email1,
+                contactPerson2: this.state.userData.email2,
                 mixedField: this.state.mixedMapping[this.state.userData.mixed],
                 annotations: this.state.userData.annotations
             }
