@@ -19,10 +19,15 @@ class NewMajorInfo extends React.Component {
             <>
                 <h5 className={"mt-4 text-secondary mb-3"}>Informacje o kierunku</h5>
                 <Form.Row>
-                    <FormGroup as={Col} controlId={"major"}>
-                        <Form.Label>Kierunek</Form.Label>
+                    <FormGroup as={Col} controlId={"fullName"}>
+                        <Form.Label>Pełna Nazwa</Form.Label>
                         <Form.Control type={"text"} onChange={this.handleControlChange} required
-                                      value={this.props.inputValuesFromState.major}/>
+                                      value={this.props.inputValuesFromState.fullName}/>
+                    </FormGroup>
+                    <FormGroup as={Col} controlId={"shortName"}>
+                        <Form.Label>Krótka Nazwa</Form.Label>
+                        <Form.Control type={"text"} onChange={this.handleControlChange} required
+                                      value={this.props.inputValuesFromState.shortName}/>
                     </FormGroup>
                     <FormGroup as={Col} controlId={"faculty"}>
                         <Form.Label>Wydział</Form.Label>
@@ -34,7 +39,7 @@ class NewMajorInfo extends React.Component {
                     </FormGroup>
                 </Form.Row>
                 <Form.Row>
-                    <FormGroup as={Col} controlId={"modeOfStudy"}>
+                    <FormGroup as={Col} controlId={"mode"}>
                         <Form.Label>Tryb studiów</Form.Label>
                         <Form.Control as={"select"} onChange={this.handleControlChange} required
                                       value={this.props.inputValuesFromState.mode}>
@@ -43,15 +48,11 @@ class NewMajorInfo extends React.Component {
                             <option>niestacjonarne</option>
                         </Form.Control>
                     </FormGroup>
-                    <FormGroup as={Col} controlId={"type"}>
-                        <Form.Label>Typ egzaminu</Form.Label>
-                        <Form.Control as={"select"} onChange={this.handleControlChange} required defaultValue={"pisemny"}>
-                            {/*<option hidden disabled value={"default"}/>*/}
-                            <option value={"pisemny"}>pisemny</option>
-                            <option>ustny</option>
-                        </Form.Control>
+                    <FormGroup as={Col} controlId={"numberOfPlaces"}>
+                        <Form.Label>Liczba miejsc</Form.Label>
+                        <Form.Control type={"number"} onChange={this.handleControlChange} required value={this.props.inputValuesFromState.numberOfPlaces} />
                     </FormGroup>
-                    <FormGroup as={Col} controlId={"mixed"}>
+                    <FormGroup as={Col} controlId={"mixedField"}>
                         <Form.Label>Kierunek łączony</Form.Label>
                         <Form.Control as={"select"} onChange={this.handleControlChange} required
                                       value={this.props.inputValuesFromState.mixedField}>

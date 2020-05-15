@@ -17,7 +17,6 @@ public class Exam {
     private ModeOfStudy modeOfStudy;
     private Date startDate;
     private Date endDate;
-    //TODO Add Recrutation Cycle field after it has been implemented
     @ManyToOne(cascade = {CascadeType.MERGE})
     private RecruitmentCycle recruitmentCycle;
 
