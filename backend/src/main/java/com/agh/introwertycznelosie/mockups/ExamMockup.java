@@ -67,16 +67,21 @@ public class ExamMockup {
     }
 
     private String name;
-    //TODO remove JsonProperty after changing on front
-    @JsonProperty("faculty")
     private String major;
     private String modeOfStudy;
     private Date startDate;
     private Date endDate;
     private Long recruitmentCycleId;
 
+    public Long getId() {
+        return id;
+    }
+
+    private Long id;
+
     public ExamMockup(Exam exam)
     {
+        this.id = exam.getId();
         this.name = exam.getName();
         this.major = exam.getMajor().getFullName();
         this.modeOfStudy = exam.getModeOfStudy().toString();

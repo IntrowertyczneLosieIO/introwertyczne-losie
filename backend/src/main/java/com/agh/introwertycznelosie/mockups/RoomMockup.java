@@ -46,6 +46,11 @@ public class RoomMockup {
     @Autowired
     public RoomMockup(){}
 
+    public Long getId() {
+        return id;
+    }
+
+    private Long id;
     private int recommendedCapacity;
     private int maximalCapacity;
     private String localization;
@@ -54,6 +59,7 @@ public class RoomMockup {
 
 
     public RoomMockup(Room room) {
+        id = room.getId();
         recommendedCapacity = room.getRecommendedCapacity();
         maximalCapacity = room.getMaximalCapacity();
         localization = room.getLocalization();

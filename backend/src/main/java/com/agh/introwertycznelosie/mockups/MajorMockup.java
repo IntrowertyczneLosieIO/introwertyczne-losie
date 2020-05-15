@@ -3,9 +3,7 @@ package com.agh.introwertycznelosie.mockups;
 import com.agh.introwertycznelosie.data.*;
 import com.agh.introwertycznelosie.services.FacultyService;
 import com.agh.introwertycznelosie.services.PersonService;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -89,6 +87,11 @@ public class MajorMockup {
         this.annotations = annotations;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    private Long id;
     private String faculty;
     private List<Exam> exams = new ArrayList<>();
     private String fullName;
@@ -104,10 +107,12 @@ public class MajorMockup {
 
     public MajorMockup(Major major)
     {
+        id = major.getId();
         faculty = major.getFaculty().getAcronym();
         shortName = major.getShortName();
         fullName = major.getFullName();
         mode = major.getMode();
+        System.out.println(mode);
         numberOfPlaces = major.getNumberOfPlaces();
         contactPerson1 = major.getContactPerson1();
         contactPerson2 = major.getContactPerson2();
