@@ -24,4 +24,6 @@ public class PersonService {
 
     public void delete(Person person) { personRepository.delete(person);}
 
+    public Person findByMail(String mail) { return personRepository.findByMail(mail);}
+
 }
