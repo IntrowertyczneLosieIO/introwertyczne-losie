@@ -16,21 +16,21 @@ class ContactPersonInfo extends React.Component {
               <Form.Row>
                   <FormGroup as={Col} controlId={"name"+this.props.order}>
                       <Form.Label>Imię</Form.Label>
-                      <Form.Control type={"text"} onChange={this.handleControlChange} required={this.props.required}/>
+                      <Form.Control type={"text"} onChange={this.handleControlChange} required={this.props.required} value={this.props.inputValuesFromState["name"+this.props.order]}/>
                   </FormGroup>
                   <FormGroup as={Col} controlId={"surname"+this.props.order}>
                       <Form.Label>Nazwisko</Form.Label>
-                      <Form.Control type={"text"} onChange={this.handleControlChange} required={this.props.required}/>
+                      <Form.Control type={"text"} onChange={this.handleControlChange} required={this.props.required} value={this.props.inputValuesFromState["surname"+this.props.order]}/>
                   </FormGroup>
               </Form.Row>
               <Form.Row>
                   <FormGroup as={Col} controlId={"email"+this.props.order}>
                       <Form.Label>E-mail</Form.Label>
-                      <Form.Control type={"email"} pattern="^([a-zA-Z0-9_\-\.]+)@(agh)\.(edu)\.(pl)" onChange={this.handleControlChange} required={this.props.required} />
+                      <Form.Control type={"email"} pattern="^([a-zA-Z0-9_\-\.]+)@(agh)\.(edu)\.(pl)" onChange={this.handleControlChange} required={this.props.required} value={this.props.inputValuesFromState["email"+this.props.order]}/>
                   </FormGroup>
                   <FormGroup as={Col} controlId={"phone"+this.props.order}>
                       <Form.Label>Telefon</Form.Label>
-                      <Form.Control type={"text"} pattern="[0-9]*" onChange={this.handleControlChange}/>
+                      <Form.Control type={"text"} pattern="[0-9]*" onChange={this.handleControlChange} value={this.props.inputValuesFromState["phone"+this.props.order]}/>
                   </FormGroup>
               </Form.Row>
           </>

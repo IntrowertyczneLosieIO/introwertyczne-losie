@@ -56,11 +56,11 @@ class AddMajor extends React.Component {
         }
         else {
             return {
-                major: "",
+                fullName: "",
+                shortName: "",
                 faculty: "WIEiT",
-                modeOfStudy: "stacjonarne",
-                type: "pisemny",
-                mixed: "Tak",
+                mode: "stacjonarne",
+                mixedField: "Tak",
                 name1: "",
                 surname1: "",
                 email1: "",
@@ -69,7 +69,8 @@ class AddMajor extends React.Component {
                 surname2: "",
                 email2: "",
                 phone2: "",
-                annotations: ""
+                annotations: "",
+                numberOfPlaces: ""
             }
         }
     }
@@ -104,13 +105,23 @@ class AddMajor extends React.Component {
             this.props.handleHide();
             let userDataToSend = {
                 faculty: this.state.userData.faculty,
-                fullName: this.state.userData.major,
-                shortName: this.state.userData.major,
-                mode: this.state.modesMapping[this.state.userData.modeOfStudy],
-                numberOfPlaces: 100,
-                contactPerson1: this.state.userData.email1,
-                contactPerson2: this.state.userData.email2,
-                mixedField: this.state.mixedMapping[this.state.userData.mixed],
+                fullName: this.state.userData.fullName,
+                shortName: this.state.userData.shortName,
+                mode: this.state.modesMapping[this.state.userData.mode],
+                numberOfPlaces: this.state.userData.numberOfPlaces,
+                contactPerson1: {
+                    firstName: this.state.userData.name1,
+                    lastName: this.state.userData.surname1,
+                    phoneNo: this.state.userData.phone1,
+                    mail: this.state.userData.email1
+                },
+                contactPerson2: {
+                    firstName: this.state.userData.name2,
+                    lastName: this.state.userData.surname2,
+                    phoneNo: this.state.userData.phone2,
+                    mail: this.state.userData.email2
+                },
+                mixedField: this.state.mixedMapping[this.state.userData.mixedField],
                 annotations: this.state.userData.annotations
             }
             console.log(userDataToSend);
@@ -151,9 +162,9 @@ class AddMajor extends React.Component {
                 </Modal.Header>
                 <Modal.Body className={"custom-margins"}>
                     <Form noValidate validated={this.state.validated} ref={this.formRef}>
-                        <NewMajorInfo getFormData={this.getFormData} faculties={this.state.faculties}/>
-                        <ContactPersonInfo order={1} required={true} getFormData={this.getFormData}/>
-                        <ContactPersonInfo order={2} required={false} getFormData={this.getFormData}/>
+                        <NewMajorInfo getFormData={this.getFormData} faculties={this.state.faculties} inputValuesFromState={this.state.userData}/>
+                        <ContactPersonInfo order={1} required={true} getFormData={this.getFormData} inputValuesFromState={this.state.userData}/>
+                        <ContactPersonInfo order={2} required={false} getFormData={this.getFormData} inputValuesFromState={this.state.userData}/>
                         <h5 className={"mt-4 text-secondary mb-3"}>Uwagi</h5>
                         <FormGroup controlId={"annotations"}>
                             <Form.Control as={"textarea"} rows={"4"} onChange={this.handleInputChange}/>

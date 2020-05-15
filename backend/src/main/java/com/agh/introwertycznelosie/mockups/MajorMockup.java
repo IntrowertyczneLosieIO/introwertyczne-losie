@@ -57,20 +57,20 @@ public class MajorMockup {
         this.numberOfPlaces = numberOfPlaces;
     }
 
-    public String getContactPerson1Mail() {
-        return contactPerson1Mail;
+    public Person getContactPerson1() {
+        return contactPerson1;
     }
 
-    public void setContactPerson1Mail(String contactPerson1Mail) {
-        this.contactPerson1Mail = contactPerson1Mail;
+    public void setContactPerson1(Person contactPerson1) {
+        this.contactPerson1 = contactPerson1;
     }
 
-    public String getContactPerson2Mail() {
-        return contactPerson2Mail;
+    public Person getContactPerson2() {
+        return contactPerson2;
     }
 
-    public void setContactPerson2Mail(String contactPerson2Mail) {
-        this.contactPerson2Mail = contactPerson2Mail;
+    public void setContactPerson2(Person contactPerson2) {
+        this.contactPerson2 = contactPerson2;
     }
 
     public boolean isMixedField() {
@@ -95,10 +95,10 @@ public class MajorMockup {
     private String shortName;
     private ModeOfStudy mode;
     private int numberOfPlaces;
-    @JsonProperty("contactPerson1")
-    private String contactPerson1Mail;
-    @JsonProperty("contactPerson2")
-    private String contactPerson2Mail;
+//    @JsonProperty("contactPerson1")
+    private Person contactPerson1;
+//    @JsonProperty("contactPerson2")
+    private Person contactPerson2;
     private boolean mixedField;
     private String annotations;
 
@@ -109,8 +109,8 @@ public class MajorMockup {
         fullName = major.getFullName();
         mode = major.getMode();
         numberOfPlaces = major.getNumberOfPlaces();
-        contactPerson1Mail = major.getContactPerson1().getMail();
-        contactPerson2Mail = major.getContactPerson2().getMail();
+        contactPerson1 = major.getContactPerson1();
+        contactPerson2 = major.getContactPerson2();
         mixedField = major.isMixedField();
         annotations = major.getAnnotations();
     }
@@ -130,19 +130,19 @@ public class MajorMockup {
         major.setAnnotations(annotations);
         major.setShortName(shortName);
         major.setFullName(fullName);
-        Person contactPerson1 = personService.findByMail(contactPerson1Mail);
-        Person contactPerson2 = personService.findByMail(contactPerson2Mail);
+        Person contactPersonDB1 = personService.findByMail(contactPerson1.getMail());
+        Person contactPersonDB2 = personService.findByMail(contactPerson2.getMail());
         //TODO handle creating new Person
-        if(contactPerson1==null) {
-            contactPerson1 = new Person(null, null, null, contactPerson1Mail);
-            contactPerson1 = personService.save(contactPerson1);
+        if(contactPersonDB1==null) {
+            contactPersonDB1 = new Person(contactPerson1.getFirstName(), contactPerson1.getLastName(), contactPerson1.getPhoneNo(), contactPerson1.getMail());
+            contactPersonDB1 = personService.save(contactPersonDB1);
         }
-        major.setContactPerson1(contactPerson1);
-        if(contactPerson2==null) {
-            contactPerson2 = new Person(null, null, null, contactPerson2Mail);
-            contactPerson2 = personService.save(contactPerson2);
+        major.setContactPerson1(contactPersonDB1);
+        if(contactPersonDB2==null) {
+            contactPersonDB2 = new Person(contactPerson2.getFirstName(), contactPerson2.getLastName(), contactPerson2.getPhoneNo(), contactPerson2.getMail());
+            contactPersonDB2 = personService.save(contactPersonDB2);
         }
-        major.setContactPerson2(contactPerson2);
+        major.setContactPerson2(contactPersonDB2);
         major.setNumberOfPlaces(numberOfPlaces);
         major.setMode(mode);
         return major;
