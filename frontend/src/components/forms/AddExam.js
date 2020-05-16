@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import FormGroup from "react-bootstrap/FormGroup";
 import Button from "react-bootstrap/Button";
 import NewExamInfo from "./formParts/NewExamInfo";
+import NewSubexamInfo from "./formParts/NewSubexamInfo";
 
 class AddExam extends React.Component {
     constructor(props) {
@@ -12,6 +13,7 @@ class AddExam extends React.Component {
         this.state = {
             validated: false,
             showConfirmationModal: false,
+            showSubexamModal: false,
             userData: this.getInitialState(),
             majors: [],
             buildings: [],
@@ -28,14 +30,20 @@ class AddExam extends React.Component {
                       showConfirmationModal: show
                   });
 }
+setShowSubexamModal = (show) => {
+    this.setState({
+        showSubexamModal: show
+    });
+}
 
 handleCloseConfirmationModal = () => this.setShowConfirmationModal(false);
 handleOpenConfirmationModal = () => this.setShowConfirmationModal(true);
+handleOpenSubexamModal = () => this.setShowSubexamModal(true);
 
-handleSaveAndOpenConfirm = () => {
+handleSaveAndOpenSubexam = () => {
     let promise = new Promise(this.handleSave);
     promise.then(
-        this.handleOpenConfirmationModal
+        this.handleOpenSubexamModal
     ).catch(
         () => {console.log("err")}
 )
@@ -50,10 +58,11 @@ setValidated = (validated) => {
 getInitialState = () => {
     return {
         name: "",
-        major: "ahaFajnie",
+        major: "WIEiT",
         modeOfStudy: "",
         startDate: "",
         endDate: "",
+        recruitmentCycle: -1,
     }
 }
 
@@ -87,11 +96,13 @@ handleSave = (resolve, reject) => {
         this.props.handleHide();
         let userDataToSend = {
             name: this.state.userData.name,
-            major: this.state.userData.major,
+            major: this.state.userData.major.fullName,
             modeOfStudy: this.state.modesMapping[this.state.userData.modeOfStudy],
             startDate: this.state.userData.startDate,
             endDate: this.state.userData.endDate,
+            recruitmentCycle: 1
         }
+        console.log(userDataToSend);
         fetch("/new-exam", {
             method: 'POST',
             headers: {
@@ -175,9 +186,13 @@ render() {
     </Form>
     </Modal.Body>
     <Modal.Footer>
-    <Button variant={"primary"} className={"custom-margins"} onClick={this.handleSaveAndOpenConfirm}>
-        Dodaj egzamin
+    <Button variant={"primary"} className={"custom-margins"} onClick={this.handleSaveAndOpenSubexam}>
+        Dodaj subegzamin
     </Button>
+        <NewSubexamInfo handleShow={this.handleShow}
+                        handleHide={this.handleHide}
+                        show={this.state.showSubexamModal}
+                        options={10}/>
     </Modal.Footer>
     </Modal>
     <Modal show={this.state.showConfirmationModal} onHide={this.handleCloseConfirmationModal}>
