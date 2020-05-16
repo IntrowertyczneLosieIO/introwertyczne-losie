@@ -22,7 +22,7 @@ public class MajorController {
     @Autowired
     FacultyService facultyService;
 
-    @GetMapping(value="/newest-majors", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/newest-majors", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Major> getMajors() {
         return majorService.get();
     }
@@ -30,8 +30,7 @@ public class MajorController {
     @PostMapping("/new-major")
     public ResponseEntity<HttpStatus> postNewMajor(@RequestBody Major major) {
         Faculty faculty = facultyService.findByAcronym(major.getFaculty().getAcronym());
-        if(faculty==null)
-        {
+        if (faculty == null) {
             faculty = facultyService.save(major.getFaculty());
         }
         major.setFaculty(faculty);
@@ -46,8 +45,7 @@ public class MajorController {
             majorDB.setFullName(major.getFullName());
             majorDB.setShortName(major.getShortName());
             Faculty faculty = facultyService.findByAcronym(major.getFaculty().getAcronym());
-            if(faculty==null)
-            {
+            if (faculty == null) {
                 faculty = facultyService.save(major.getFaculty());
             }
             majorDB.setFaculty(faculty);
@@ -65,8 +63,7 @@ public class MajorController {
     }
 
     @GetMapping(value = "/major/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Major getMajor(@PathVariable(name = "id") Long id)
-    {
+    public Major getMajor(@PathVariable(name = "id") Long id) {
         return majorService.get(id);
     }
 }
