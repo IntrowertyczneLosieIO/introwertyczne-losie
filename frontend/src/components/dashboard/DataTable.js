@@ -71,16 +71,18 @@ class DataTable extends React.Component {
             for (let i=0; i<this.props.tableValues.length; i++) {
                 rowData[this.props.tableValues[i]] = Object.values(row)[i] ? Object.values(row)[i] : "";
             }
-            rowData.name1 = row.contactPerson1.firstName;
-            rowData.surname1 = row.contactPerson1.lastName;
-            rowData.phone1 = row.contactPerson1.phoneNo;
-            rowData.email1 = row.contactPerson1.mail;
-            rowData.name2 = row.contactPerson2.firstName;
-            rowData.surname2 = row.contactPerson2.lastName;
-            rowData.phone2 = row.contactPerson2.phoneNo;
-            rowData.email2 = row.contactPerson2.mail;
-            delete rowData.contactPerson1;
-            delete rowData.contactPerson2;
+            if (this.props.name === "Majors") {
+                rowData.name1 = row.contactPerson1.firstName;
+                rowData.surname1 = row.contactPerson1.lastName;
+                rowData.phone1 = row.contactPerson1.phoneNo;
+                rowData.email1 = row.contactPerson1.mail;
+                rowData.name2 = row.contactPerson2.firstName;
+                rowData.surname2 = row.contactPerson2.lastName;
+                rowData.phone2 = row.contactPerson2.phoneNo;
+                rowData.email2 = row.contactPerson2.mail;
+                delete rowData.contactPerson1;
+                delete rowData.contactPerson2;
+            }
 
             return <tr>
                 {cellList}
