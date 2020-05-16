@@ -189,10 +189,7 @@ render() {
     <Button variant={"primary"} className={"custom-margins"} onClick={this.handleSaveAndOpenSubexam}>
         Dodaj subegzamin
     </Button>
-        <NewSubexamInfo handleShow={this.handleShow}
-                        handleHide={this.handleHide}
-                        show={this.state.showSubexamModal}
-                        options={10}/>
+
     </Modal.Footer>
     </Modal>
     <Modal show={this.state.showConfirmationModal} onHide={this.handleCloseConfirmationModal}>
