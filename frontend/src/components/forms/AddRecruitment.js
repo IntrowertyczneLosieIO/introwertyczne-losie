@@ -51,7 +51,7 @@ class AddRecruitment extends React.Component {
         else {
             return {
                 acronym: "",
-                recruitmentStatus: "",
+                // recruitmentStatus: "",
                 year: "",
                 semester: ""
             }
@@ -79,7 +79,7 @@ class AddRecruitment extends React.Component {
             this.state.show = false;
             let userDataToSend = {
                 acronym: this.state.userData.acronym,
-                recruitmentStatus: this.state.userData.recruitmentStatus,
+                // recruitmentStatus: this.state.userData.recruitmentStatus,
                 year: this.state.userData.year,
                 semester: this.state.semesterMapping[this.state.userData.semester]
             }
@@ -109,7 +109,6 @@ class AddRecruitment extends React.Component {
         });
         this.setValidated(false);
         this.state.show = false;
-        // this.props.handleHide();
     }
 
 
@@ -128,7 +127,7 @@ class AddRecruitment extends React.Component {
                         </Form>
                     </Modal.Body>
                     <Modal.Footer className={"modal-form-bg-color"}>
-                        <Button variant={"danger"} onClick={this.hideAndClearState}>Anuluj </Button>
+                        <Button variant={"danger"} onClick={this.hideAndClearState}> Anuluj </Button>
                         <Button variant={"success"} className={"custom-margins"} onClick={this.handleSaveAndOpenConfirm}>
                             Dodaj rekrutację
                         </Button>

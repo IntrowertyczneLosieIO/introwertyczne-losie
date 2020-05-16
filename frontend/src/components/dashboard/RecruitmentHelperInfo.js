@@ -14,6 +14,12 @@ class RecruitmentHelperInfo extends React.Component {
         }
     }
 
+    setShowAddNew = (show) => {
+        this.setState({
+            showAddNew: show
+        });
+    }
+
     render() {
 
         return (
