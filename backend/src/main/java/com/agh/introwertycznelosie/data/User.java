@@ -18,6 +18,9 @@ public class User {
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Set<Role> roles;
 
+    public User() {
+    }
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;

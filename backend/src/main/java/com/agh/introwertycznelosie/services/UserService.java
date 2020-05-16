@@ -25,9 +25,7 @@ public class UserService {
     private void postConstruct() {
         Role role = new Role();
         role.setName("basic");
-        User admin = new User();
-        admin.setPassword(bCryptPasswordEncoder.encode("admin"));
-        admin.setUsername("admin");
+        User admin = new User("admin", bCryptPasswordEncoder.encode("admin"));
         HashSet hashSet = new HashSet();
         hashSet.add(role);
         admin.setRoles(hashSet);
