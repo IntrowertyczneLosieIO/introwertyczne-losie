@@ -68,6 +68,7 @@ public class MajorController {
             majorDB.setContactPerson2(major.getContactPerson2());
             majorDB.setAnnotations(major.getAnnotations());
             majorDB.setMode(major.getMode());
+            System.out.println(majorDB.getMode());
             majorDB.setNumberOfPlaces(major.getNumberOfPlaces());
             majorDB.setAnnotations(major.getAnnotations());
             majorDB.setMixedField(major.isMixedField());
