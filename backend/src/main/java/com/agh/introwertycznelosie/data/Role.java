@@ -18,6 +18,12 @@ public class Role {
 
     private Set<User> users;
 
+    public interface Roles{
+        final static String ADMIN = "admin";
+        final static String USER = "user";
+        final static String SPECIALUSER = "special_user";
+    }
+
     public Long getId() {
         return id;
     }
@@ -40,5 +46,12 @@ public class Role {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    public Role(String name) {
+        this.name = name;
+    }
+
+    public Role() {
     }
 }
