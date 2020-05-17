@@ -105,14 +105,6 @@ class NewExamInfo extends React.Component {
                     </FormGroup>
                 </Form.Row>
                 <Form.Row>
-                    <FormGroup as={Col} controlId={"modeOfStudy"}>
-                        <Form.Label>Rodzaj</Form.Label>
-                        <Form.Control as={"select"} onChange={this.handleControlChange} required>
-                            {/*<option hidden disabled value={"default"} />*/}
-                            <option>stacjonarne</option>
-                            <option>niestacjonarne</option>
-                        </Form.Control>
-                    </FormGroup>
                 </Form.Row>
                 <h5 className={"mt-4 text-secondary mb-3"}>Informacje o subegzaminie</h5>
                     <Button variant={"secondary"} className={"custom-margins"} onClick={this.handleShowSubexam}>
