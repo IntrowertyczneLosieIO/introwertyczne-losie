@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 @RestController
 @RequestMapping("/")
 public class RoomController {
 
+    Logger logger = LogManager.getLogger(RoomController.class);
     @Autowired
     RoomService roomService;
 
@@ -33,6 +36,7 @@ public class RoomController {
     public ResponseEntity<HttpStatus> postNewRoom(@RequestBody RoomMockup roomMockup) {
         Room room = roomMockup.mockToRoom();
         roomService.save(room);
+        logger.info("New room created: " + room );
         return ResponseEntity.ok(HttpStatus.OK);
     }
     @PutMapping("edit-room/{id}")
