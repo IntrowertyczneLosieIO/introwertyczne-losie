@@ -66,7 +66,7 @@ public class IntrowertyczneLosieApplication {
         person4 = new Person("Wojciech", "Korzeń", null, "w.korzen@agh.edu.pl");
         person5 = new Person("Jurek", "Ogórek", null, "j.ogorek@agh.edu.pl");
         major1 = new Major(faculty1, "Informatyka", "Inf", ModeOfStudy.fullTime, 170, person1, person2, true, "");
-        major2 = new Major(faculty1, "Data Science", "DS", ModeOfStudy.partTime, 30, person3, null, true, "Kieruek dla wybranych");
+        major2 = new Major(faculty1, "Data Science", "DS", ModeOfStudy.partTime, 30, person3, null, true, "Kierunek dla wybranych");
         major3 = new Major(faculty2, "Teoria grafów", "Grafy", ModeOfStudy.partTime, 40, person4, person5, false, "");
         recruitment1 = new Recruitment("Rekrutacja LATO 2020/2021", 2020, Semester.winter);
         recruitment2 = new Recruitment("Rekrutacja ZIMA 2021/2022", 2021, Semester.summer);

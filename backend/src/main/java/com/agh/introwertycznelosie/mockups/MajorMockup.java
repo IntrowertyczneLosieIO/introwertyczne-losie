@@ -112,7 +112,6 @@ public class MajorMockup {
         shortName = major.getShortName();
         fullName = major.getFullName();
         mode = major.getMode();
-        System.out.println(mode);
         numberOfPlaces = major.getNumberOfPlaces();
         contactPerson1 = major.getContactPerson1();
         contactPerson2 = major.getContactPerson2();
