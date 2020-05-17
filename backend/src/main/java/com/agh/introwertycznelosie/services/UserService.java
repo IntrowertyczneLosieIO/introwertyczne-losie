@@ -1,5 +1,6 @@
 package com.agh.introwertycznelosie.services;
 
+import com.agh.introwertycznelosie.data.Role;
 import com.agh.introwertycznelosie.data.User;
 import com.agh.introwertycznelosie.repositories.RoleRepository;
 import com.agh.introwertycznelosie.repositories.UserRepository;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.HashSet;
 
 @Service
@@ -19,9 +21,25 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @PostConstruct
+    private void postConstruct() {
+        Role role = new Role();
+        role.setName("basic");
+        User admin = new User("admin", bCryptPasswordEncoder.encode("admin"));
+        HashSet hashSet = new HashSet();
+        hashSet.add(role);
+        admin.setRoles(hashSet);
+        userRepository.save(admin);
+    }
+
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles(new HashSet<>(roleRepository.findAll()));
+        userRepository.save(user);
+    }
+
+    public void changePassword(User user, String password){
+        user.setPassword(bCryptPasswordEncoder.encode(password));
         userRepository.save(user);
     }
 

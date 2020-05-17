@@ -28,7 +28,7 @@ public class MajorController {
     @Autowired
     PersonService personService;
 
-    @GetMapping(value="/newest-majors", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/newest-majors", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MajorMockup> getMajors() {
         List<MajorMockup> list = new ArrayList<>();
         for (
@@ -42,8 +42,7 @@ public class MajorController {
     public ResponseEntity<HttpStatus> postNewMajor(@RequestBody MajorMockup majorMockup) {
         Major major = majorMockup.mockToMajor(personService, facultyService);
         Faculty faculty = facultyService.findByAcronym(major.getFaculty().getAcronym());
-        if(faculty==null)
-        {
+        if (faculty == null) {
             faculty = facultyService.save(major.getFaculty());
         }
         major.setFaculty(faculty);
@@ -59,8 +58,7 @@ public class MajorController {
             majorDB.setFullName(major.getFullName());
             majorDB.setShortName(major.getShortName());
             Faculty faculty = facultyService.findByAcronym(major.getFaculty().getAcronym());
-            if(faculty==null)
-            {
+            if (faculty == null) {
                 faculty = facultyService.save(major.getFaculty());
             }
             majorDB.setFaculty(faculty);
@@ -81,8 +79,7 @@ public class MajorController {
     }
 
     @GetMapping(value = "/major/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public MajorMockup getMajor(@PathVariable(name = "id") Long id)
-    {
+    public MajorMockup getMajor(@PathVariable(name = "id") Long id) {
         return new MajorMockup(majorService.get(id));
     }
 }
