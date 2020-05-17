@@ -32,8 +32,10 @@ public class SubexamTests {
     private SubexamService subexamService;
     @Autowired
     private ExamService examService;
+
     @Autowired
     private RoomService roomService;
+    
     @Autowired
     private MajorService majorService;
     @Autowired

@@ -2,11 +2,7 @@ package com.agh.introwertycznelosie.config;
 
 
 import com.agh.introwertycznelosie.data.Exam;
-import com.agh.introwertycznelosie.data.Major;
-import com.agh.introwertycznelosie.data.RecruitmentCycle;
-import com.agh.introwertycznelosie.data.Room;
 import com.agh.introwertycznelosie.mockups.ExamMockup;
-import com.agh.introwertycznelosie.mockups.RoomMockup;
 import com.agh.introwertycznelosie.services.ExamService;
 import com.agh.introwertycznelosie.services.MajorService;
 import com.agh.introwertycznelosie.services.RecruitmentCycleService;

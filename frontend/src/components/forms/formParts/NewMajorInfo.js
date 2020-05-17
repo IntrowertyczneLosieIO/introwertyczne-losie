@@ -44,7 +44,7 @@ class NewMajorInfo extends React.Component {
                         <Form.Control as={"select"} onChange={this.handleControlChange} required
                                       value={this.props.inputValuesFromState.mode}>
                             {/*<option hidden disabled value={"default"} />*/}
-                            <option value={"stacjonarne"}>stacjonarne</option>
+                            <option>stacjonarne</option>
                             <option>niestacjonarne</option>
                         </Form.Control>
                     </FormGroup>
