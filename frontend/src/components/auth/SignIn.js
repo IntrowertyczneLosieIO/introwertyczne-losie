@@ -13,7 +13,20 @@ const SignIn = () => (
     <Formik
         initialValues={{email: "", password: ""}}
         onSubmit={(values, {setSubmitting}) => {
-            console.log(values);
+            let valuesToSend = {
+                username: values.email,
+                password: values.password
+            };
+            fetch("/login", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(valuesToSend)
+            })
+                .then(response => response.json())
+                .catch(error => console.log(error));
+
             setSubmitting(false);
         }}
         validate={
@@ -102,4 +115,4 @@ const SignIn = () => (
     </Formik>
 );
 
-export default SignIn;
+export default SignIn
