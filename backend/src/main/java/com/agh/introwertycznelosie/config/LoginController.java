@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
@@ -24,10 +25,17 @@ public class LoginController {
         return "home";
     }
 
-    @RequestMapping(value="/login", method = RequestMethod.GET)
-    public ResponseEntity<HttpStatus> index(@RequestBody User user){
-        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
-        securityService.autoLogin(userDetails.getUsername(), userDetails.getPassword());
-        return ResponseEntity.ok(HttpStatus.OK);
+//    @RequestMapping(value="/login", method = RequestMethod.GET)
+//    public ResponseEntity<HttpStatus> index(@RequestBody User user){
+//        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+//        securityService.autoLogin(userDetails.getUsername(), userDetails.getPassword());
+//        return ResponseEntity.ok(HttpStatus.OK);
+//    }
+
+    @RequestMapping(value={"/*"}, method = RequestMethod.GET)
+    public ModelAndView index() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("../static/index");
+        return modelAndView;
     }
 }
