@@ -2,14 +2,17 @@ package com.agh.introwertycznelosie.config;
 
 import com.agh.introwertycznelosie.data.Faculty;
 import com.agh.introwertycznelosie.data.Major;
+import com.agh.introwertycznelosie.mockups.MajorMockup;
 import com.agh.introwertycznelosie.services.FacultyService;
 import com.agh.introwertycznelosie.services.MajorService;
+import com.agh.introwertycznelosie.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,13 +25,22 @@ public class MajorController {
     @Autowired
     FacultyService facultyService;
 
+    @Autowired
+    PersonService personService;
+
     @GetMapping(value="/newest-majors", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Major> getMajors() {
-        return majorService.get();
+    public List<MajorMockup> getMajors() {
+        List<MajorMockup> list = new ArrayList<>();
+        for (
+                Major major : majorService.get()) {
+            list.add(new MajorMockup(major));
+        }
+        return list;
     }
 
     @PostMapping("/new-major")
-    public ResponseEntity<HttpStatus> postNewMajor(@RequestBody Major major) {
+    public ResponseEntity<HttpStatus> postNewMajor(@RequestBody MajorMockup majorMockup) {
+        Major major = majorMockup.mockToMajor(personService, facultyService);
         Faculty faculty = facultyService.findByAcronym(major.getFaculty().getAcronym());
         if(faculty==null)
         {
@@ -40,7 +52,8 @@ public class MajorController {
     }
 
     @PutMapping("edit-major/{id}")
-    public Major updateMajor(@RequestBody Major major, @PathVariable Long id) {
+    public MajorMockup updateMajor(@RequestBody MajorMockup majorMockup, @PathVariable Long id) {
+        Major major = majorMockup.mockToMajor(personService, facultyService);
         Major majorDB = majorService.get(id);
         if (majorDB != null) {
             majorDB.setFullName(major.getFullName());
@@ -55,18 +68,21 @@ public class MajorController {
             majorDB.setContactPerson2(major.getContactPerson2());
             majorDB.setAnnotations(major.getAnnotations());
             majorDB.setMode(major.getMode());
+            System.out.println(majorDB.getMode());
             majorDB.setNumberOfPlaces(major.getNumberOfPlaces());
             majorDB.setAnnotations(major.getAnnotations());
             majorDB.setMixedField(major.isMixedField());
-            return majorService.save(majorDB);
+            majorDB = majorService.save(majorDB);
+            return new MajorMockup(majorDB);
         } else {
-            return majorService.save(major);
+            major = majorService.save(major);
+            return new MajorMockup(major);
         }
     }
 
     @GetMapping(value = "/major/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Major getMajor(@PathVariable(name = "id") Long id)
+    public MajorMockup getMajor(@PathVariable(name = "id") Long id)
     {
-        return majorService.get(id);
+        return new MajorMockup(majorService.get(id));
     }
 }

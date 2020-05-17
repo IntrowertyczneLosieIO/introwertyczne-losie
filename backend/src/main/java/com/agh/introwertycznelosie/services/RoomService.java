@@ -15,9 +15,7 @@ public class RoomService {
 
     public Room save(Room room) { return roomRepository.save(room);}
 
-    public List<Room> get() {
-        return roomRepository.findTop3ByOrderByIdDesc();
-    }
+    public List<Room> get() { return roomRepository.findTop3ByOrderByIdDesc(); }
 
     public Room get(Long id) { return roomRepository.getOne(id);}
 
