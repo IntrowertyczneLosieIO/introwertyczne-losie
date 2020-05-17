@@ -47,7 +47,7 @@ public class RecruitmentCycleTest {
     @Test
     public void editRCTest(){
         RecruitmentCycle recruitmentCycle = recruitmentCycleService.get(recruitmentCycle1.getId());
-        Exam exam = new Exam("Computer Science", null, fullTime, new Date(2021, Calendar.SEPTEMBER, 1), new Date(2021, Calendar.SEPTEMBER, 8), recruitmentCycle);
+        Exam exam = new Exam("Computer Science", null, new Date(2021, Calendar.SEPTEMBER, 1), new Date(2021, Calendar.SEPTEMBER, 8), recruitmentCycle);
         List<Exam> exams = new ArrayList<>();
         exams.add(exam);
         recruitmentCycle.setExams(exams);
@@ -59,8 +59,8 @@ public class RecruitmentCycleTest {
     @BeforeAll
     public static void setupObjects() {
         recruitment = new Recruitment("LATO-2020", 2020, Semester.summer);
-        recruitmentCycle1 = new RecruitmentCycle(recruitment);
-        recruitmentCycle2 = new RecruitmentCycle(recruitment);
+        recruitmentCycle1 = new RecruitmentCycle(recruitment, 1);
+        recruitmentCycle2 = new RecruitmentCycle(recruitment, 2);
     }
 
     @BeforeEach
@@ -77,7 +77,6 @@ public class RecruitmentCycleTest {
             recruitmentService.delete(recruitment);
         }
         catch (EmptyResultDataAccessException ex) {
-
         }
     }
 }

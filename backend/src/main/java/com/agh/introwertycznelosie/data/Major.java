@@ -35,7 +35,6 @@ public class Major {
     @JoinColumn(name = "contact_person_2", referencedColumnName = "id")
     private Person contactPerson2;
     private boolean mixedField;
-
     private String annotations;
 
     public Major(Faculty faculty, String fullName, String shortName, ModeOfStudy mode,
