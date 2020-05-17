@@ -13,6 +13,7 @@ class Sidenav extends React.Component {
                 <Nav.Link href={"#"}><Button variant={"outline-dark"}
                                              block>Rekrutacje</Button></Nav.Link>
                 {objectsList}
+                {/*<Nav.Link href={"#"}><Button variant={"outline-dark"} block>Wydziały</Button></Nav.Link>*/}
             </Nav>
         );
     }

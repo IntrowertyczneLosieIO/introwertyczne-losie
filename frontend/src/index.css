@@ -18,12 +18,16 @@ code {
 }
 
 .navbar-style {
-  background-color: steelblue;
+  background-color: #1d3250;
+  min-height: 10vh;
 }
 
 .custom-sidenav-bg {
   background-color: honeydew;
   height: 100vh;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .custom-width-modal {
@@ -31,11 +35,26 @@ code {
   max-width: 100%;
 }
 
+.input-info {
+  color: red;
+  font-weight: lighter;
+  margin-top: 4px;
+  font-size: 14px;
+  position: absolute;
+}
+.wrapper {
+  height: 90vh;
+}
+
 .custom-margins {
   margin-left: 100px;
   margin-right: 100px;
 }
-
+.form-bg {
+  background-color: #1d3250;
+  margin-left: 40px;
+  margin-right: 40px;
+}
 .modal-content {
   background-color: mintcream;
 }
@@ -50,6 +69,10 @@ code {
 
 .modal-form-bg-color .close {
   color: white;
+}
+
+.main-container {
+  padding: 0;
 }
 
 .modal-form-bg-color .close:hover {

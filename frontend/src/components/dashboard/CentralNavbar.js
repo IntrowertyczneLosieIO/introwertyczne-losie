@@ -7,7 +7,7 @@ import AdminLinks from "./AdminLinks";
 class CentralNavbar extends React.Component {
     render() {
         return (
-            <Navbar expand={"lg"} variant={"dark"} className={'mb-3 navbar-style rounded'}>
+            <Navbar expand={"lg"} variant={"dark"} className={'navbar-style'}>
                 <Navbar.Brand href={"#"}>
                     LOGO
                 </Navbar.Brand>
