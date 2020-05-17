@@ -53,9 +53,9 @@ public class SubexamTests {
 
         major1 = new Major(wiet, "Computer Science", "Inf", fullTime, 200, person1, person2, false, "");
         r1 = new Room(100, 200, "d17", "3.42", availableDates);
-        recruitmentCycle = new RecruitmentCycle(null);
-        e1 = new Exam("analiza", major1, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13), recruitmentCycle);
-        e2 = new Exam("analiza", major1, ModeOfStudy.fullTime, new Date(2020, 10, 10), new Date(2020, 10, 13), recruitmentCycle);
+        recruitmentCycle = new RecruitmentCycle(null, 1);
+        e1 = new Exam("analiza", major1, new Date(2020, 10, 10), new Date(2020, 10, 13), recruitmentCycle);
+        e2 = new Exam("analiza", major1, new Date(2020, 10, 10), new Date(2020, 10, 13), recruitmentCycle);
         s1 = new Subexam(e1, r1, new Date(2020, 10, 10), LocalTime.NOON);
         s2 = new Subexam(e2, r1, new Date(2020, 10, 12), LocalTime.MIDNIGHT);
     }
@@ -68,12 +68,14 @@ public class SubexamTests {
         System.out.println("==============================" + major1.getId());
         roomService.save(r1);
         System.out.println(s1.getId());
+        examService.save(e1);
         s1 = subexamService.save(s1);
         System.out.println(s1.getId());
     }
 
     @Test
     void testSubexamGet(){
+        examService.save(e2);
         s2 = subexamService.save(s2);
         assertEquals(subexamService.get(s1.getId()).getId(), s1.getId());
         assertEquals(subexamService.get(s2.getId()).getId(), s2.getId());
