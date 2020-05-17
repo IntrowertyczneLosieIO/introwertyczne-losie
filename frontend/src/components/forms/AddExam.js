@@ -18,10 +18,6 @@ class AddExam extends React.Component {
             majors: [],
             buildings: [],
             rooms: [],
-            modesMapping: {
-                "stacjonarne": "fullTime",
-                "niestacjonarne": "partTime"
-            },
         };
     }
 
@@ -59,7 +55,6 @@ getInitialState = () => {
     return {
         name: "",
         major: "WIEiT",
-        modeOfStudy: "",
         startDate: "",
         endDate: "",
         recruitmentCycle: -1,
@@ -97,7 +92,6 @@ handleSave = (resolve, reject) => {
         let userDataToSend = {
             name: this.state.userData.name,
             major: this.state.userData.major.fullName,
-            modeOfStudy: this.state.modesMapping[this.state.userData.modeOfStudy],
             startDate: this.state.userData.startDate,
             endDate: this.state.userData.endDate,
             recruitmentCycle: 1
