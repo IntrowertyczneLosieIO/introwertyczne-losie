@@ -14,7 +14,6 @@ public class Exam {
     private String name;
     @ManyToOne(cascade = {CascadeType.MERGE})
     private Major major;
-    private ModeOfStudy modeOfStudy;
     private Date startDate;
     private Date endDate;
     @ManyToOne(cascade = {CascadeType.MERGE})
@@ -22,10 +21,9 @@ public class Exam {
 
     public Exam(){}
 
-    public Exam(String name, Major major, ModeOfStudy modeOfStudy, Date startDate, Date endDate, RecruitmentCycle recruitmentCycle) {
+    public Exam(String name, Major major, Date startDate, Date endDate, RecruitmentCycle recruitmentCycle) {
         this.name = name;
         this.major = major;
-        this.modeOfStudy = modeOfStudy;
         this.startDate = startDate;
         this.endDate = endDate;
         this.recruitmentCycle = recruitmentCycle;
@@ -59,14 +57,6 @@ public class Exam {
 
     public void setMajor(Major major) {
         this.major = major;
-    }
-
-    public ModeOfStudy getModeOfStudy() {
-        return modeOfStudy;
-    }
-
-    public void setModeOfStudy(ModeOfStudy modeOfStudy) {
-        this.modeOfStudy = modeOfStudy;
     }
 
     public Date getStartDate() {

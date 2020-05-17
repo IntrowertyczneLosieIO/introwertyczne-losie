@@ -85,4 +85,13 @@ public class Recruitment {
     public void setSemester(Semester semester) {
         this.semester = semester;
     }
+
+    @Override
+    public String toString() {
+        return "Recruitment{" +
+                "acronym='" + acronym + '\'' +
+                ", year=" + year +
+                ", semester=" + semester +
+                '}';
+    }
 }
