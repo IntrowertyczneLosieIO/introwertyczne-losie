@@ -19,8 +19,8 @@ const SignIn = () => (
         validate={
             values => {
                 let errors = {};
-                const emailRegex = /(^([a-zA-Z0-9_\-\.]+)@(agh)\.(edu)\.(pl))/;
-                const passwordRegex = /(?=.*[0-9])/;
+                // const emailRegex = /(^([a-zA-Z0-9_\-\.]+)@(agh)\.(edu)\.(pl))/;
+                // const passwordRegex = /(?=.*[0-9])/;
                 if (!values.email) {
                     errors.email = "Email jest wymagany"
                 }
