@@ -38,6 +38,12 @@ class AddRecruitment extends React.Component {
         )
     }
 
+    setShow = (show) => {
+        this.setState({
+            show
+        });
+    }
+
     setValidated = (validated) => {
         this.setState({
             validated
@@ -84,7 +90,7 @@ class AddRecruitment extends React.Component {
             reject();
         }
         else {
-            this.state.show = false;
+            this.setShow(false);
             let userDataToSend = {
                 acronym: this.state.userData.acronym,
                 year: this.state.userData.year,
@@ -115,7 +121,7 @@ class AddRecruitment extends React.Component {
             userData: this.getInitialState()
         });
         this.setValidated(false);
-        this.state.show = false;
+        this.setShow(false);
     }
 
 
