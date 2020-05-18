@@ -9,7 +9,7 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import {Formik} from "formik";
 
-const SignIn = () => (
+const SignIn = (props) => (
     <Formik
         initialValues={{email: "", password: ""}}
         onSubmit={(values, {setSubmitting}) => {
@@ -18,13 +18,16 @@ const SignIn = () => (
                 password: values.password
             };
             fetch("/login", {
-                method: "GET",
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(valuesToSend)
             })
                 .then(response => response.json())
+                .then(() => {
+                    props.history.push("/");
+                })
                 .catch(error => console.log(error));
 
             setSubmitting(false);
