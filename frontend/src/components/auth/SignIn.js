@@ -25,8 +25,10 @@ const SignIn = (props) => (
                 body: JSON.stringify(valuesToSend)
             })
                 .then(response => response.json())
-                .then(() => {
-                    props.history.push("/");
+                .then((response) => {
+                    if (response === "OK") {
+                        props.history.push("/");
+                    }
                 })
                 .catch(error => console.log(error));
 
@@ -118,4 +120,4 @@ const SignIn = (props) => (
     </Formik>
 );
 
-export default SignIn
+export default SignIn;
