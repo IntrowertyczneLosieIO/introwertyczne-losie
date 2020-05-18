@@ -49,9 +49,9 @@ class ExamTest {
         person3 = new Person("Janina", "Bosacka", "999888777", "j.bosacka@agh.edu.pl");
         major1 = new Major(wiet, "Computer Science", "Inf", fullTime, 200, person1, null, false, "");
         major2 = new Major(wiet, "Electronics", "Inf", fullTime, 200, person2, person3, false, "");
-        recruitmentCycle = new RecruitmentCycle(null);
-        exam1 = new Exam("Computer Science", major1, fullTime, new Date(2021, Calendar.SEPTEMBER, 1), new Date(2021, Calendar.SEPTEMBER, 8), recruitmentCycle);
-        exam2 = new Exam("Electronics", major2, fullTime, new Date(2021, Calendar.SEPTEMBER, 8), new Date(2021, Calendar.SEPTEMBER, 16), recruitmentCycle);
+        recruitmentCycle = new RecruitmentCycle(null, 1);
+        exam1 = new Exam("Computer Science", major1, new Date(2021, Calendar.SEPTEMBER, 1), new Date(2021, Calendar.SEPTEMBER, 8), recruitmentCycle);
+        exam2 = new Exam("Electronics", major2, new Date(2021, Calendar.SEPTEMBER, 8), new Date(2021, Calendar.SEPTEMBER, 16), recruitmentCycle);
     }
 
     @Test

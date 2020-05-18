@@ -62,7 +62,7 @@ class DataTable extends React.Component {
 
         let rowList = this.state.tableData.map((row, rowIndex) => {
             let cellList = Object.values(row).map((columnValue, index) => {
-                if(typeof(columnValue) === "object") {
+                if(typeof(columnValue) === "object" && columnValue !== null) {
                     columnValue = columnValue.firstName + " " + columnValue.lastName;
                 }
                 return <td key={index}>{columnValue}</td>
@@ -76,10 +76,12 @@ class DataTable extends React.Component {
                 rowData.surname1 = row.contactPerson1.lastName;
                 rowData.phone1 = row.contactPerson1.phoneNo;
                 rowData.email1 = row.contactPerson1.mail;
-                rowData.name2 = row.contactPerson2.firstName;
-                rowData.surname2 = row.contactPerson2.lastName;
-                rowData.phone2 = row.contactPerson2.phoneNo;
-                rowData.email2 = row.contactPerson2.mail;
+                if (row.contactPerson2 !== null) {
+                    rowData.name2 = row.contactPerson2.firstName;
+                    rowData.surname2 = row.contactPerson2.lastName;
+                    rowData.phone2 = row.contactPerson2.phoneNo;
+                    rowData.email2 = row.contactPerson2.mail;
+                }
                 delete rowData.contactPerson1;
                 delete rowData.contactPerson2;
             }

@@ -61,7 +61,7 @@ class EditMajor extends React.Component {
                 fullName: "",
                 shortName: "",
                 faculty: "WIEiT",
-                mode: "fullTime",
+                mode: "stacjonarne",
                 mixedField: "Tak",
                 name1: "",
                 surname1: "",
@@ -104,6 +104,7 @@ class EditMajor extends React.Component {
             reject();
         }
         else {
+            this.props.handleHide();
             let userDataToSend = {
                 faculty: this.state.userData.faculty,
                 fullName: this.state.userData.fullName,

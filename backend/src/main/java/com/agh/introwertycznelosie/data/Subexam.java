@@ -13,7 +13,7 @@ public class Subexam {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     private Exam exam;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")

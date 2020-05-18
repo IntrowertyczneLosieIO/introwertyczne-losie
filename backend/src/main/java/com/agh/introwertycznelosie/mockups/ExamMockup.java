@@ -2,13 +2,9 @@ package com.agh.introwertycznelosie.mockups;
 
 import com.agh.introwertycznelosie.data.Exam;
 import com.agh.introwertycznelosie.data.Major;
-import com.agh.introwertycznelosie.data.ModeOfStudy;
 import com.agh.introwertycznelosie.data.RecruitmentCycle;
 import com.agh.introwertycznelosie.services.MajorService;
 import com.agh.introwertycznelosie.services.RecruitmentCycleService;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -32,14 +28,6 @@ public class ExamMockup {
 
     public void setMajor(String major) {
         this.major = major;
-    }
-
-    public String getModeOfStudy() {
-        return modeOfStudy;
-    }
-
-    public void setModeOfStudy(String modeOfStudy) {
-        this.modeOfStudy = modeOfStudy;
     }
 
     public Date getStartDate() {
@@ -68,7 +56,6 @@ public class ExamMockup {
 
     private String name;
     private String major;
-    private String modeOfStudy;
     private Date startDate;
     private Date endDate;
     private Long recruitmentCycleId;
@@ -84,7 +71,6 @@ public class ExamMockup {
         this.id = exam.getId();
         this.name = exam.getName();
         this.major = exam.getMajor().getFullName();
-        this.modeOfStudy = exam.getModeOfStudy().toString();
         this.startDate = exam.getStartDate();
         this.endDate = exam.getEndDate();
         this.recruitmentCycleId = exam.getRecruitmentCycle().getId();
@@ -97,7 +83,6 @@ public class ExamMockup {
         Major major = majorService.findByFullName(this.major);
 
         exam.setMajor(major);
-        exam.setModeOfStudy(ModeOfStudy.fromString(modeOfStudy));
         exam.setStartDate(startDate);
         exam.setEndDate(endDate);
         RecruitmentCycle recruitmentCycle = null;
