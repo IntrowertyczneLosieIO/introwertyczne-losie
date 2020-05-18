@@ -15,92 +15,59 @@ public class MajorMockup {
     @Autowired
     public MajorMockup(){}
 
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
     public String getFaculty() {
         return faculty;
     }
 
-    public void setFaculty(String faculty) {
-        this.faculty = faculty;
+    public List<Exam> getExams() {
+        return exams;
     }
 
     public String getFullName() {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public String getShortName() {
         return shortName;
-    }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
     }
 
     public ModeOfStudy getMode() {
         return mode;
     }
 
-    public void setMode(ModeOfStudy mode) {
-        this.mode = mode;
-    }
-
     public int getNumberOfPlaces() {
         return numberOfPlaces;
-    }
-
-    public void setNumberOfPlaces(int numberOfPlaces) {
-        this.numberOfPlaces = numberOfPlaces;
     }
 
     public Person getContactPerson1() {
         return contactPerson1;
     }
 
-    public void setContactPerson1(Person contactPerson1) {
-        this.contactPerson1 = contactPerson1;
-    }
-
     public Person getContactPerson2() {
         return contactPerson2;
-    }
-
-    public void setContactPerson2(Person contactPerson2) {
-        this.contactPerson2 = contactPerson2;
     }
 
     public boolean isMixedField() {
         return mixedField;
     }
 
-    public void setMixedField(boolean mixedField) {
-        this.mixedField = mixedField;
-    }
-
     public String getAnnotations() {
         return annotations;
     }
 
-    public void setAnnotations(String annotations) {
-        this.annotations = annotations;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    private Long id;
     private String faculty;
     private List<Exam> exams = new ArrayList<>();
     private String fullName;
     private String shortName;
     private ModeOfStudy mode;
     private int numberOfPlaces;
-//    @JsonProperty("contactPerson1")
     private Person contactPerson1;
-//    @JsonProperty("contactPerson2")
     private Person contactPerson2;
     private boolean mixedField;
     private String annotations;
