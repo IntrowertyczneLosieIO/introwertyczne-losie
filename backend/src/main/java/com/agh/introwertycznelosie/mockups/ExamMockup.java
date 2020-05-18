@@ -14,48 +14,29 @@ public class ExamMockup {
 
     public ExamMockup(){}
 
+    private String name;
+    private String major;
+
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getMajor() {
         return major;
     }
 
-    public void setMajor(String major) {
-        this.major = major;
-    }
-
     public Date getStartDate() {
         return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
     }
 
     public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
     public Long getRecruitmentCycleId() {
         return recruitmentCycleId;
     }
 
-    public void setRecruitmentCycleId(Long recruitmentCycleId) {
-        this.recruitmentCycleId = recruitmentCycleId;
-    }
-
-    private String name;
-    private String major;
     private Date startDate;
     private Date endDate;
     private Long recruitmentCycleId;

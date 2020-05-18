@@ -11,37 +11,6 @@ import java.util.List;
 
 @Service
 public class RoomMockup {
-    public int getRecommendedCapacity() {
-        return recommendedCapacity;
-    }
-
-    public void setRecommendedCapacity(int recommendedCapacity) {
-        this.recommendedCapacity = recommendedCapacity;
-    }
-
-    public int getMaximalCapacity() {
-        return maximalCapacity;
-    }
-
-    public void setMaximalCapacity(int maximalCapacity) {
-        this.maximalCapacity = maximalCapacity;
-    }
-
-    public String getLocalization() {
-        return localization;
-    }
-
-    public void setLocalization(String localization) {
-        this.localization = localization;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
 
     @Autowired
     public RoomMockup(){}
@@ -55,6 +24,27 @@ public class RoomMockup {
     private int maximalCapacity;
     private String localization;
     private String number;
+
+    public int getRecommendedCapacity() {
+        return recommendedCapacity;
+    }
+
+    public int getMaximalCapacity() {
+        return maximalCapacity;
+    }
+
+    public String getLocalization() {
+        return localization;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public List<DateRange> getAvailableDates() {
+        return availableDates;
+    }
+
     private List<DateRange> availableDates = new ArrayList<>();
 
 
