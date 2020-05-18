@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -29,31 +30,31 @@ public class LoginController {
     BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     UserService userService;
+
     @GetMapping("/home")
-    public String home(){
+    public String home() {
         return "home";
     }
 
     @RequestMapping(value = "/getCurrentUserRole", method = RequestMethod.GET)
     public String getRole(){
-        UserDetails userDetails =  securityService.findLoggedInUser();
+        UserDetails userDetails = securityService.findLoggedInUser();
         User user = userService.findByUsername(userDetails.getUsername());
         return user.getRoles().iterator().next().getName();
     }
 
-    @RequestMapping(value="/login", method = RequestMethod.PUT)
-    public ResponseEntity<HttpStatus> index(@RequestBody User user){
+    @RequestMapping(value = "/login", method = RequestMethod.PUT)
+    public ResponseEntity<HttpStatus> index(@RequestBody User user) {
         try {
             UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
             securityService.autoLogin(userDetails.getUsername(), user.getPassword());
-        }
-        catch (UsernameNotFoundException e){
-            return ResponseEntity.ok(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found", e);
         }
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @RequestMapping(value={"/*"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/*"}, method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("../static/index");
