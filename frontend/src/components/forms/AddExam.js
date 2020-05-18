@@ -150,9 +150,9 @@ findMajors() {
         })
         .then((response) => {
             console.log(response);
-
+            let majorsValues = response.map(value => value.fullName);
             this.setState({
-                majors: response,
+                majors: majorsValues
             });
         });
 }
