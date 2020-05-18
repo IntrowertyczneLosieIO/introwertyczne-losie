@@ -28,7 +28,7 @@ class NewExamInfo extends React.Component {
     render() {
         let majorList = [];
         majorList = this.props.majors.map((major, index) => {
-            return <option key={index} value={major}>{major.fullName}</option>
+            return <option key={index}>{major.fullName}</option>
         });
 
         return (
