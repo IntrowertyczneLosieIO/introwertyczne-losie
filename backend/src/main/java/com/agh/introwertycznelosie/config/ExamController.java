@@ -39,9 +39,9 @@ public class ExamController {
     }
 
     @PostMapping("/new-exam")
-    public ResponseEntity<HttpStatus> postNewMajor(@RequestBody ExamMockup examMockup) {
+    public Long postNewMajor(@RequestBody ExamMockup examMockup) {
         Exam exam = examMockup.mockToExam(recruitmentCycleService, majorService);
-        examService.save(exam);
-        return ResponseEntity.ok(HttpStatus.OK);
+        exam = examService.save(exam);
+        return exam.getId();
     }
 }
