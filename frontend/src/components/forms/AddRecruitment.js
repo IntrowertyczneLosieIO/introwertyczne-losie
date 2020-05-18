@@ -51,11 +51,20 @@ class AddRecruitment extends React.Component {
         else {
             return {
                 acronym: "",
-                // recruitmentStatus: "",
                 year: "",
                 semester: ""
             }
         }
+    }
+
+    handleInputChange = (event) => { // added
+        let currentUserData = this.state.userData;
+        this.setState({
+            userData: {
+                ...currentUserData,
+                [event.target.id]: event.target.value
+            }
+        });
     }
 
     getFormData = (target, value) => {
@@ -75,11 +84,9 @@ class AddRecruitment extends React.Component {
             reject();
         }
         else {
-            // this.props.handleHide();
             this.state.show = false;
             let userDataToSend = {
                 acronym: this.state.userData.acronym,
-                // recruitmentStatus: this.state.userData.recruitmentStatus,
                 year: this.state.userData.year,
                 semester: this.state.semesterMapping[this.state.userData.semester]
             }
@@ -113,7 +120,6 @@ class AddRecruitment extends React.Component {
 
 
     render() {
-        // console.log(this.props.show)
         return (
             <>
                 <Modal show={this.state.show} dialogClassName={"custom-width-modal"} onHide={this.hideAndClearState}

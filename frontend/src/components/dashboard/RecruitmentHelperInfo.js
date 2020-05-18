@@ -14,10 +14,17 @@ class RecruitmentHelperInfo extends React.Component {
         }
     }
 
-    setShowAddNew = (show) => {
-        this.setState({
-            showAddNew: show
-        });
+    handleShowAddNew = () => {
+        if(this.state.showAddNew){
+            this.setState({
+                showAddNew: false
+            });
+        }
+        else{
+            this.setState({
+                showAddNew: true
+            });
+        }
     }
 
     render() {
@@ -33,7 +40,7 @@ class RecruitmentHelperInfo extends React.Component {
                     <Button variant={"outline-primary"} size={"sm"} block>Informacje o rekrutacji</Button>
                 </Col>
                 <Col xs={2}>
-                    <Button variant={"success"} className={"mb-3"} size={"sm"} block onClick={()=>this.setState({showAddNew:true})}>Dodaj nową rekrutację</Button>
+                    <Button variant={"success"} className={"mb-3"} size={"sm"} block onClick={()=>this.handleShowAddNew()}>Dodaj nową rekrutację</Button>
                     {this.state.showAddNew && <AddRecruitment> </AddRecruitment>}
                 </Col>
             </Row>
