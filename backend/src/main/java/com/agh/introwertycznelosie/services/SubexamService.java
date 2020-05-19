@@ -5,6 +5,8 @@ import com.agh.introwertycznelosie.repositories.SubexamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SubexamService {
 
@@ -18,6 +20,9 @@ public class SubexamService {
     public Subexam get(Long id){
         return subexamRepository.getOne(id);
     }
+
+    public List<Subexam> get() { return subexamRepository.findTop3ByOrderByIdDesc(); }
+
 
     public void delete(Subexam subexam){ subexamRepository.delete(subexam); }
 
