@@ -59,9 +59,9 @@ class RecruitmentHelperInfo extends React.Component {
             <Row className={"mb-4"}>
                 <Col xs={12}>
                     <Alert variant={"primary"} className={"mt-3"}>
-                        <div>Aktualna Rekrutacja: <strong>{this.state.recruitment}</strong></div>
+                        <div style={{marginLeft: '17px'}}>Aktualna Rekrutacja: <strong>{this.state.recruitment}</strong></div>
                         <FormGroup as={Col} controlId={"newRecruitment"}>
-                            <Form.Control as={"select"} size={"sm"} onChange={(e) => this.setState({recruitment: e.target.value})} required>
+                            <Form.Control as={"select"} style={{width: 600, marginTop: '10px'}} onChange={(e) => this.setState({recruitment: e.target.value})} required>
                                 {this.state.recruitments.map((r, index) => <option
                                     key={index}>{r.acronym} </option>)}
                             </Form.Control>
