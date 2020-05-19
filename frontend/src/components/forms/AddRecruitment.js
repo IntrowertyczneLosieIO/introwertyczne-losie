@@ -90,6 +90,7 @@ class AddRecruitment extends React.Component {
             reject();
         }
         else {
+            this.props.handleHide();
             this.setShow(false);
             let userDataToSend = {
                 acronym: this.state.userData.acronym,

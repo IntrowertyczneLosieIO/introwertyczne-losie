@@ -4,13 +4,17 @@ import Col from "react-bootstrap/Col";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import AddRecruitment from "../forms/AddRecruitment";
+import Form from "react-bootstrap/Form";
+import FormGroup from "react-bootstrap/FormGroup";
 
 class RecruitmentHelperInfo extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            showAddNew: false
+            showAddNew: false,
+            recruitments: [],
+            recruitment: this.props.currentRecruitment
         }
     }
 
@@ -27,13 +31,41 @@ class RecruitmentHelperInfo extends React.Component {
         }
     }
 
+    handleControlChange = (event) => {
+        this.props.getFormData(event.target.id, event.target.value);
+    }
+
+
+    componentDidMount() {
+        this.getRecruitments()
+    }
+
+    getRecruitments = () => {
+        fetch("/newest-recruitments")
+            .then((response) => {
+                return response.json();
+            })
+            .then((response) => {
+                this.setState({
+                    recruitments: response
+                });
+                console.log(response)
+            });
+    }
+
     render() {
 
         return (
             <Row className={"mb-4"}>
                 <Col xs={12}>
                     <Alert variant={"primary"} className={"mt-3"}>
-                        Aktualna Rekrutacja: <strong>{this.props.currentRecruitment}</strong>
+                        <div>Aktualna Rekrutacja: <strong>{this.state.recruitment}</strong></div>
+                        <FormGroup as={Col} controlId={"newRecruitment"}>
+                            <Form.Control as={"select"} size={"sm"} onChange={(e) => this.setState({recruitment: e.target.value})} required>
+                                {this.state.recruitments.map((r, index) => <option
+                                    key={index}>{r.acronym} </option>)}
+                            </Form.Control>
+                        </FormGroup>
                     </Alert>
                 </Col>
                 <Col xs={2}>
