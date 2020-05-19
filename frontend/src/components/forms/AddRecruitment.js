@@ -104,7 +104,7 @@ class AddRecruitment extends React.Component {
                 },
                 body: JSON.stringify(userDataToSend)
             })
-                .then((response) => response.json())
+                .then((response) => {response.json(); console.log(response)})
                 .then(() => {
                     this.setState({
                         userData: this.getInitialState()
