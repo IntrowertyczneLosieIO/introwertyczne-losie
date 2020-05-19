@@ -28,7 +28,7 @@ class NewExamInfo extends React.Component {
     render() {
         let majorList = [];
         majorList = this.props.majors.map((major, index) => {
-            return <option key={index}>{major.fullName}</option>
+            return <option key={index} value={major.fullName}>{major.fullName}</option>
         });
 
         return (
@@ -37,11 +37,14 @@ class NewExamInfo extends React.Component {
                 <Form.Row>
                     <FormGroup as={Col} controlId={"name"}>
                         <Form.Label>Egzamin</Form.Label>
-                        <Form.Control type={"text"} onChange={this.handleControlChange} required/>
+                        <Form.Control type={"text"} onChange={this.handleControlChange} required
+                                      value={this.props.inputValuesFromState.name}/>
                     </FormGroup>
                     <FormGroup as={Col} controlId={"major"}>
                         <Form.Label>Kierunek</Form.Label>
-                        <Form.Control as={"select"} onChange={this.handleControlChange} required>
+                        <Form.Control as={"select"} onChange={this.handleControlChange} required
+                                      value={this.props.inputValuesFromState.major}>
+                            {}
                             {majorList}
                         </Form.Control>
                     </FormGroup>
@@ -49,11 +52,13 @@ class NewExamInfo extends React.Component {
                 <Form.Row>
                     <FormGroup as={Col} controlId={"startDate"}>
                         <Form.Label>Data rozpoczęcia</Form.Label>
-                        <Form.Control type={"date"} onChange={this.handleControlChange} required/>
+                        <Form.Control type={"date"} onChange={this.handleControlChange} required
+                                      value={this.props.inputValuesFromState.startDate}/>
                     </FormGroup>
                     <FormGroup as={Col} controlId={"endDate"}>
                         <Form.Label>Data zakończenia</Form.Label>
-                        <Form.Control type={"date"} onChange={this.handleControlChange} required/>
+                        <Form.Control type={"date"} onChange={this.handleControlChange} required
+                                      value={this.props.inputValuesFromState.endDate}/>
                     </FormGroup>
                 </Form.Row>
             </>

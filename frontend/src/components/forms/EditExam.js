@@ -1,12 +1,16 @@
+
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import FormGroup from "react-bootstrap/FormGroup";
 import Button from "react-bootstrap/Button";
 import NewExamInfo from "./formParts/NewExamInfo";
 import NewSubExamInfo from "./formParts/NewSubexamInfo";
+import Col from "react-bootstrap/Col";
+import DataTable from "../dashboard/DataTable";
+import Row from "react-bootstrap/Row";
 
-class AddExam extends React.Component {
+class EditExam extends React.Component {
+
     constructor(props) {
         super(props);
         this.formRef = React.createRef();
@@ -19,7 +23,6 @@ class AddExam extends React.Component {
             examId: 0
         };
     }
-
 
     setShowSubexamModal = (show) => {
         this.setState({
@@ -50,7 +53,8 @@ class AddExam extends React.Component {
     getInitialState = () => {
         if (this.props.initialInputValues) {
             return this.props.initialInputValues;
-        } else {
+        }
+        else {
             return {
                 name: "",
                 major: "",
@@ -93,11 +97,11 @@ class AddExam extends React.Component {
                 major: this.state.userData.major,
                 startDate: this.state.userData.startDate,
                 endDate: this.state.userData.endDate,
-                recruitmentCycle: 1
+                recruitmentCycle: this.state.userData.recruitmentCycle
             }
             console.log(userDataToSend);
-            fetch("/new-exam", {
-                method: 'POST',
+            fetch(`/edit-exam/${this.props.initialInputValues.id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -162,30 +166,43 @@ class AddExam extends React.Component {
             });
     }
 
+
     render() {
         return (
             <>
                 <Modal show={this.props.show} dialogClassName={"custom-width-modal"} onHide={this.hideAndClearState}
                        backdrop={"static"} keyboard={false}>
                     <Modal.Header closeButton className={"modal-form-bg-color"}>
-                        <Modal.Title className={"custom-margins custom-font text-light"}>Dodawanie nowego
-                            egzaminu</Modal.Title>
+                        <Modal.Title className={"custom-margins custom-font text-light"}>Edytowanie egzaminu
+                        </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={"custom-margins"}>
                         <Form noValidate validated={this.state.validated} ref={this.formRef}>
-                            <NewExamInfo options={this.props.options} getFormData={this.getFormData} inputValuesFromState={this.state.userData}
+                            <NewExamInfo options={this.props.options} getFormData={this.getFormData}
                                          majors={this.state.majors}
-                                         rooms={this.state.rooms}/>
-                            <h4 className={"mt-3 text-center"}>Uwagi</h4>
-                            <FormGroup controlId={"annotations"}>
-                                <Form.Control as={"textarea"} rows={"4"} onChange={this.handleInputChange}/>
-                            </FormGroup>
+                                         rooms={this.state.rooms} inputValuesFromState={this.state.userData}/>
+                            {/*<h4 className={"mt-3 text-center"}>Uwagi</h4>*/}
+                            {/*<FormGroup controlId={"annotations"}>*/}
+                            {/*    <Form.Control as={"textarea"} rows={"4"} onChange={this.handleInputChange}/>*/}
+                            {/*</FormGroup>*/}
                         </Form>
+                        <Row>
+                            <Col>
+                                <DataTable tableHeader={["Subexam id", "Sala", "Data", "Godzina"]}
+                                           name={"Subexams"}
+                                           mapping={`/newest-subexams/${this.state.userData.id}`}
+                                           tableValues={["id", "room", "date", "time"]}/>
+                            </Col>
+                        </Row>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant={"primary"} className={"custom-margins"}
                                 onClick={this.handleSaveAndOpenSubexam}>
                             Dodaj subegzamin
+                        </Button>
+                        <Button variant={"secondary"} className={"custom-margins"}
+                                onClick={this.handleSaveAndOpenSubexam}>
+                            Zapisz zmiany
                         </Button>
                     </Modal.Footer>
                 </Modal>
@@ -205,4 +222,4 @@ class AddExam extends React.Component {
     }
 }
 
-export default AddExam;
+export default EditExam;
