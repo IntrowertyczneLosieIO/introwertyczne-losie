@@ -8,9 +8,9 @@ import logo from './agh-logo.jpg';
 class CentralNavbar extends React.Component {
     render() {
         return (
-            <Navbar expand={"lg"} variant={"dark"} className={'mb-3 navbar-style rounded'}>
-                <Navbar.Brand href={"#"}>
-                    <img src={logo} alt="Logo" style={{height: '100px'}}/>
+            <Navbar expand={"lg"} variant={"dark"} className={'navbar-style pt-0 pb-0'}>
+                <Navbar.Brand href={"#"} className={"pt-0 pb-0"}>
+                    <img src={logo} alt="Logo" style={{height: '9vh'}}/>
                 </Navbar.Brand>
                 <Nav className={"mr-auto text-light"}>
                     <Col>
