@@ -9,10 +9,10 @@ class LoggedInView extends React.Component {
     render() {
         return (
             <Row className={"no-gutters"}>
-                <Col xs={1} className={"custom-sidenav-bg rounded"}>
+                <Col xs={2} xl={1} className={"custom-sidenav-bg rounded"}>
                     <Sidenav objects={this.props.objects}/>
                 </Col>
-                <Col xs={11}>
+                <Col xs={10} xl={11}>
                     <Route path={"/"} component={(props) => <Dashboard objects={this.props.objects} {...props}/>}/>
                 </Col>
             </Row>
