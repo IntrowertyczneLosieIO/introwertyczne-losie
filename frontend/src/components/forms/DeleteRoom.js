@@ -1,8 +1,6 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import NewRoomInfo from "./formParts/NewRoomInfo";
 
 class DeleteRoom extends React.Component {
     constructor(props) {
@@ -20,7 +18,6 @@ class DeleteRoom extends React.Component {
         });
     }
 
-    handleCloseConfirmationModal = () => this.setShowConfirmationModal(false);
     handleOpenConfirmationModal = () => this.setShowConfirmationModal(true);
 
     handleSaveAndOpenConfirm = () => {
@@ -52,17 +49,9 @@ class DeleteRoom extends React.Component {
         }
     }
 
-    getFormData = (target, value) => {
-        let currentUserData = this.state.userData;
-        this.setState({
-            userData: {
-                ...currentUserData,
-                [target]: value
-            }
-        })
-    }
 
-    handleDelete = (resolve, reject) => {
+
+    handleDelete = () => {
 
             this.props.handleHide();
             fetch(`/delete-room/${this.props.initialInputValues.id}`, {
