@@ -57,7 +57,8 @@ class DataTable extends React.Component {
         const nameComponentMapping = {
             "Majors": EditMajor,
             "Rooms": EditRoom,
-            "Exams": EditExam
+            "Exams": EditExam,
+            "Subexams": EditExam
         };
         const FormToRender = nameComponentMapping[this.props.name];
 
@@ -86,11 +87,6 @@ class DataTable extends React.Component {
                 delete rowData.contactPerson1;
                 delete rowData.contactPerson2;
             }
-
-            // } else if (this.props.name === 'Exams') {
-            //     rowData.iteration = row.recruitmentCycle.iteration
-            //     delete rowData.recruitmentCycle
-            // }
 
             return <tr>
                 {cellList}

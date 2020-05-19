@@ -6,6 +6,9 @@ import Button from "react-bootstrap/Button";
 import FormGroup from "react-bootstrap/FormGroup";
 import NewExamInfo from "./formParts/NewExamInfo";
 import NewSubExamInfo from "./formParts/NewSubexamInfo";
+import Col from "react-bootstrap/Col";
+import DataTable from "../dashboard/DataTable";
+import Row from "react-bootstrap/Row";
 
 class EditExam extends React.Component {
 
@@ -179,11 +182,19 @@ class EditExam extends React.Component {
                             <NewExamInfo options={this.props.options} getFormData={this.getFormData}
                                          majors={this.state.majors}
                                          rooms={this.state.rooms} inputValuesFromState={this.state.userData}/>
-                            <h4 className={"mt-3 text-center"}>Uwagi</h4>
-                            <FormGroup controlId={"annotations"}>
-                                <Form.Control as={"textarea"} rows={"4"} onChange={this.handleInputChange}/>
-                            </FormGroup>
+                            {/*<h4 className={"mt-3 text-center"}>Uwagi</h4>*/}
+                            {/*<FormGroup controlId={"annotations"}>*/}
+                            {/*    <Form.Control as={"textarea"} rows={"4"} onChange={this.handleInputChange}/>*/}
+                            {/*</FormGroup>*/}
                         </Form>
+                        <Row>
+                            <Col>
+                                <DataTable tableHeader={["Subexam id", "Sala", "Data", "Godzina"]}
+                                           name={"Subexams"}
+                                           mapping={`/newest-subexams/${this.state.userData.id}`}
+                                           tableValues={["id", "room", "date", "time"]}/>
+                            </Col>
+                        </Row>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant={"primary"} className={"custom-margins"}
