@@ -1,30 +1,22 @@
-
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import NewMajorInfo from "./formParts/NewMajorInfo";
-import ContactPersonInfo from "./formParts/ContactPersonInfo";
-import FormGroup from "react-bootstrap/FormGroup";
+import NewRecruitmentInfo from "./formParts/NewRecruitmentInfo";
 
-class EditMajor extends React.Component {
-
+class AddRecruitment extends React.Component {
     constructor(props) {
         super(props);
         this.formRef = React.createRef();
         this.state = {
+            show: true,
             validated: false,
             showConfirmationModal: false,
             userData: this.getInitialState(),
-            faculties: ["WGiG", "WIMIP", "WEAiIB", "WIEiT", "WIMiR", "WGGiOS", "WGGiIS", "WIMiC", "WO", "WMN", "WWNiG", "WZ", "WEiP", "WFiIS", "WMS", "WH"],
-            modesMapping: {
-                "stacjonarne": "fullTime",
-                "niestacjonarne": "partTime"
+            semesterMapping: {
+                "letni": "summer",
+                "zimowy": "winter"
             },
-            mixedMapping: {
-                "Tak": true,
-                "Nie": false
-            }
         };
     }
 
@@ -46,6 +38,12 @@ class EditMajor extends React.Component {
         )
     }
 
+    setShow = (show) => {
+        this.setState({
+            show
+        });
+    }
+
     setValidated = (validated) => {
         this.setState({
             validated
@@ -58,23 +56,21 @@ class EditMajor extends React.Component {
         }
         else {
             return {
-                fullName: "",
-                shortName: "",
-                faculty: "WIEiT",
-                mode: "stacjonarne",
-                mixedField: "Tak",
-                name1: "",
-                surname1: "",
-                email1: "",
-                phone1: "",
-                name2: "",
-                surname2: "",
-                email2: "",
-                phone2: "",
-                annotations: "",
-                numberOfPlaces: ""
+                acronym: "",
+                year: "",
+                semester: ""
             }
         }
+    }
+
+    handleInputChange = (event) => { // added
+        let currentUserData = this.state.userData;
+        this.setState({
+            userData: {
+                ...currentUserData,
+                [event.target.id]: event.target.value
+            }
+        });
     }
 
     getFormData = (target, value) => {
@@ -87,16 +83,6 @@ class EditMajor extends React.Component {
         })
     }
 
-    handleInputChange = (event) => {
-        let currentUserData = this.state.userData;
-        this.setState({
-            userData: {
-                ...currentUserData,
-                [event.target.id]: event.target.value
-            }
-        });
-    }
-
     handleSave = (resolve, reject) => {
         let form = this.formRef.current;
         if (!form.checkValidity()) {
@@ -104,31 +90,15 @@ class EditMajor extends React.Component {
             reject();
         }
         else {
-            this.props.handleHide();
+            this.setShow(false);
             let userDataToSend = {
-                faculty: this.state.userData.faculty,
-                fullName: this.state.userData.fullName,
-                shortName: this.state.userData.shortName,
-                mode: this.state.modesMapping[this.state.userData.mode],
-                numberOfPlaces: this.state.userData.numberOfPlaces,
-                contactPerson1: {
-                    firstName: this.state.userData.name1,
-                    lastName: this.state.userData.surname1,
-                    phoneNo: this.state.userData.phone1,
-                    mail: this.state.userData.email1
-                },
-                contactPerson2: {
-                    firstName: this.state.userData.name2,
-                    lastName: this.state.userData.surname2,
-                    phoneNo: this.state.userData.phone2,
-                    mail: this.state.userData.email2
-                },
-                mixedField: this.state.mixedMapping[this.state.userData.mixedField],
-                annotations: this.state.userData.annotations
+                acronym: this.state.userData.acronym,
+                year: this.state.userData.year,
+                semester: this.state.semesterMapping[this.state.userData.semester]
             }
             console.log(userDataToSend);
-            fetch(`/edit-major/${this.props.initialInputValues.id}`, {
-                method: 'PUT',
+            fetch("/new-recruitment", {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -151,40 +121,33 @@ class EditMajor extends React.Component {
             userData: this.getInitialState()
         });
         this.setValidated(false);
-        this.props.handleHide();
+        this.setShow(false);
     }
 
 
     render() {
         return (
             <>
-                <Modal show={this.props.show} dialogClassName={"custom-width-modal"} onHide={this.hideAndClearState}
+                <Modal show={this.state.show} dialogClassName={"custom-width-modal"} onHide={this.hideAndClearState}
                        backdrop={"static"} keyboard={false}>
                     <Modal.Header closeButton className={"modal-form-bg-color"}>
-                        <Modal.Title className={"custom-margins custom-font text-light"}>Edytowanie kierunku</Modal.Title>
+                        <Modal.Title className={"custom-margins custom-font text-light"}>Dodawanie nowej rekrutacji</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={"custom-margins"}>
                         <Form noValidate validated={this.state.validated} ref={this.formRef}>
-                            <NewMajorInfo getFormData={this.getFormData} faculties={this.state.faculties} inputValuesFromState={this.state.userData}/>
-                            <ContactPersonInfo order={1} getFormData={this.getFormData} inputValuesFromState={this.state.userData}/>
-                            <ContactPersonInfo order={2} getFormData={this.getFormData} inputValuesFromState={this.state.userData}/>
-                            <h5 className={"mt-4 text-secondary mb-3"}>Uwagi</h5>
-                            <FormGroup controlId={"annotations"}>
-                                <Form.Control as={"textarea"} rows={"4"} onChange={this.handleInputChange}/>
-                            </FormGroup>
+                            <NewRecruitmentInfo getFormData={this.getFormData} inputValuesFromState={this.state.userData}/>
                         </Form>
                     </Modal.Body>
                     <Modal.Footer className={"modal-form-bg-color"}>
-                        <Button variant={"danger"} onClick={this.hideAndClearState}>Anuluj
-                        </Button>
+                        <Button variant={"danger"} onClick={this.hideAndClearState}> Anuluj </Button>
                         <Button variant={"success"} className={"custom-margins"} onClick={this.handleSaveAndOpenConfirm}>
-                            Zapisz zmiany
+                            Dodaj rekrutację
                         </Button>
                     </Modal.Footer>
                 </Modal>
                 <Modal show={this.state.showConfirmationModal} onHide={this.handleCloseConfirmationModal} size={"lg"}>
                     <Modal.Body>
-                        <h4 className={"text-center"}>Kierunek został edytowany pomyślnie</h4>
+                        <h4 className={"text-center"}>Rekrutacja została dodana pomyślnie</h4>
                     </Modal.Body>
                     <Modal.Footer className={"modal-form-bg-color"}>
                         <Button variant={"success"} onClick={this.handleCloseConfirmationModal} block size={"sm"}>OK</Button>
@@ -195,4 +158,4 @@ class EditMajor extends React.Component {
     }
 }
 
-export default EditMajor;
+export default AddRecruitment;

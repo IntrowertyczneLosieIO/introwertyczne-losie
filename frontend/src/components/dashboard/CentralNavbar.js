@@ -3,13 +3,14 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Col from "react-bootstrap/Col";
 import AdminLinks from "./AdminLinks";
+import logo from './agh-logo.jpg';
 
 class CentralNavbar extends React.Component {
     render() {
         return (
             <Navbar expand={"lg"} variant={"dark"} className={'navbar-style'}>
                 <Navbar.Brand href={"#"}>
-                    LOGO
+                    <img src={logo} alt="Logo" style={{height: '100px'}}/>
                 </Navbar.Brand>
                 <Nav className={"mr-auto text-light"}>
                     <Col>
