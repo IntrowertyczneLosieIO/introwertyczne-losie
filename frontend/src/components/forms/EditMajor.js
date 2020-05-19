@@ -1,12 +1,14 @@
+
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import FormGroup from "react-bootstrap/FormGroup";
 import Button from "react-bootstrap/Button";
-import ContactPersonInfo from "./formParts/ContactPersonInfo";
 import NewMajorInfo from "./formParts/NewMajorInfo";
+import ContactPersonInfo from "./formParts/ContactPersonInfo";
+import FormGroup from "react-bootstrap/FormGroup";
 
-class AddMajor extends React.Component {
+class EditMajor extends React.Component {
+
     constructor(props) {
         super(props);
         this.formRef = React.createRef();
@@ -75,16 +77,6 @@ class AddMajor extends React.Component {
         }
     }
 
-    handleInputChange = (event) => {
-        let currentUserData = this.state.userData;
-        this.setState({
-            userData: {
-                ...currentUserData,
-                [event.target.id]: event.target.value
-            }
-        });
-    }
-
     getFormData = (target, value) => {
         let currentUserData = this.state.userData;
         this.setState({
@@ -93,6 +85,16 @@ class AddMajor extends React.Component {
                 [target]: value
             }
         })
+    }
+
+    handleInputChange = (event) => {
+        let currentUserData = this.state.userData;
+        this.setState({
+            userData: {
+                ...currentUserData,
+                [event.target.id]: event.target.value
+            }
+        });
     }
 
     handleSave = (resolve, reject) => {
@@ -125,8 +127,8 @@ class AddMajor extends React.Component {
                 annotations: this.state.userData.annotations
             }
             console.log(userDataToSend);
-            fetch("/new-major", {
-                method: 'POST',
+            fetch(`/edit-major/${this.props.initialInputValues.id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -152,36 +154,37 @@ class AddMajor extends React.Component {
         this.props.handleHide();
     }
 
+
     render() {
         return (
             <>
-            <Modal show={this.props.show} dialogClassName={"custom-width-modal"} onHide={this.hideAndClearState}
-                   backdrop={"static"} keyboard={false}>
-                <Modal.Header closeButton className={"modal-form-bg-color"}>
-                    <Modal.Title className={"custom-margins custom-font text-light"}>Dodawanie nowego kierunku</Modal.Title>
-                </Modal.Header>
-                <Modal.Body className={"custom-margins"}>
-                    <Form noValidate validated={this.state.validated} ref={this.formRef}>
-                        <NewMajorInfo getFormData={this.getFormData} faculties={this.state.faculties} inputValuesFromState={this.state.userData}/>
-                        <ContactPersonInfo order={1} required={true} getFormData={this.getFormData} inputValuesFromState={this.state.userData}/>
-                        <ContactPersonInfo order={2} required={false} getFormData={this.getFormData} inputValuesFromState={this.state.userData}/>
-                        <h5 className={"mt-4 text-secondary mb-3"}>Uwagi</h5>
-                        <FormGroup controlId={"annotations"}>
-                            <Form.Control as={"textarea"} rows={"4"} onChange={this.handleInputChange}/>
-                        </FormGroup>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer className={"modal-form-bg-color"}>
-                    <Button variant={"danger"} onClick={this.hideAndClearState}>Anuluj
-                    </Button>
-                    <Button variant={"success"} className={"custom-margins"} onClick={this.handleSaveAndOpenConfirm}>
-                        Dodaj kierunek
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                <Modal show={this.props.show} dialogClassName={"custom-width-modal"} onHide={this.hideAndClearState}
+                       backdrop={"static"} keyboard={false}>
+                    <Modal.Header closeButton className={"modal-form-bg-color"}>
+                        <Modal.Title className={"custom-margins custom-font text-light"}>Edytowanie kierunku</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className={"custom-margins"}>
+                        <Form noValidate validated={this.state.validated} ref={this.formRef}>
+                            <NewMajorInfo getFormData={this.getFormData} faculties={this.state.faculties} inputValuesFromState={this.state.userData}/>
+                            <ContactPersonInfo order={1} getFormData={this.getFormData} inputValuesFromState={this.state.userData}/>
+                            <ContactPersonInfo order={2} getFormData={this.getFormData} inputValuesFromState={this.state.userData}/>
+                            <h5 className={"mt-4 text-secondary mb-3"}>Uwagi</h5>
+                            <FormGroup controlId={"annotations"}>
+                                <Form.Control as={"textarea"} rows={"4"} onChange={this.handleInputChange}/>
+                            </FormGroup>
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer className={"modal-form-bg-color"}>
+                        <Button variant={"danger"} onClick={this.hideAndClearState}>Anuluj
+                        </Button>
+                        <Button variant={"success"} className={"custom-margins"} onClick={this.handleSaveAndOpenConfirm}>
+                            Zapisz zmiany
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
                 <Modal show={this.state.showConfirmationModal} onHide={this.handleCloseConfirmationModal} size={"lg"}>
                     <Modal.Body>
-                        <h4 className={"text-center"}>Kierunek został dodany pomyślnie</h4>
+                        <h4 className={"text-center"}>Kierunek został edytowany pomyślnie</h4>
                     </Modal.Body>
                     <Modal.Footer className={"modal-form-bg-color"}>
                         <Button variant={"success"} onClick={this.handleCloseConfirmationModal} block size={"sm"}>OK</Button>
@@ -192,4 +195,4 @@ class AddMajor extends React.Component {
     }
 }
 
-export default AddMajor;
+export default EditMajor;

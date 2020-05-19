@@ -78,4 +78,16 @@ public Long getId(){
     public void setAvailableDates(List<DateRange> availableDates) {
         this.availableDates = availableDates;
     }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", recommendedCapacity=" + recommendedCapacity +
+                ", maximalCapacity=" + maximalCapacity +
+                ", localization='" + localization + '\'' +
+                ", number='" + number + '\'' +
+                ", availableDates=" + availableDates +
+                '}';
+    }
 }

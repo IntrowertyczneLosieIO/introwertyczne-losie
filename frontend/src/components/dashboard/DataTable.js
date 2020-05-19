@@ -1,6 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
+import EditMajor from "../forms/EditMajor";
 import EditRoom from "../forms/EditRoom";
 import DeleteRoom from "../forms/DeleteRoom";
 
@@ -50,7 +51,7 @@ class DataTable extends React.Component {
                 let newTableData = response.map((responseValue, responseIndex) => {
                     let rows = {};
                     this.props.tableValues.forEach((tableValue, tableIndex) => {
-                        rows["column" + (tableIndex + 1)] = response[responseIndex] ? response[responseIndex][tableValue] : "";
+                        rows[tableValue] = response[responseIndex] ? response[responseIndex][tableValue] : "";
                     })
 
                     return rows;
@@ -68,7 +69,7 @@ class DataTable extends React.Component {
 
     render() {
         const nameComponentMapping = {
-            "Majors": EditRoom,
+            "Majors": EditMajor,
             "Rooms": EditRoom,
             "Exams": EditRoom
         };
@@ -83,12 +84,30 @@ class DataTable extends React.Component {
 
         let rowList = this.state.tableData.map((row, rowIndex) => {
             let cellList = Object.values(row).map((columnValue, index) => {
+                if(typeof(columnValue) === "object" && columnValue !== null) {
+                    columnValue = columnValue.firstName + " " + columnValue.lastName;
+                }
                 return <td key={index}>{columnValue}</td>
             })
             let rowData = {};
             for (let i=0; i<this.props.tableValues.length; i++) {
                 rowData[this.props.tableValues[i]] = Object.values(row)[i] ? Object.values(row)[i] : "";
             }
+            if (this.props.name === "Majors") {
+                rowData.name1 = row.contactPerson1.firstName;
+                rowData.surname1 = row.contactPerson1.lastName;
+                rowData.phone1 = row.contactPerson1.phoneNo;
+                rowData.email1 = row.contactPerson1.mail;
+                if (row.contactPerson2 !== null) {
+                    rowData.name2 = row.contactPerson2.firstName;
+                    rowData.surname2 = row.contactPerson2.lastName;
+                    rowData.phone2 = row.contactPerson2.phoneNo;
+                    rowData.email2 = row.contactPerson2.mail;
+                }
+                delete rowData.contactPerson1;
+                delete rowData.contactPerson2;
+            }
+
             return <tr>
                 {cellList}
                 <Button variant={"info"} size={"sm"} onClick={() => this.handleShow(rowIndex)} block>Edytuj</Button>

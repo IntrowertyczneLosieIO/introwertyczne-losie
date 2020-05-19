@@ -2,10 +2,7 @@ package com.agh.introwertycznelosie.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +18,9 @@ public class Major {
     @GeneratedValue
     private Long id;
 
+    @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Faculty faculty;
+
     @OneToMany(mappedBy = "major")
     private List<Exam> exams = new ArrayList<>();
 
@@ -29,16 +28,17 @@ public class Major {
     private String shortName;
     private ModeOfStudy mode;
     private int numberOfPlaces;
-    // TODO - klasa zamiast stringa, ale klasy jeszcze nie ma
-
-    private String contactPerson1;
-    private String contactPerson2;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "contact_person_1", referencedColumnName = "id")
+    private Person contactPerson1;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "contact_person_2", referencedColumnName = "id")
+    private Person contactPerson2;
     private boolean mixedField;
-
     private String annotations;
 
     public Major(Faculty faculty, String fullName, String shortName, ModeOfStudy mode,
-                 int numberOfPlaces, String contactPerson1, String contactPerson2,
+                 int numberOfPlaces, Person contactPerson1, Person contactPerson2,
                  boolean mixedField, String annotations) {
         this.faculty = faculty;
         this.fullName = fullName;
@@ -99,19 +99,19 @@ public class Major {
         this.numberOfPlaces = numberOfPlaces;
     }
 
-    public String getContactPerson1() {
+    public Person getContactPerson1() {
         return contactPerson1;
     }
 
-    public void setContactPerson1(String contactPerson1) {
+    public void setContactPerson1(Person contactPerson1) {
         this.contactPerson1 = contactPerson1;
     }
 
-    public String getContactPerson2() {
+    public Person getContactPerson2() {
         return contactPerson2;
     }
 
-    public void setContactPerson2(String contactPerson2) {
+    public void setContactPerson2(Person contactPerson2) {
         this.contactPerson2 = contactPerson2;
     }
 

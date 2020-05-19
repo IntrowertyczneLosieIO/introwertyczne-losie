@@ -3,8 +3,8 @@ package com.agh.introwertycznelosie.data;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.time.LocalTime;
+import java.util.Date;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -13,7 +13,7 @@ public class Subexam {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     private Exam exam;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")

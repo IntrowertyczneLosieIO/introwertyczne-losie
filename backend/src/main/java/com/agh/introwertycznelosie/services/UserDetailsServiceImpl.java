@@ -1,10 +1,5 @@
 package com.agh.introwertycznelosie.services;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
 import com.agh.introwertycznelosie.data.Role;
 import com.agh.introwertycznelosie.data.User;
 import com.agh.introwertycznelosie.repositories.UserRepository;
@@ -15,6 +10,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

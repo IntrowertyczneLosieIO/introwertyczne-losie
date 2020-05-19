@@ -13,9 +13,9 @@ class AddExam extends React.Component {
             validated: false,
             showConfirmationModal: false,
             userData: this.getInitialState(),
-            majors: ["Informatyka", "Informatyka Społeczna", "Humanistyka", "Telekomunikacja", "Elektronika"],
-            buildings: ["D17", "D10", "A0", "B1", "D11", "C2"],
-            rooms: ["1.38", "2.41", "3.22", "3.23", "3.27A", "3.27B", "3.27C"],
+            majors: [],
+            buildings: [],
+            rooms: [],
             modesMapping: {
                 "stacjonarne": "fullTime",
                 "niestacjonarne": "partTime"
@@ -50,8 +50,8 @@ setValidated = (validated) => {
 getInitialState = () => {
     return {
         name: "",
-        major: "Informatyka",
-        modeOfStudy: "stacjonarne",
+        major: "aha Fajnie",
+        modeOfStudy: "",
         startDate: "",
         endDate: "",
     }
@@ -117,6 +117,44 @@ hideAndClearState = () => {
     });
     this.setValidated(false);
     this.props.handleHide();
+}
+
+componentDidMount() {
+    this.findMajors()
+    this.findRooms()
+}
+
+findRooms(){
+    fetch("/newest-rooms")
+        .then((response)=>{
+            return response.json();
+        })
+        .then((response) => {
+            console.log(response);
+            let roomsValues = response.map(value => value.number);
+            let buildingsValues = response.map(value => value.localization);
+
+            this.setState({
+                rooms: roomsValues
+            });
+            this.setState({
+                buildings: buildingsValues
+            });
+        });
+}
+
+findMajors() {
+    fetch("/newest-majors")
+        .then((response)=>{
+            return response.json();
+        })
+        .then((response) => {
+            console.log(response);
+            let majorsValues = response.map(value => value.fullName);
+            this.setState({
+                majors: majorsValues
+            });
+        });
 }
 
 render() {
