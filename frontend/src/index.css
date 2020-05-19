@@ -13,7 +13,6 @@ code {
 }
 
 .dashboard-container {
-  background-color: white;
   margin-left: 0;
 }
 
@@ -77,4 +76,8 @@ code {
 
 .modal-form-bg-color .close:hover {
   color: white;
+}
+
+table {
+  font-size: 14px;
 }

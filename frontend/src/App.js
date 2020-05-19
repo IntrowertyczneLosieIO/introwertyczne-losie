@@ -38,7 +38,7 @@ class App extends React.Component {
     render() {
         return (
             <BrowserRouter>
-                <div className="App">
+                <div className="App bg-light">
                     <Container fluid className={"main-container"}>
                         <CentralNavbar/>
                         <Route exact path={"/login"} component={SignIn}/>
