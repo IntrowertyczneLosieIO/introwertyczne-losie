@@ -7,6 +7,9 @@ import com.agh.introwertycznelosie.services.ExamService;
 import com.agh.introwertycznelosie.services.RoomService;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -16,19 +19,26 @@ public class SubexamMockup {
         id = subexam.getId();
         examId = subexam.getExam().getId();
         roomId = subexam.getRoom().getId();
-        date = subexam.getDate();
-        time = subexam.getTime();
+        room = subexam.getRoom().getLocalization() + " " + subexam.getRoom().getNumber();
+        date = subexam.getDate().toString().substring(0,10);
+        time = subexam.getTime().toString();
     }
 
     public Subexam mockToSubexam(ExamService examService, RoomService roomService) {
         Subexam subexam = new Subexam();
 
-        subexam.setDate(date);
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date dateFromString = format.parse(date);
+            subexam.setDate(dateFromString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         Exam exam = examService.get(examId);
         subexam.setExam(exam);
         Room room = roomService.get(roomId);
         subexam.setRoom(room);
-        subexam.setTime(time);
+        subexam.setTime(LocalTime.parse(time));
         return subexam;
     }
 
@@ -45,18 +55,21 @@ public class SubexamMockup {
         return roomId;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public LocalTime getTime() {
+    public String getTime() {
         return time;
     }
+
+    public String getRoom() {return room; }
 
     private Long id;
     private Long examId;
     private Long roomId;
-    private Date date;
-    private LocalTime time;
+    private String date;
+    private String time;
+    private String room;
 
 }
