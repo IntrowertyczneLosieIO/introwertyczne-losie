@@ -44,4 +44,22 @@ public class ExamController {
         exam = examService.save(exam);
         return exam.getId();
     }
+
+    @PutMapping("edit-exam/{id}")
+    public ExamMockup updateExam(@RequestBody ExamMockup examMockup, @PathVariable Long id) {
+        Exam exam = examMockup.mockToExam(recruitmentCycleService, majorService);
+        Exam examDB = examService.get(id);
+        if (examDB != null) {
+            examDB.setName(exam.getName());
+            examDB.setRecruitmentCycle(exam.getRecruitmentCycle());
+            examDB.setStartDate(exam.getStartDate());
+            examDB.setEndDate(exam.getEndDate());
+            examDB.setMajor(exam.getMajor());
+            examDB = examService.save(examDB);
+            return new ExamMockup(examDB);
+        } else {
+            exam = examService.save(exam);
+            return new ExamMockup(exam);
+        }
+    }
 }

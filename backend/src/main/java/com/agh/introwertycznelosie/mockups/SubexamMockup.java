@@ -10,7 +10,6 @@ import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -22,7 +21,8 @@ public class SubexamMockup {
         id = subexam.getId();
         examId = subexam.getExam().getId();
         roomId = subexam.getRoom().getId();
-        date = subexam.getDate().toString();
+        room = subexam.getRoom().getLocalization() + " " + subexam.getRoom().getNumber();
+        date = subexam.getDate().toString().substring(0,10);
         time = subexam.getTime().toString();
     }
 
@@ -65,10 +65,13 @@ public class SubexamMockup {
         return time;
     }
 
+    public String getRoom() {return room; }
+
     private Long id;
     private Long examId;
     private Long roomId;
     private String date;
     private String time;
+    private String room;
 
 }

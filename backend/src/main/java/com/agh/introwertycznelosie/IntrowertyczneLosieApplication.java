@@ -8,6 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
@@ -47,6 +49,7 @@ public class IntrowertyczneLosieApplication {
     private RecruitmentCycle recruitmentCycle1, recruitmentCycle2, recruitmentCycle3;
     private Exam exam1, exam2, exam3, exam4;
     private Subexam subexam1, subexam2, subexam3, subexam4, subexam5, subexam6;
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 
     private void setDatabase() {
@@ -73,16 +76,21 @@ public class IntrowertyczneLosieApplication {
         recruitmentCycle1 = new RecruitmentCycle(recruitment1, 1);
         recruitmentCycle2 = new RecruitmentCycle(recruitment1, 2);
         recruitmentCycle3 = new RecruitmentCycle(recruitment2, 1);
-        exam1 = new Exam("EgzaminInf2.wiet", major1, new Date(2020, Calendar.AUGUST, 1), new Date(2020, Calendar.AUGUST, 2), recruitmentCycle1);
-        exam2 = new Exam("EgzaminInf2.2.wiet", major1, new Date(2020, Calendar.AUGUST, 10), new Date(2020, Calendar.AUGUST, 11), recruitmentCycle2);
-        exam3 = new Exam("EgzaminDS2.wiet", major2, new Date(2020, Calendar.AUGUST, 3), new Date(2020, Calendar.AUGUST, 4), recruitmentCycle1);
-        exam4 = new Exam("Grafy2.ms", major3, new Date(2021, Calendar.JANUARY, 3), new Date(2021, Calendar.JANUARY, 4), recruitmentCycle3);
-        subexam1 = new Subexam(exam1, room1, new Date(2020, Calendar.AUGUST, 1), LocalTime.parse("13:00"));
-        subexam2 = new Subexam(exam1, room2, new Date(2020, Calendar.AUGUST, 2), LocalTime.parse("13:00"));
-        subexam3 = new Subexam(exam2, room2, new Date(2020, Calendar.AUGUST, 10), LocalTime.parse("15:00"));
-        subexam4 = new Subexam(exam2, room1, new Date(2020, Calendar.AUGUST, 11), LocalTime.parse("17:00"));
-        subexam5 = new Subexam(exam3, room1, new Date(2020, Calendar.AUGUST, 3), LocalTime.parse("11:00"));
-        subexam6 = new Subexam(exam4, room1, new Date(2021, Calendar.JANUARY, 3), LocalTime.parse("17:00"));
+        try {
+            exam1 = new Exam("EgzaminInf2.wiet", major1, sdf.parse("2020-08-01"), sdf.parse("2020-08-03"), recruitmentCycle1);
+            exam2 = new Exam("EgzaminInf2.2.wiet", major1, sdf.parse("2020-08-10"), sdf.parse("2020-08-11"), recruitmentCycle2);
+            exam3 = new Exam("EgzaminDS2.wiet", major2, sdf.parse("2020-08-03"), sdf.parse("2020-08-04"), recruitmentCycle1);
+            exam4 = new Exam("Grafy2.ms", major3, sdf.parse("2021-01-03"), sdf.parse("2021-01-04"), recruitmentCycle3);
+            subexam1 = new Subexam(exam1, room1, sdf.parse("2020-08-01"), LocalTime.parse("13:00"));
+            subexam2 = new Subexam(exam1, room2, sdf.parse("2020-08-02"), LocalTime.parse("13:00"));
+            subexam3 = new Subexam(exam2, room2, sdf.parse("2020-08-10"), LocalTime.parse("15:00"));
+            subexam4 = new Subexam(exam2, room1, sdf.parse("2020-08-11"), LocalTime.parse("17:00"));
+            subexam5 = new Subexam(exam3, room1, sdf.parse("2020-08-03"), LocalTime.parse("11:00"));
+            subexam6 = new Subexam(exam4, room1, sdf.parse("2021-01-03"), LocalTime.parse("17:00"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Bean
