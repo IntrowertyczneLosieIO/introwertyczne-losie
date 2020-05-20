@@ -63,16 +63,6 @@ class EditRecruitment extends React.Component {
         }
     }
 
-    handleInputChange = (event) => { // added
-        let currentUserData = this.state.userData;
-        this.setState({
-            userData: {
-                ...currentUserData,
-                [event.target.id]: event.target.value
-            }
-        });
-    }
-
     getFormData = (target, value) => {
         let currentUserData = this.state.userData;
         this.setState({
@@ -146,7 +136,7 @@ class EditRecruitment extends React.Component {
                 </Modal>
                 <Modal show={this.state.showConfirmationModal} onHide={this.handleCloseConfirmationModal} size={"lg"}>
                     <Modal.Body>
-                        <h4 className={"text-center"}>Rekrutacja została dodana pomyślnie</h4>
+                        <h4 className={"text-center"}>Rekrutacja została edytowana pomyślnie</h4>
                     </Modal.Body>
                     <Modal.Footer className={"modal-form-bg-color"}>
                         <Button variant={"success"} onClick={this.handleCloseConfirmationModal} block size={"sm"}>OK</Button>

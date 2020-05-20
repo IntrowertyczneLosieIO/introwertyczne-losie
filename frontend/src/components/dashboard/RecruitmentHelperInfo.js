@@ -11,7 +11,8 @@ class RecruitmentHelperInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showAddNew: false
+            showAddNew: false,
+            showEdit: false
         }
     }
 
@@ -24,6 +25,19 @@ class RecruitmentHelperInfo extends React.Component {
         else{
             this.setState({
                 showAddNew: true
+            });
+        }
+    }
+
+    handleShowEdit = () => {
+        if(this.state.showEdit){
+            this.setState({
+                showEdit: false
+            });
+        }
+        else{
+            this.setState({
+                showEdit: true
             });
         }
     }
@@ -46,8 +60,8 @@ class RecruitmentHelperInfo extends React.Component {
                 </Col>
 
                 <Col xs={2}>
-                    <Button variant={"info"} className={"mb-3"} size={"sm"} block onClick={()=>this.handleShowAddNew()}>Edytuj rekrutację</Button>
-                    {this.state.showAddNew && <EditRecruitment> </EditRecruitment>}
+                    <Button variant={"info"} className={"mb-3"} size={"sm"} block onClick={()=>this.handleShowEdit()}>Edytuj rekrutację</Button>
+                    {this.state.showEdit && <EditRecruitment> </EditRecruitment>}
                 </Col>
             </Row>
         );
