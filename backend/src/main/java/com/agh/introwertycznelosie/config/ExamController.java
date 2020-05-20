@@ -2,6 +2,7 @@ package com.agh.introwertycznelosie.config;
 
 
 import com.agh.introwertycznelosie.data.Exam;
+import com.agh.introwertycznelosie.data.Major;
 import com.agh.introwertycznelosie.mockups.ExamMockup;
 import com.agh.introwertycznelosie.services.ExamService;
 import com.agh.introwertycznelosie.services.MajorService;
@@ -44,4 +45,15 @@ public class ExamController {
         exam = examService.save(exam);
         return exam.getId();
     }
+
+    @DeleteMapping("delete-exam/{id}")
+    public ResponseEntity<HttpStatus> deleteExam(@PathVariable Long id) {
+        Exam currentExam = examService.get(id);
+        if (currentExam != null) {
+            examService.delete(id);
+        }
+        return ResponseEntity.ok(HttpStatus.OK);
+
+    }
+
 }

@@ -1,15 +1,25 @@
+
 import React from "react";
 import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import ErrorLinking from "./formParts/ErrorLinking"
+import NewMajorInfo from "./formParts/NewMajorInfo";
+import ContactPersonInfo from "./formParts/ContactPersonInfo";
+import FormGroup from "react-bootstrap/FormGroup";
 
-class DeleteRoom extends React.Component {
+class DeleteExam extends React.Component {
+
     constructor(props) {
         super(props);
+        this.formRef = React.createRef();
         this.state = {
             validated: false,
             showConfirmationModal: false,
-            userData: this.getInitialState()
+            userData: this.getInitialState(),
+            mixedMapping: {
+                "Tak": true,
+                "Nie": false
+            },
         };
     }
 
@@ -19,6 +29,7 @@ class DeleteRoom extends React.Component {
         });
     }
 
+    handleCloseConfirmationModal = () => this.setShowConfirmationModal(false);
     handleOpenConfirmationModal = () => this.setShowConfirmationModal(true);
 
     handleSaveAndOpenConfirm = () => {
@@ -42,24 +53,33 @@ class DeleteRoom extends React.Component {
         }
         else {
             return {
-                localization: "",
-                number: "",
-                recommendedCapacity: "",
-                maximalCapacity: ""
+                fullName: "",
+                shortName: "",
+                faculty: "WIEiT",
+                mode: "stacjonarne",
+                mixedField: "Tak",
+                name1: "",
+                surname1: "",
+                email1: "",
+                phone1: "",
+                name2: "",
+                surname2: "",
+                email2: "",
+                phone2: "",
+                annotations: "",
+                numberOfPlaces: ""
             }
         }
     }
 
-
-
     handleDelete = () => {
 
-            this.props.handleHide();
-            fetch(`/delete-room/${this.props.initialInputValues.id}`, {
-                method: 'delete'
-            })
-                .then((response) => response.json())
-                .catch((error) => console.log(error));
+        this.props.handleHide();
+        fetch(`/delete-exam/${this.props.initialInputValues.id}`, {
+            method: 'delete'
+        })
+            .then((response) => response.json())
+            .catch((error) => console.log(error));
     }
 
     hideAndClearState = () => {
@@ -77,15 +97,14 @@ class DeleteRoom extends React.Component {
                 <Modal show={this.props.show}  onHide={this.hideAndClearState}
                        backdrop={"static"} keyboard={false}>
                     <Modal.Body className={"custom-margins"}>
-            <h4 className={"text-center"}>Czy na pewno chcesz usunąć salę ?</h4>
-        </Modal.Body>
-                    <Modal.Footer >
+                        <h4 className={"text-center"}>Czy na pewno chcesz usunąć egzamin ?</h4>
+                    </Modal.Body>
+                    <Modal.Footer>
                         <Button variant={"danger"} onClick={this.hideAndClearState}>Nie
                         </Button>
                         <Button variant={"success"} className={"custom-margins"} onClick={this.handleSaveAndOpenConfirm}>
                             Tak
                         </Button>
-
                     </Modal.Footer>
                 </Modal>
             </>
@@ -93,4 +112,4 @@ class DeleteRoom extends React.Component {
     }
 }
 
-export default DeleteRoom;
+export default DeleteExam;

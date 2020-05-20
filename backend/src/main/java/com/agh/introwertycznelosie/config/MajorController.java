@@ -2,6 +2,7 @@ package com.agh.introwertycznelosie.config;
 
 import com.agh.introwertycznelosie.data.Faculty;
 import com.agh.introwertycznelosie.data.Major;
+import com.agh.introwertycznelosie.data.Room;
 import com.agh.introwertycznelosie.mockups.MajorMockup;
 import com.agh.introwertycznelosie.services.FacultyService;
 import com.agh.introwertycznelosie.services.MajorService;
@@ -78,6 +79,16 @@ public class MajorController {
             major = majorService.save(major);
             return new MajorMockup(major);
         }
+    }
+
+    @DeleteMapping("delete-major/{id}")
+    public ResponseEntity<HttpStatus> deleteMajor(@PathVariable Long id) {
+        Major currentMajor = majorService.get(id);
+        if (currentMajor != null) {
+            majorService.delete(id);
+        }
+        return ResponseEntity.ok(HttpStatus.OK);
+
     }
 
     @GetMapping(value = "/major/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
