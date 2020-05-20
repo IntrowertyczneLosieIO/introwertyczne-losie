@@ -8,6 +8,8 @@ import DeleteMajor from "../forms/DeleteMajor";
 import DeleteExam from "../forms/DeleteExam";
 import ShowMajor from "../forms/ShowMajor";
 import ShowRoom from "../forms/ShowRoom";
+import EditExam from "../forms/EditExam";
+import DeleteSubexam from "../forms/DeleteSubexam";
 
 
 class DataTable extends React.Component {
@@ -91,7 +93,8 @@ class DataTable extends React.Component {
         const nameComponentMapping = {
             "Majors": EditMajor,
             "Rooms": EditRoom,
-            "Exams": EditRoom
+            "Exams": EditExam,
+            "Subexams": DeleteSubexam
         };
 
         const nameComponentMappingDelete = {
@@ -129,6 +132,16 @@ class DataTable extends React.Component {
                 }
                 delete rowData.contactPerson1;
                 delete rowData.contactPerson2;
+            }
+            if (this.props.name === "Subexams") {
+                return <tr>
+                    {cellList}
+                    <Button variant={"info"} size={"sm"} onClick={() => this.handleShow(rowIndex)} block>Usuń</Button>
+                    <FormToRender handleShow={() => this.handleShow(rowIndex)}
+                                  handleHide={() => this.handleHide(rowIndex)}
+                                  show={this.state.showEdit[rowIndex]}
+                                  initialInputValues={rowData}/>
+                </tr>
             }
             let cellList = Object.values(row).map((columnValue, index) => {
                 if(typeof(columnValue) === "object" && columnValue !== null) {
