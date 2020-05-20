@@ -11,6 +11,7 @@ import ShowRoom from "../forms/ShowRoom";
 
 import EditExam from "../forms/EditExam";
 import DeleteSubexam from "../forms/DeleteSubexam";
+import ShowExam from "../forms/ShowExam";
 
 class DataTable extends React.Component {
     constructor(props) {
@@ -94,19 +95,24 @@ class DataTable extends React.Component {
             "Majors": EditMajor,
             "Rooms": EditRoom,
             "Exams": EditExam,
-            "Subexams": DeleteSubexam
+            "Subexams": DeleteSubexam,
+            "SubexamsNonEditable": DeleteSubexam
         };
 
         const nameComponentMappingDelete = {
             "Majors": DeleteMajor,
             "Rooms": DeleteRoom,
-            "Exams": DeleteExam
+            "Exams": DeleteExam,
+            "Subexams": DeleteSubexam,
+            "SubexamsNonEditable":DeleteSubexam
         };
 
         const nameComponentMappingShow = {
             "Majors": ShowMajor,
             "Rooms": ShowRoom,
-            "Exams": ShowRoom
+            "Exams": ShowExam,
+            "Subexams": DeleteSubexam,
+            "SubexamsNonEditable": DeleteSubexam
         };
 
         const FormToRender = nameComponentMapping[this.props.name];
@@ -148,13 +154,17 @@ class DataTable extends React.Component {
             if (this.props.name === "Subexams") {
                 return <tr>
                     {cellList}
-                    <Button variant={"info"} size={"sm"} onClick={() => this.handleShow(rowIndex)} block>Usuń</Button>
-                    <FormToRender handleShow={() => this.handleShow(rowIndex)}
-                                  handleHide={() => this.handleHide(rowIndex)}
-                                  show={this.state.showEdit[rowIndex]}
-                                  initialInputValues={rowData}/>
+                    <Button variant={"danger"} size={"sm"} onClick={() => this.handleShowDelete(rowIndex)} block>Usuń</Button>
+                    <FormToRenderDelete handleShow={() => this.handleShowDelete(rowIndex)}
+                                        handleHide={() => this.handleHideDelete(rowIndex)}
+                                        show={this.state.showDelete[rowIndex]}
+                                        initialInputValues={rowData}/>
                 </tr>
-            }
+            } else if (this.props.name === "SubexamsNonEditable") {
+                return <tr>
+                    {cellList}
+                </tr>
+            } else {
 
             return <tr>
                 {cellList}
@@ -173,7 +183,7 @@ class DataTable extends React.Component {
                                 initialInputValues={rowData}/>
                                 </th>
             </tr>
-        })
+        }})
 
         let thList = this.props.tableHeader.map((value, index) => {
             return <th key={index}>{value}</th>

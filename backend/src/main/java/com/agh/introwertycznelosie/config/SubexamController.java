@@ -1,5 +1,6 @@
 package com.agh.introwertycznelosie.config;
 
+import com.agh.introwertycznelosie.data.Room;
 import com.agh.introwertycznelosie.data.Subexam;
 import com.agh.introwertycznelosie.mockups.MajorMockup;
 import com.agh.introwertycznelosie.mockups.SubexamMockup;
@@ -43,6 +44,16 @@ public class SubexamController {
             list.add(new SubexamMockup(s));
         }
         return list;
+    }
+
+    @DeleteMapping("delete-subexam/{id}")
+    public ResponseEntity<HttpStatus> deleteRoom(@PathVariable Long id) {
+        Subexam currentSubexam = subexamService.get(id);
+        if (currentSubexam != null) {
+            subexamService.delete(id);
+        }
+        return ResponseEntity.ok(HttpStatus.OK);
+
     }
 
 }

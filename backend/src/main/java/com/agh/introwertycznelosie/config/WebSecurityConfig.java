@@ -43,15 +43,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().cors().and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/index*", "/static/**", "/login/**", "/*.js", "/*.json", "/*.ico").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
-        http.headers().frameOptions().disable();
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .permitAll()
+//                .and()
+//                .logout()
+//                .permitAll();
+//        http.headers().frameOptions().disable();
+        ;
 
     }
 }

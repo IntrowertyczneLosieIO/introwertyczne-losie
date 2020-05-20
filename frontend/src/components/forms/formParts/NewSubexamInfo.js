@@ -15,7 +15,7 @@ class NewSubExamInfo extends React.Component {
             showConfirmationModal: false,
             subexamList: [],
             subExam: {
-                room: this.props.rooms[0].id + " " + this.props.rooms[0].number + " " + this.props.rooms[0].localization,
+                room: this.props.rooms[0].id + ". " + this.props.rooms[0].number + " " + this.props.rooms[0].localization,
                 date: "",
                 time: ""
             }
