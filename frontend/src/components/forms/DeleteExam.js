@@ -3,9 +3,7 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import NewMajorInfo from "./formParts/NewMajorInfo";
-import ContactPersonInfo from "./formParts/ContactPersonInfo";
-import FormGroup from "react-bootstrap/FormGroup";
+
 
 class DeleteExam extends React.Component {
 
