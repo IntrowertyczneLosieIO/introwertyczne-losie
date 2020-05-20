@@ -13,11 +13,6 @@ class DeleteMajor extends React.Component {
             validated: false,
             showConfirmationModal: false,
             userData: this.getInitialState(),
-            // faculties: ["WGiG", "WIMIP", "WEAiIB", "WIEiT", "WIMiR", "WGGiOS", "WGGiIS", "WIMiC", "WO", "WMN", "WWNiG", "WZ", "WEiP", "WFiIS", "WMS", "WH"],
-            // modesMapping: {
-            //     "stacjonarne": "fullTime",
-            //     "niestacjonarne": "partTime"
-            // },
             mixedMapping: {
                 "Tak": true,
                 "Nie": false
