@@ -32,12 +32,12 @@ class RecruitmentHelperInfo extends React.Component {
         return (
             <Row className={"mb-4"}>
                 <Col xs={12}>
-                    <Alert variant={"primary"} className={"mt-3"}>
+                    <Alert variant={"info"} className={"mt-3"}>
                         Aktualna Rekrutacja: <strong>{this.props.currentRecruitment}</strong>
                     </Alert>
                 </Col>
                 <Col xs={2}>
-                    <Button variant={"outline-primary"} size={"sm"} block>Informacje o rekrutacji</Button>
+                    <Button variant={"outline-dark"} size={"sm"} block>Informacje o rekrutacji</Button>
                 </Col>
                 <Col xs={2}>
                     <Button variant={"success"} className={"mb-3"} size={"sm"} block onClick={()=>this.handleShowAddNew()}>Dodaj nową rekrutację</Button>

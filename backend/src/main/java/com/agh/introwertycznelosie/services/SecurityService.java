@@ -19,10 +19,10 @@ public class SecurityService {
     private UserDetailsService userDetailsService;
 
 
-    public String findLoggedInUsername() {
-        Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
+    public UserDetails findLoggedInUser() {
+        Object userDetails = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (userDetails instanceof UserDetails) {
-            return ((UserDetails)userDetails).getUsername();
+            return ((UserDetails)userDetails);
         }
 
         return null;

@@ -144,8 +144,8 @@ class DataTable extends React.Component {
 
             return <tr>
                 {cellList}
-                <th>
-                <Button variant={"info"} size={"sm"} onClick={() => this.handleShow(rowIndex)} block>Edytuj</Button>
+
+                <Button variant={"info"} size={"sm"} onClick={() => this.handleShow(rowIndex)} block className={"border border-light"}>Edytuj</Button>
                 <FormToRender handleShow={() => this.handleShow(rowIndex)}
                               handleHide={() => this.handleHide(rowIndex)}
                               show={this.state.showEdit[rowIndex]}
