@@ -15,7 +15,7 @@ class NewSubExamInfo extends React.Component {
             showConfirmationModal: false,
             subexamList: [],
             subExam: {
-                room: this.props.rooms[0].id + " " + this.props.rooms[0].number + " " + this.props.rooms[0].localization,
+                room: this.props.rooms[0].id + ". " + this.props.rooms[0].number + " " + this.props.rooms[0].localization,
                 date: "",
                 time: ""
             }
@@ -122,12 +122,6 @@ class NewSubExamInfo extends React.Component {
                                           value={this.state.subExam.time}/>
                         </FormGroup>
                     </Form.Row>
-                    {/*<Form.Row>*/}
-                    {/*    <FormGroup as={Col} controlId={"endTime"}>*/}
-                    {/*        <Form.Label>Godzina zakończenia</Form.Label>*/}
-                    {/*        <Form.Control type={"time"} onChange={this.handleControlChange} required/>*/}
-                    {/*    </FormGroup>*/}
-                    {/*</Form.Row>*/}
                     <Form.Row>
                         <FormGroup as={Col} controlId={"room"}>
                             <Form.Label>Sala</Form.Label>
