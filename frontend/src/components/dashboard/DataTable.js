@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import EditMajor from "../forms/EditMajor";
 import EditRoom from "../forms/EditRoom";
 import EditExam from "../forms/EditExam";
+import DeleteSubexam from "../forms/DeleteSubexam";
 
 class DataTable extends React.Component {
     constructor(props) {
@@ -58,7 +59,7 @@ class DataTable extends React.Component {
             "Majors": EditMajor,
             "Rooms": EditRoom,
             "Exams": EditExam,
-            "Subexams": EditExam
+            "Subexams": DeleteSubexam
         };
         const FormToRender = nameComponentMapping[this.props.name];
 
@@ -86,6 +87,17 @@ class DataTable extends React.Component {
                 }
                 delete rowData.contactPerson1;
                 delete rowData.contactPerson2;
+            }
+
+            if (this.props.name === "Subexams") {
+                return <tr>
+                    {cellList}
+                    <Button variant={"info"} size={"sm"} onClick={() => this.handleShow(rowIndex)} block>Usuń</Button>
+                    <FormToRender handleShow={() => this.handleShow(rowIndex)}
+                                  handleHide={() => this.handleHide(rowIndex)}
+                                  show={this.state.showEdit[rowIndex]}
+                                  initialInputValues={rowData}/>
+                </tr>
             }
 
             return <tr>
