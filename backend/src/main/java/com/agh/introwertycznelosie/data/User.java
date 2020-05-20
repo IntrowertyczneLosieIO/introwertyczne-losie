@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -24,6 +25,14 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public User(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        HashSet hashSet = new HashSet();
+        hashSet.add(new Role(role));
+        this.roles = hashSet;
     }
 
     public Long getId() {
