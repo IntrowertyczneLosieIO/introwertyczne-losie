@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 import DataTable from "../dashboard/DataTable";
 import Row from "react-bootstrap/Row";
 
-class EditExam extends React.Component {
+class DeleteSubexam extends React.Component {
 
     constructor(props) {
         super(props);
@@ -172,7 +172,7 @@ class EditExam extends React.Component {
                 <Modal show={this.props.show} dialogClassName={"custom-width-modal"} onHide={this.hideAndClearState}
                        backdrop={"static"} keyboard={false}>
                     <Modal.Header closeButton className={"modal-form-bg-color"}>
-                        <Modal.Title className={"custom-margins custom-font text-light"}>Edytowanie egzaminu
+                        <Modal.Title className={"custom-margins custom-font text-light"}>Usuwanie subegzaminu
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={"custom-margins"}>
@@ -221,4 +221,4 @@ class EditExam extends React.Component {
     }
 }
 
-export default EditExam;
+export default DeleteSubexam;
