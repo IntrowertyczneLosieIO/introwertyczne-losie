@@ -66,10 +66,6 @@ class RecruitmentHelperInfo extends React.Component {
         return (
             <Row className={"mb-4"}>
                 <Col xs={12}>
-<<<<<<< .merge_file_a04468
-                    <Alert variant={"info"} className={"mt-3"}>
-                        Aktualna Rekrutacja: <strong>{this.props.currentRecruitment}</strong>
-=======
                     <Alert variant={"primary"} className={"mt-3"}>
                         <div style={{marginLeft: '17px'}}>Aktualna Rekrutacja: <strong>{this.state.recruitment}</strong></div>
                         <FormGroup as={Col} controlId={"newRecruitment"}>
@@ -78,7 +74,7 @@ class RecruitmentHelperInfo extends React.Component {
                                     key={index}>{r.acronym} </option>)}
                             </Form.Control>
                         </FormGroup>
->>>>>>> .merge_file_a08924
+
                     </Alert>
                 </Col>
                 <Col xs={2}>
