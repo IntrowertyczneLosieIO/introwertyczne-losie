@@ -197,7 +197,7 @@ class EditExam extends React.Component {
                     <Modal.Footer>
                         <Button variant={"primary"} className={"custom-margins"}
                                 onClick={this.handleSaveAndOpenSubexam}>
-                            Dodaj subegzamin
+                            Dodaj termin
                         </Button>
                         <Button variant={"secondary"} className={"custom-margins"}
                                 onClick={this.handleSave}>
