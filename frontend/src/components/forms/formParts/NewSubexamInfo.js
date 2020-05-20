@@ -15,7 +15,7 @@ class NewSubExamInfo extends React.Component {
             showConfirmationModal: false,
             subexamList: [],
             subExam: {
-                room: this.props.rooms[0].id + " " + this.props.rooms[0].number + " " + this.props.rooms[0].localization,
+                room: this.props.rooms[0].id + ". " + this.props.rooms[0].number + " " + this.props.rooms[0].localization,
                 date: "",
                 time: ""
             }
@@ -108,7 +108,7 @@ class NewSubExamInfo extends React.Component {
     render() {
         return (
             <>
-                <h5 className={"mt-4 text-secondary mb-3"}>Informacje o subegzaminie</h5>
+                <h5 className={"mt-4 text-secondary mb-3"}>Informacje o terminie egzaminu</h5>
                 <Form noValidate validated={this.state.validated} ref={this.formRef}>
                     <Form.Row>
                         <FormGroup as={Col} controlId={"date"}>
@@ -122,12 +122,6 @@ class NewSubExamInfo extends React.Component {
                                           value={this.state.subExam.time}/>
                         </FormGroup>
                     </Form.Row>
-                    {/*<Form.Row>*/}
-                    {/*    <FormGroup as={Col} controlId={"endTime"}>*/}
-                    {/*        <Form.Label>Godzina zakończenia</Form.Label>*/}
-                    {/*        <Form.Control type={"time"} onChange={this.handleControlChange} required/>*/}
-                    {/*    </FormGroup>*/}
-                    {/*</Form.Row>*/}
                     <Form.Row>
                         <FormGroup as={Col} controlId={"room"}>
                             <Form.Label>Sala</Form.Label>
@@ -141,18 +135,18 @@ class NewSubExamInfo extends React.Component {
 
                     <Form.Row className={"justify-content-center"}>
                         <Button variant={"secondary"} className={"custom-margins"} onClick={this.addSubexam}>
-                            Dodaj subegzamin
+                            Dodaj termin
                         </Button>
                         <Button variant={"success"} className={"custom-margins"}
                                 onClick={this.handleSaveAndOpenConfirm}>
-                            Wyślij wszystkie dodane subegzaminy
+                            Wyślij wszystkie dodane terminy
                         </Button>
                     </Form.Row>
                 </Form>
 
                 <Modal show={this.state.showConfirmationModal} onHide={this.handleCloseConfirmationModal}>
                     <Modal.Body>
-                        <h4 className={"text-center"}>Egzamin i subegzaminy zostały dodane pomyślnie</h4>
+                        <h4 className={"text-center"}>Egzamin i ich terminy zostały dodane pomyślnie</h4>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant={"success"} onClick={this.handleCloseConfirmationModal}>OK</Button>

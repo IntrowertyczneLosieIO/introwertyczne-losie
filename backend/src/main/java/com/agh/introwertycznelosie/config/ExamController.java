@@ -2,6 +2,7 @@ package com.agh.introwertycznelosie.config;
 
 
 import com.agh.introwertycznelosie.data.Exam;
+import com.agh.introwertycznelosie.data.Major;
 import com.agh.introwertycznelosie.mockups.ExamMockup;
 import com.agh.introwertycznelosie.services.ExamService;
 import com.agh.introwertycznelosie.services.MajorService;
@@ -44,4 +45,33 @@ public class ExamController {
         exam = examService.save(exam);
         return exam.getId();
     }
+
+    @PutMapping("edit-exam/{id}")
+    public ExamMockup updateExam(@RequestBody ExamMockup examMockup, @PathVariable Long id) {
+        Exam exam = examMockup.mockToExam(recruitmentCycleService, majorService);
+        Exam examDB = examService.get(id);
+        if (examDB != null) {
+            examDB.setName(exam.getName());
+            examDB.setRecruitmentCycle(exam.getRecruitmentCycle());
+            examDB.setStartDate(exam.getStartDate());
+            examDB.setEndDate(exam.getEndDate());
+            examDB.setMajor(exam.getMajor());
+            examDB = examService.save(examDB);
+            return new ExamMockup(examDB);
+        } else {
+            exam = examService.save(exam);
+            return new ExamMockup(exam);
+        }
+    }
+
+    @DeleteMapping("delete-exam/{id}")
+    public ResponseEntity<HttpStatus> deleteExam(@PathVariable Long id) {
+        Exam currentExam = examService.get(id);
+        if (currentExam != null) {
+            examService.delete(id);
+        }
+        return ResponseEntity.ok(HttpStatus.OK);
+
+    }
+
 }

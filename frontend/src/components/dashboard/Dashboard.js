@@ -13,7 +13,7 @@ class Dashboard extends React.Component {
                     pageTitle={"System rezerwacji sal komputerowych"}
                     subTitle={"na potrzeby przeprowadzania egzaminów na studia II stopnia"}/>
                 <hr/>
-                <RecruitmentHelperInfo currentRecruitment="LATO 2020"/>
+                <RecruitmentHelperInfo currentRecruitment="Rekrutacja ZIMA 2021/2022"/>
                 <AllObjectsDataOverview objects={this.props.objects}/>
             </Container>
         );
