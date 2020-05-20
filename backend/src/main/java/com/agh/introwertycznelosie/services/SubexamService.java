@@ -26,6 +26,8 @@ public class SubexamService {
 
     public void delete(Subexam subexam){ subexamRepository.delete(subexam); }
 
+    public List<Subexam> getByExam_Id(Long id) { return subexamRepository.getByExam_Id(id);}
+
     public void delete(Long id){ subexamRepository.deleteById(id); }
 
 }
