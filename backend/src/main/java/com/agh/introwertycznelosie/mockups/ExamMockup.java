@@ -7,6 +7,8 @@ import com.agh.introwertycznelosie.services.MajorService;
 import com.agh.introwertycznelosie.services.RecruitmentCycleService;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Service
@@ -25,11 +27,11 @@ public class ExamMockup {
         return major;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
@@ -37,8 +39,8 @@ public class ExamMockup {
         return recruitmentCycleId;
     }
 
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private Long recruitmentCycleId;
 
     public Long getId() {
@@ -52,8 +54,8 @@ public class ExamMockup {
         this.id = exam.getId();
         this.name = exam.getName();
         this.major = exam.getMajor().getFullName();
-        this.startDate = exam.getStartDate();
-        this.endDate = exam.getEndDate();
+        this.startDate = exam.getStartDate().toString().substring(0,10);
+        this.endDate = exam.getEndDate().toString().substring(0,10);
         this.recruitmentCycleId = exam.getRecruitmentCycle().getId();
     }
 
@@ -64,8 +66,14 @@ public class ExamMockup {
         Major major = majorService.findByFullName(this.major);
 
         exam.setMajor(major);
-        exam.setStartDate(startDate);
-        exam.setEndDate(endDate);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            exam.setStartDate(sdf.parse(startDate));
+            exam.setEndDate(sdf.parse(endDate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         RecruitmentCycle recruitmentCycle = null;
         //TODO set recruitmentCycle after front can handle it
         if (recruitmentCycleId!=null) {

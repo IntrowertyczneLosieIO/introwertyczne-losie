@@ -9,4 +9,5 @@ import java.util.List;
 public interface SubexamRepository extends JpaRepository<Subexam, Long> {
     List<Subexam> findTop3ByOrderByIdDesc();
 
+    List<Subexam> getByExam_Id(Long id);
 }
