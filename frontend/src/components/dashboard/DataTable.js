@@ -104,7 +104,7 @@ class DataTable extends React.Component {
             "Rooms": DeleteRoom,
             "Exams": DeleteExam,
             "Subexams": DeleteSubexam,
-            "SubexamsNonEditable":DeleteSubexam
+            "SubexamsNonEditable": DeleteSubexam
         };
 
         const nameComponentMappingShow = {
@@ -114,6 +114,15 @@ class DataTable extends React.Component {
             "Subexams": DeleteSubexam,
             "SubexamsNonEditable": DeleteSubexam
         };
+        const receivedToBeChanged = ["fullTime", "partTime", true, false];
+        const receivedDate = ["startDate", "endDate"];
+
+        const receiveDisplayedMapping = {
+            "fullTime": "stacjonarne",
+            "partTime": "niestacjonarne",
+            true: "Tak",
+            false: "Nie"
+        }
 
         const FormToRender = nameComponentMapping[this.props.name];
         const FormToRenderDelete = nameComponentMappingDelete[this.props.name];
@@ -122,8 +131,8 @@ class DataTable extends React.Component {
 
         let rowList = this.state.tableData.map((row, rowIndex) => {
             let rowData = {};
-            for (let i=0; i<this.props.tableValues.length; i++) {
-                rowData[this.props.tableValues[i]] = Object.values(row)[i] ? Object.values(row)[i] : "";
+            for (let i = 0; i < this.props.tableValues.length; i++) {
+                rowData[this.props.tableValues[i]] = Object.values(row)[i] ?? "";
             }
             if (this.props.name === "Majors") {
                 rowData.name1 = row.contactPerson1.firstName;
@@ -140,21 +149,30 @@ class DataTable extends React.Component {
                 delete rowData.contactPerson2;
             }
             let cellList = Object.values(row).map((columnValue, index) => {
-                if(typeof(columnValue) === "object" && columnValue !== null) {
+                if (typeof (columnValue) === "object" && columnValue !== null) {
                     columnValue = columnValue.firstName + " " + columnValue.lastName;
                 }
-                return <td  key={index} onDoubleClick={() => this.handleShowInfo(rowIndex)}>{columnValue}
+                let columnValueToDisplay;
+                if (receivedToBeChanged.includes(columnValue)) {
+                    columnValueToDisplay = receiveDisplayedMapping[columnValue]
+                } else if (receivedDate.includes(Object.keys(row)[index])) {
+                    columnValueToDisplay = (columnValue + "").slice(0, 10);
+                } else {
+                    columnValueToDisplay = columnValue;
+                }
+                return <td key={index} onDoubleClick={() => this.handleShowInfo(rowIndex)}>{columnValueToDisplay}
                     <FormToRenderShow handleShow={() => this.handleShowInfo(rowIndex)}
-                                  handleHide={() => this.handleHideInfo(rowIndex)}
-                                  show={this.state.showInfo[rowIndex]}
-                                  initialInputValues={rowData}/>
+                                      handleHide={() => this.handleHideInfo(rowIndex)}
+                                      show={this.state.showInfo[rowIndex]}
+                                      initialInputValues={rowData}/>
                 </td>
             })
 
             if (this.props.name === "Subexams") {
                 return <tr>
                     {cellList}
-                    <Button variant={"danger"} size={"sm"} onClick={() => this.handleShowDelete(rowIndex)} block>Usuń</Button>
+                    <Button variant={"danger"} size={"sm"} onClick={() => this.handleShowDelete(rowIndex)}
+                            block>Usuń</Button>
                     <FormToRenderDelete handleShow={() => this.handleShowDelete(rowIndex)}
                                         handleHide={() => this.handleHideDelete(rowIndex)}
                                         show={this.state.showDelete[rowIndex]}
@@ -166,24 +184,27 @@ class DataTable extends React.Component {
                 </tr>
             } else {
 
-            return <tr>
-                {cellList}
-                <th>
-                <Button variant={"info"} size={"sm"} onClick={() => this.handleShow(rowIndex)} block className={"border border-light"}>Edytuj</Button>
-                <FormToRender handleShow={() => this.handleShow(rowIndex)}
-                              handleHide={() => this.handleHide(rowIndex)}
-                              show={this.state.showEdit[rowIndex]}
-                              initialInputValues={rowData}/>
-                              </th>
-                <th>
-                <Button variant={"danger"} size={"sm"} onClick={() => this.handleShowDelete(rowIndex)} block>Usuń</Button>
-                <FormToRenderDelete handleShow={() => this.handleShowDelete(rowIndex)}
-                                handleHide={() => this.handleHideDelete(rowIndex)}
-                                show={this.state.showDelete[rowIndex]}
-                                initialInputValues={rowData}/>
-                                </th>
-            </tr>
-        }})
+                return <tr>
+                    {cellList}
+                    <th>
+                        <Button variant={"info"} size={"sm"} onClick={() => this.handleShow(rowIndex)} block
+                                className={"border border-light"}>Edytuj</Button>
+                        <FormToRender handleShow={() => this.handleShow(rowIndex)}
+                                      handleHide={() => this.handleHide(rowIndex)}
+                                      show={this.state.showEdit[rowIndex]}
+                                      initialInputValues={rowData}/>
+                    </th>
+                    <th>
+                        <Button variant={"danger"} size={"sm"} onClick={() => this.handleShowDelete(rowIndex)}
+                                block>Usuń</Button>
+                        <FormToRenderDelete handleShow={() => this.handleShowDelete(rowIndex)}
+                                            handleHide={() => this.handleHideDelete(rowIndex)}
+                                            show={this.state.showDelete[rowIndex]}
+                                            initialInputValues={rowData}/>
+                    </th>
+                </tr>
+            }
+        })
 
         let thList = this.props.tableHeader.map((value, index) => {
             return <th key={index}>{value}</th>
