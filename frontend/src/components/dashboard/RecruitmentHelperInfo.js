@@ -4,6 +4,7 @@ import Col from "react-bootstrap/Col";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import AddRecruitment from "../forms/AddRecruitment";
+import EditRecruitment from "../forms/EditRecruitment";
 
 class RecruitmentHelperInfo extends React.Component {
 
@@ -42,6 +43,11 @@ class RecruitmentHelperInfo extends React.Component {
                 <Col xs={2}>
                     <Button variant={"success"} className={"mb-3"} size={"sm"} block onClick={()=>this.handleShowAddNew()}>Dodaj nową rekrutację</Button>
                     {this.state.showAddNew && <AddRecruitment> </AddRecruitment>}
+                </Col>
+
+                <Col xs={2}>
+                    <Button variant={"info"} className={"mb-3"} size={"sm"} block onClick={()=>this.handleShowAddNew()}>Edytuj rekrutację</Button>
+                    {this.state.showAddNew && <EditRecruitment> </EditRecruitment>}
                 </Col>
             </Row>
         );

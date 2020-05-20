@@ -19,17 +19,6 @@ class NewRecruitmentInfo extends React.Component {
                         <Form.Control type={"text"} onChange={this.handleControlChange} required
                                       value={this.props.inputValuesFromState.acronym}/>
                     </FormGroup>
-                    {/*<FormGroup as={Col} controlId={"recruitmentStatus"}>*/}
-                    {/*    <Form.Label>Status rekrutacji</Form.Label>*/}
-                    {/*    <Form.Control as={"select"} onChange={this.handleControlChange} required*/}
-                    {/*                  value={this.props.inputValuesFromState.recruitmentStatus}>*/}
-                    {/*        <option value={"status"}>w przygotowaniu</option>*/}
-                    {/*        <option>trwa</option>*/}
-                    {/*        <option>zamknięta</option>*/}
-                    {/*    </Form.Control>*/}
-                    {/*</FormGroup>*/}
-                {/*</Form.Row>*/}
-                {/*<Form.Row>*/}
                     <FormGroup as={Col} controlId={"year"}>
                         <Form.Label>Rok</Form.Label>
                         <Form.Control type={"text"} pattern="[1-9][0-9][0-9][0-9]" onChange={this.handleControlChange} required
@@ -39,7 +28,7 @@ class NewRecruitmentInfo extends React.Component {
                         <Form.Label>Semestr</Form.Label>
                         <Form.Control as={"select"} onChange={this.handleControlChange} required
                                       value={this.props.inputValuesFromState.semester}>
-                            <option value={"letni"}>letni</option>
+                            <option>letni</option>
                             <option>zimowy</option>
                         </Form.Control>
                     </FormGroup>
