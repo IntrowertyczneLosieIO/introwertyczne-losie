@@ -20,6 +20,8 @@ public class RegistrationToken {
 
     private Date expiryDate;
 
+    private String role;
+
     public RegistrationToken() {
     }
 
@@ -30,10 +32,11 @@ public class RegistrationToken {
         return new Date(cal.getTime().getTime());
     }
 
-    public RegistrationToken(String email) {
+    public RegistrationToken(String email, String role) {
         this.token =  UUID.randomUUID().toString();
         this.email = email;
         this.expiryDate = calculateExpiryDate(EXPIRATION);
+        this.role = role;
     }
 
     public Long getId() {
@@ -66,5 +69,13 @@ public class RegistrationToken {
 
     public void setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

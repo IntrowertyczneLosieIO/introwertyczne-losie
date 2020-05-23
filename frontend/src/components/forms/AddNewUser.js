@@ -47,7 +47,6 @@ class AddNewUser extends React.Component {
         else {
             return {
                 username: "",
-                password: "",
                 role: ""
             }
         }
@@ -73,9 +72,8 @@ class AddNewUser extends React.Component {
             this.props.handleHide();
             let userDataToSend = {
                 username: this.state.userData.username,
-                password: this.state.userData.password,
                 role: this.state.userData.role
-            }
+            };
             console.log(userDataToSend);
             fetch("/register", {
                 method: 'PUT',

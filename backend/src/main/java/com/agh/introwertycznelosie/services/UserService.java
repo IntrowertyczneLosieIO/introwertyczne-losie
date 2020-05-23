@@ -17,18 +17,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private RoleRepository roleRepository;
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostConstruct
     private void postConstruct() {
         Role role = new Role();
         role.setName("basic");
-        User admin = new User("admin", bCryptPasswordEncoder.encode("admin"));
-        HashSet hashSet = new HashSet();
-        hashSet.add(role);
-        admin.setRoles(hashSet);
+        User admin = new User("admin", bCryptPasswordEncoder.encode("admin"), "admin");
         userRepository.save(admin);
     }
 
