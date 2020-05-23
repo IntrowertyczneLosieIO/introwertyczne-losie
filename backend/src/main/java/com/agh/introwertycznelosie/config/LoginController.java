@@ -1,6 +1,8 @@
 package com.agh.introwertycznelosie.config;
 
+import com.agh.introwertycznelosie.data.Role;
 import com.agh.introwertycznelosie.data.User;
+import com.agh.introwertycznelosie.repositories.UserRepository;
 import com.agh.introwertycznelosie.services.SecurityService;
 import com.agh.introwertycznelosie.services.UserDetailsServiceImpl;
 import com.agh.introwertycznelosie.services.UserService;
@@ -13,12 +15,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashSet;
 
 @Controller
 public class LoginController {
@@ -30,6 +31,8 @@ public class LoginController {
     BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     UserService userService;
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping("/home")
     public String home() {
@@ -37,7 +40,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/getCurrentUserRole", method = RequestMethod.GET)
-    public String getRole(){
+    public String getRole() {
         UserDetails userDetails = securityService.findLoggedInUser();
         User user = userService.findByUsername(userDetails.getUsername());
         return user.getRoles().iterator().next().getName();
@@ -53,6 +56,15 @@ public class LoginController {
         }
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/register", method = RequestMethod.PUT)
+    public ResponseEntity<HttpStatus> register(@RequestBody User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return ResponseEntity.ok(HttpStatus.OK);
+
+    }
+
 
     @RequestMapping(value = {"/*"}, method = RequestMethod.GET)
     public ModelAndView index() {

@@ -1,4 +1,3 @@
-
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -109,7 +108,7 @@ class EditMajor extends React.Component {
                 faculty: this.state.userData.faculty,
                 fullName: this.state.userData.fullName,
                 shortName: this.state.userData.shortName,
-                mode: this.state.modesMapping[this.state.userData.mode],
+                mode: this.state.userData.mode,
                 numberOfPlaces: this.state.userData.numberOfPlaces,
                 contactPerson1: {
                     firstName: this.state.userData.name1,
@@ -118,15 +117,14 @@ class EditMajor extends React.Component {
                     mail: this.state.userData.email1
                 },
                 contactPerson2: {
-                    firstName: this.state.userData.name2,
-                    lastName: this.state.userData.surname2,
-                    phoneNo: this.state.userData.phone2,
-                    mail: this.state.userData.email2
-                },
-                mixedField: this.state.mixedMapping[this.state.userData.mixedField],
+                    firstName: this.state.userData.name2 ?? "",
+                    lastName: this.state.userData.surname2 ?? "",
+                    phoneNo: this.state.userData.phone2 ?? "",
+                    mail: this.state.userData.email2 ?? ""
+                } ?? "",
+                mixedField: this.state.userData.mixedField,
                 annotations: this.state.userData.annotations
             }
-            console.log(userDataToSend);
             fetch(`/edit-major/${this.props.initialInputValues.id}`, {
                 method: 'PUT',
                 headers: {

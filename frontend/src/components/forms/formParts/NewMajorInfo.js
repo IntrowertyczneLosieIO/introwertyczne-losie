@@ -44,8 +44,8 @@ class NewMajorInfo extends React.Component {
                         <Form.Control as={"select"} onChange={this.handleControlChange} required
                                       value={this.props.inputValuesFromState.mode}>
                             {/*<option hidden disabled value={"default"} />*/}
-                            <option>stacjonarne</option>
-                            <option>niestacjonarne</option>
+                            <option value={"fullTime"}>stacjonarne</option>
+                            <option value={"partTime"}>niestacjonarne</option>
                         </Form.Control>
                     </FormGroup>
                     <FormGroup as={Col} controlId={"numberOfPlaces"}>
@@ -57,8 +57,8 @@ class NewMajorInfo extends React.Component {
                         <Form.Control as={"select"} onChange={this.handleControlChange} required
                                       value={this.props.inputValuesFromState.mixedField}>
                             {/*<option hidden disabled value={"default"}/>*/}
-                            <option value={"Tak"}>Tak</option>
-                            <option>Nie</option>
+                            <option value={true}>Tak</option>
+                            <option value={false}>Nie</option>
                         </Form.Control>
                     </FormGroup>
                 </Form.Row>

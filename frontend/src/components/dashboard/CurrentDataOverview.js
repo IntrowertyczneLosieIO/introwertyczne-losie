@@ -15,7 +15,7 @@ class CurrentDataOverview extends React.Component {
 
             Majors: {
                 displayName: "Kierunki",
-                headers: ["Id", "Pełna Nazwa", "Krótka Nazwa", "Tryb studiow", "Kierunek łączony", "Liczba miejsc", "Wydział", "Osoba kontaktowa nr 1", "Osoba kontaktowa nr 2", "Uwagi"],
+                headers: ["Id", "Pełna nazwa", "Krótka nazwa", "Tryb studiów", "Kierunek łączony", "Liczba miejsc", "Wydział", "Osoba kontaktowa nr 1", "Osoba kontaktowa nr 2", "Uwagi"],
                 values: ["id", "fullName", "shortName", "mode", "mixedField", "numberOfPlaces", "faculty", "contactPerson1", "contactPerson2", "annotations"]
             },
             Rooms: {
@@ -25,8 +25,8 @@ class CurrentDataOverview extends React.Component {
             },
             Exams: {
                 displayName: "Egzaminy",
-                headers: ["Nazwa", "Kierunek", "Forma studiów", "Data rozpoczęcia", "Data zakończenia"],
-                values: ["name", "major", "modeOfStudy", "startDate", "endDate"]
+                headers: ["Id", "Nazwa", "Kierunek", "Data rozpoczęcia", "Data zakończenia", "Cykl"],
+                values: ["id", "name", "major", "startDate", "endDate", "recruitmentCycleId"]
             }
         }
     }

@@ -5,6 +5,8 @@ import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import AddRecruitment from "../forms/AddRecruitment";
 import EditRecruitment from "../forms/EditRecruitment";
+import Form from "react-bootstrap/Form";
+import FormGroup from "react-bootstrap/FormGroup";
 
 class RecruitmentHelperInfo extends React.Component {
 
@@ -12,7 +14,9 @@ class RecruitmentHelperInfo extends React.Component {
         super(props);
         this.state = {
             showAddNew: false,
-            showEdit: false
+            showEdit: false,
+            recruitments: [],
+            recruitment: this.props.currentRecruitment
         }
     }
 
@@ -30,16 +34,45 @@ class RecruitmentHelperInfo extends React.Component {
     }
 
     handleShowEdit = () => {
-        if(this.state.showEdit){
+        if (this.state.showEdit) {
             this.setState({
                 showEdit: false
             });
-        }
-        else{
+        } else {
             this.setState({
                 showEdit: true
             });
         }
+    }
+
+    hideAndClearState = () => {
+        this.setState({
+            userData: this.getInitialState()
+        });
+        this.setValidated(false);
+        this.handleHide();
+    }
+
+    handleControlChange = (event) => {
+        this.props.getFormData(event.target.id, event.target.value);
+    }
+
+
+    componentDidMount() {
+        this.getRecruitments()
+    }
+
+    getRecruitments = () => {
+        fetch("/newest-recruitments")
+            .then((response) => {
+                return response.json();
+            })
+            .then((response) => {
+                this.setState({
+                    recruitments: response
+                });
+                console.log(response)
+            });
     }
 
     render() {
@@ -47,8 +80,15 @@ class RecruitmentHelperInfo extends React.Component {
         return (
             <Row className={"mb-4"}>
                 <Col xs={12}>
-                    <Alert variant={"info"} className={"mt-3"}>
-                        Aktualna Rekrutacja: <strong>{this.props.currentRecruitment}</strong>
+                    <Alert variant={"primary"} className={"mt-3"}>
+                        <div style={{marginLeft: '17px'}}>Aktualna Rekrutacja: <strong>{this.state.recruitment}</strong></div>
+                        <FormGroup as={Col} controlId={"newRecruitment"}>
+                            <Form.Control as={"select"} style={{width: 600, marginTop: '10px'}} onChange={(e) => this.setState({recruitment: e.target.value})} required>
+                                {this.state.recruitments.map((r, index) => <option
+                                    key={index}>{r.acronym} </option>)}
+                            </Form.Control>
+                        </FormGroup>
+
                     </Alert>
                 </Col>
                 <Col xs={2}>
