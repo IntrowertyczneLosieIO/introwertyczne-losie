@@ -87,7 +87,7 @@ const SignIn = (props) => (
                                     <Col className={"pb-4 pt-4"}>
                                         <Button type={"submit"} onClick={handleSubmit} className={"mt-4 mb-4"}
                                                 disabled={isSubmitting}
-                                                variant={"outline-light"} block>Zaloguj się</Button>
+                                                variant={"outline-light"} block>Zarejestruj się</Button>
                                     </Col>
                                 </Form>
                             </Row>
