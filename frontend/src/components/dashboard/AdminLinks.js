@@ -31,7 +31,11 @@ class AdminLinks extends React.Component {
                     <Button variant="outline-light">Pomoc</Button>
                 </div>
                 <div className={"ml-5"}>
-                    <Link to={"/logout"}><Button variant="outline-light" onClick={() => window.location.reload()}> Wyloguj się</Button></Link>
+                    <Link to={"/logout"}><Button variant="outline-light" onClick={() => {
+                        fetch("/logout")
+                            .error((error) => console.log(error));
+                    }
+                    }> Wyloguj się</Button></Link>
                 </div>
             </Nav>
         );
