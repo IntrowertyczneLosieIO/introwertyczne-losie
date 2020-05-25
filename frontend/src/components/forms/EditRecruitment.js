@@ -73,6 +73,16 @@ class EditRecruitment extends React.Component {
         })
     }
 
+    handleInputChange = (event) => {
+        let currentUserData = this.state.userData;
+        this.setState({
+            userData: {
+                ...currentUserData,
+                [event.target.id]: event.target.value
+            }
+        });
+    }
+
     handleSave = (resolve, reject) => {
         let form = this.formRef.current;
         if (!form.checkValidity()) {
@@ -86,7 +96,7 @@ class EditRecruitment extends React.Component {
                 year: this.state.userData.year,
                 semester: this.state.semesterMapping[this.state.userData.semester]
             }
-            console.log(userDataToSend);
+            // console.log(userDataToSend);
             fetch("/new-recruitment", {
                 method: 'POST',
                 headers: {
