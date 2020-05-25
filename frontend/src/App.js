@@ -42,6 +42,7 @@ class App extends React.Component {
                     <Container fluid className={"main-container"}>
                         <CentralNavbar/>
                         <Route exact path={"/login"} component={SignIn}/>
+                        <Route exact path={"/logout"} component={SignIn}/>
                         <Route exact path={"/"} component={
                             (props) => <LoggedInView objects={this.state.objects} {...props} />}/>
 
