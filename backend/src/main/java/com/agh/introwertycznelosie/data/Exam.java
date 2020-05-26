@@ -74,4 +74,16 @@ public class Exam {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+    @Override
+    public String toString() {
+        return "Exam{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", major=" + major +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", recruitmentCycle=" + recruitmentCycle +
+                '}';
+    }
 }

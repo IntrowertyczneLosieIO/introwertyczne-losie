@@ -1,25 +1,24 @@
 package com.agh.introwertycznelosie.config;
 
-import com.agh.introwertycznelosie.data.Role;
 import com.agh.introwertycznelosie.data.User;
 import com.agh.introwertycznelosie.repositories.UserRepository;
 import com.agh.introwertycznelosie.services.SecurityService;
 import com.agh.introwertycznelosie.services.UserDetailsServiceImpl;
 import com.agh.introwertycznelosie.services.UserService;
-import org.hibernate.type.MetaType;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.HashSet;
 
 @Controller
 public class LoginController {
@@ -33,6 +32,9 @@ public class LoginController {
     UserService userService;
     @Autowired
     UserRepository userRepository;
+
+    Logger logger = LogManager.getLogger(LoginController.class);
+
 
     @GetMapping("/home")
     public String home() {
@@ -51,6 +53,7 @@ public class LoginController {
         try {
             UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
             securityService.autoLogin(userDetails.getUsername(), user.getPassword());
+            logger.info("Logged in user " + user);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found", e);
         }
@@ -61,6 +64,7 @@ public class LoginController {
     public ResponseEntity<HttpStatus> register(@RequestBody User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+        logger.info("Added user " + user);
         return ResponseEntity.ok(HttpStatus.OK);
 
     }

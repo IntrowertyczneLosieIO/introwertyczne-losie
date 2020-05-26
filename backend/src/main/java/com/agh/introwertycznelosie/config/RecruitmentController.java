@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/")
 public class RecruitmentController {
+
+    Logger logger = LogManager.getLogger(RecruitmentController.class);
+
 
     @Autowired
     RecruitmentService recruitmentService;
@@ -33,6 +38,7 @@ public class RecruitmentController {
     public Long postNewRecruitment(@RequestBody RecruitmentMockup recruitmentMockup) {
         Recruitment recruitment = recruitmentMockup.mockupToRecruitment();
         recruitment = recruitmentService.save(recruitment);
+        logger.info("New recruitment added " + recruitment);
         return recruitment.getId();
     }
 }

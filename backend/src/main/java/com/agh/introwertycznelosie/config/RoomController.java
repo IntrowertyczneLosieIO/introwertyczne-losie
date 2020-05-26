@@ -3,6 +3,8 @@ package com.agh.introwertycznelosie.config;
 import com.agh.introwertycznelosie.data.Room;
 import com.agh.introwertycznelosie.mockups.RoomMockup;
 import com.agh.introwertycznelosie.services.RoomService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,8 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 @RestController
 @RequestMapping("/")
@@ -43,15 +43,18 @@ public class RoomController {
     RoomMockup updateRoom(@RequestBody RoomMockup roomMockup, @PathVariable Long id) {
         Room room = roomMockup.mockToRoom();
         Room currentRoom = roomService.get(id);
+        Room oldRoom = currentRoom;
         if (currentRoom != null) {
             currentRoom.setLocalization(room.getLocalization());
             currentRoom.setMaximalCapacity(room.getMaximalCapacity());
             currentRoom.setNumber(room.getNumber());
             currentRoom.setRecommendedCapacity(room.getRecommendedCapacity());
             currentRoom = roomService.save(currentRoom);
+            logger.info("Updated room " + oldRoom + " to " + currentRoom);
             return new RoomMockup(currentRoom);
         } else {
             room = roomService.save(room);
+            logger.info("New room created " + room);
             return new RoomMockup(room);
         }
     }
@@ -61,6 +64,7 @@ public class RoomController {
         Room currentRoom = roomService.get(id);
         if (currentRoom != null) {
              roomService.delete(id);
+             logger.info("Deleted room " + currentRoom);
         }
         return ResponseEntity.ok(HttpStatus.OK);
 
