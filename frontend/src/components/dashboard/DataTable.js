@@ -8,6 +8,7 @@ import DeleteMajor from "../forms/DeleteMajor";
 import DeleteExam from "../forms/DeleteExam";
 import ShowMajor from "../forms/ShowMajor";
 import ShowRoom from "../forms/ShowRoom";
+import ShowFaculty from "../forms/ShowFaculty"
 
 import EditExam from "../forms/EditExam";
 import DeleteSubexam from "../forms/DeleteSubexam";
@@ -112,7 +113,8 @@ class DataTable extends React.Component {
             "Rooms": ShowRoom,
             "Exams": ShowExam,
             "Subexams": DeleteSubexam,
-            "SubexamsNonEditable": DeleteSubexam
+            "SubexamsNonEditable": DeleteSubexam,
+            "Facultied": ShowFaculty
         };
         const receivedToBeChanged = ["fullTime", "partTime", true, false];
         const receivedDate = ["startDate", "endDate"];

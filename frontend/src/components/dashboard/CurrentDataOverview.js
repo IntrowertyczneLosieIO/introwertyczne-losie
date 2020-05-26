@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import AddExam from "../forms/AddExam";
 import AddMajor from "../forms/AddMajor";
 import AddRoom from "../forms/AddRoom";
+import AddFaculty from "../forms/AddFaculty";
 
 class CurrentDataOverview extends React.Component {
     constructor(props) {
@@ -27,6 +28,11 @@ class CurrentDataOverview extends React.Component {
                 displayName: "Egzaminy",
                 headers: ["Id", "Nazwa", "Kierunek", "Data rozpoczęcia", "Data zakończenia", "Cykl"],
                 values: ["id", "name", "major", "startDate", "endDate", "recruitmentCycleId"]
+            },
+            Faculties: {
+                displayName: "Wydziały",
+                headers: ["Id", "Nazwa", "Skrót"],
+                values: ["id", "name", "acronym"]
             }
         }
     }
@@ -44,13 +50,15 @@ class CurrentDataOverview extends React.Component {
         const nameComponentMapping = {
             "Majors": AddMajor,
             "Rooms": AddRoom,
-            "Exams": AddExam
+            "Exams": AddExam,
+            "Faculties": AddFaculty
         };
 
         const nameRequestMapping = {
             "Majors": "/newest-majors",
             "Rooms": "/newest-rooms",
-            "Exams": "/newest-exams"
+            "Exams": "/newest-exams",
+            "Faculties": "/newest-faculties"
         }
         const FormToRender = nameComponentMapping[this.props.name];
         return (

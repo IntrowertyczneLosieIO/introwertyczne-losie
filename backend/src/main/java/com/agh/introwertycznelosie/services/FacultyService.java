@@ -5,6 +5,8 @@ import com.agh.introwertycznelosie.repositories.FacultyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FacultyService {
 
@@ -16,6 +18,8 @@ public class FacultyService {
     }
 
     public Faculty findByAcronym(String acronym) { return facultyRepository.findByAcronym(acronym); }
+
+    public List<Faculty> get() { return facultyRepository.findTop3ByOrderByIdDesc(); }
 
     public Faculty get(Long id){
         return facultyRepository.getOne(id);
