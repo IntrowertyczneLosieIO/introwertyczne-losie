@@ -22,17 +22,18 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
 
     public User(String username, String password, String role) {
         this.username = username;
         this.password = password;
-        HashSet hashSet = new HashSet();
+        HashSet<Role> hashSet = new HashSet<>();
         hashSet.add(new Role(role));
+
         this.roles = hashSet;
+    }
+
+    public Role getRole(){
+        return roles.iterator().next();
     }
 
     public Long getId() {
