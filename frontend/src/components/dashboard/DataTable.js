@@ -97,7 +97,8 @@ class DataTable extends React.Component {
             "Rooms": EditRoom,
             "Exams": EditExam,
             "Subexams": DeleteSubexam,
-            "SubexamsNonEditable": DeleteSubexam
+            "SubexamsNonEditable": DeleteSubexam,
+            "Faculties": ShowFaculty
         };
 
         const nameComponentMappingDelete = {
@@ -105,7 +106,8 @@ class DataTable extends React.Component {
             "Rooms": DeleteRoom,
             "Exams": DeleteExam,
             "Subexams": DeleteSubexam,
-            "SubexamsNonEditable": DeleteSubexam
+            "SubexamsNonEditable": DeleteSubexam,
+            "Faculties": ShowFaculty
         };
 
         const nameComponentMappingShow = {

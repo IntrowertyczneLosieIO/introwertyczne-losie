@@ -113,7 +113,7 @@ class AddFaculty extends React.Component {
                     <Modal.Body className={"custom-margins"}>
                         <Form noValidate validated={this.state.validated} ref={this.formRef}>
                             <NewFacultyInfo getFormData={this.getFormData} inputValuesFromState={this.state.userData}/>
-                        </Form>l
+                        </Form>
                     </Modal.Body>
                     <Modal.Footer className={"modal-form-bg-color"}>
                         <Button variant={"danger"} onClick={this.hideAndClearState}>Anuluj
