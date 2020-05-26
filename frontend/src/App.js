@@ -44,6 +44,7 @@ class App extends React.Component {
                         <CentralNavbar/>
                         <Route exact path={"/registration"} component={Registration}/>
                         <Route exact path={"/login"} component={SignIn}/>
+                        <Route exact path={"/logout"} component={SignIn}/>
                         <Route exact path={"/"} component={
                             (props) => <LoggedInView objects={this.state.objects} {...props} />}/>
 

@@ -87,7 +87,6 @@ public class LoginController {
         user.setPassword(bCryptPasswordEncoder.encode(userMockup.getPassword()));
         userRepository.save(user);
         return ResponseEntity.ok(HttpStatus.OK);
-
     }
 
     @RequestMapping(value = {"/*"}, method = RequestMethod.GET)
