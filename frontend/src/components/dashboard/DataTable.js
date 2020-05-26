@@ -114,7 +114,7 @@ class DataTable extends React.Component {
             "Exams": ShowExam,
             "Subexams": DeleteSubexam,
             "SubexamsNonEditable": DeleteSubexam,
-            "Facultied": ShowFaculty
+            "Faculties": ShowFaculty
         };
         const receivedToBeChanged = ["fullTime", "partTime", true, false];
         const receivedDate = ["startDate", "endDate"];
