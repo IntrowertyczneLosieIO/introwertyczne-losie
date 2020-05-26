@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
+import {Link} from "react-router-dom";
 
 class AdminLinks extends React.Component {
     render() {
@@ -24,7 +25,7 @@ class AdminLinks extends React.Component {
             // </ul>
             <Nav>
                 <div className={"mr-5"}>
-                    <Button variant="outline-light">Ustawienia konta</Button>
+                    <Link to={"/changePassword"}> <Button variant="outline-light">Zmiana hasła</Button></Link>
                 </div>
                 <div className={"mr-5"}>
                     <Button variant="outline-light">Pomoc</Button>
