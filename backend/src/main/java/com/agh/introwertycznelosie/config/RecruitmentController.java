@@ -35,4 +35,9 @@ public class RecruitmentController {
         recruitment = recruitmentService.save(recruitment);
         return recruitment.getId();
     }
+
+    @GetMapping(value = "/recruitment/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public RecruitmentMockup getRecruitment(@PathVariable Long id) {
+        return new RecruitmentMockup(recruitmentService.get(id));
+    }
 }
