@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
+import {Link} from "react-router-dom";
 
 class AdminLinks extends React.Component {
     render() {
@@ -18,7 +19,7 @@ class AdminLinks extends React.Component {
             //     </li>
             //     <li className={"list-inline-item"}>
             //         <div className={"ml-5"}>
-            //             <Link to={"/"}><Button variant="outline-light">Wyloguj się</Button></Link>
+            //<Link to={"/"}><Button variant="outline-light">Wyloguj się</Button></Link>
             //         </div>
             //     </li>
             // </ul>
@@ -30,7 +31,11 @@ class AdminLinks extends React.Component {
                     <Button variant="outline-light">Pomoc</Button>
                 </div>
                 <div className={"ml-5"}>
-                    <Button variant="outline-light">Wyloguj się</Button>
+                    <Link to={"/logout"}><Button variant="outline-light" onClick={() => {
+                        fetch("/logout")
+                            .error((error) => console.log(error));
+                    }
+                    }> Wyloguj się</Button></Link>
                 </div>
             </Nav>
         );
