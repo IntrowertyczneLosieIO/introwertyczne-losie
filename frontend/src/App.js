@@ -31,7 +31,8 @@ class App extends React.Component {
             objects: [...currentObjects,
                 this.addNewObject("Majors", "Kierunki", "Więcej kierunków...", "Dodaj kierunek", 1),
                 this.addNewObject("Rooms", "Sale", "Więcej sal...", "Dodaj salę", 2),
-                this.addNewObject("Exams", "Egzaminy", "Więcej egzaminów...", "Dodaj egzamin", 3)
+                this.addNewObject("Exams", "Egzaminy", "Więcej egzaminów...", "Dodaj egzamin", 3),
+                this.addNewObject("Faculties", "Wydziały", "Więcej wydziałów...", "Dodaj wydział", 4)
             ]
         })
     }
