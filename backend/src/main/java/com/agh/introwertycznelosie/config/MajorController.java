@@ -22,8 +22,7 @@ import java.util.List;
 public class MajorController {
 
     Logger logger = LogManager.getLogger(MajorController.class);
-    // TODO: change after adding faculties done
-//    Logger facultyLogger = LogManager.getLogger(FacultyController.class);
+    Logger facultyLogger = LogManager.getLogger(FacultyController.class);
 
 
     @Autowired
@@ -50,8 +49,7 @@ public class MajorController {
         Faculty faculty = facultyService.findByAcronym(major.getFaculty().getAcronym());
         if (faculty == null) {
             faculty = facultyService.save(major.getFaculty());
-// TODO: change after adding faculties done
-//            facultyLogger.info("New faculty created: " + faculty);
+            facultyLogger.info("New faculty created: " + faculty);
         }
         major.setFaculty(faculty);
         majorService.save(major);
@@ -70,8 +68,7 @@ public class MajorController {
             Faculty faculty = facultyService.findByAcronym(major.getFaculty().getAcronym());
             if (faculty == null) {
                 faculty = facultyService.save(major.getFaculty());
-                // TODO: change after adding faculties done
-//                facultyLogger.info("New faculty created " + faculty);
+                facultyLogger.info("New faculty created " + faculty);
             }
             majorDB.setFaculty(faculty);
             majorDB.setContactPerson1(major.getContactPerson1());
