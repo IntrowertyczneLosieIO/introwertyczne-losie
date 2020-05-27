@@ -6,6 +6,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import SignIn from "./components/auth/SignIn";
 import Registration from "./components/auth/Registration"
 import LoggedInView from "./components/LoggedInView";
+import Majors from "./components/Majors";
 
 class App extends React.Component {
     constructor(props) {
@@ -48,7 +49,7 @@ class App extends React.Component {
                         <Route exact path={"/logout"} component={SignIn}/>
                         <Route exact path={"/"} component={
                             (props) => <LoggedInView objects={this.state.objects} {...props} />}/>
-
+                        <Route exact path={"/majors"} component={(props) => <Majors objects={this.state.objects} {...props} />}/>
                     </Container>
                 </div>
             </BrowserRouter>

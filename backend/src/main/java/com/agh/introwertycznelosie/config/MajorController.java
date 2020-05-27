@@ -39,6 +39,16 @@ public class MajorController {
         return list;
     }
 
+    @GetMapping(value = "/all-majors", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<MajorMockup> getThatMajors() {
+        List<MajorMockup> list = new ArrayList<>();
+        for (
+                Major major : majorService.getAll()) {
+            list.add(new MajorMockup(major));
+        }
+        return list;
+    }
+
     @PostMapping("/new-major")
     public ResponseEntity<HttpStatus> postNewMajor(@RequestBody MajorMockup majorMockup) {
         Major major = majorMockup.mockToMajor(personService, facultyService);

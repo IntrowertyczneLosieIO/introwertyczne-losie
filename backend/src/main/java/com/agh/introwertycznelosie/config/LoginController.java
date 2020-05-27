@@ -89,7 +89,7 @@ public class LoginController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @RequestMapping(value = {"/*"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/login", "/majors", "/registration", "/logout"}, method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("../static/index");
