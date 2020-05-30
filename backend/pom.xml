@@ -6,7 +6,8 @@
         <groupId>com.AGH</groupId>
         <artifactId>introwertyczne-losie</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../</relativePath>
+        <!-- lookup parent from repository -->
     </parent>
     <artifactId>introwertyczne-losie-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
