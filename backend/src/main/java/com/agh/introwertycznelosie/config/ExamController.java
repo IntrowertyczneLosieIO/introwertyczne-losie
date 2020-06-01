@@ -43,7 +43,7 @@ public class ExamController {
     }
 
     @PostMapping("/new-exam")
-    public Long postNewMajor(@RequestBody ExamMockup examMockup) {
+    public Long postNewExam(@RequestBody ExamMockup examMockup) {
         Exam exam = examMockup.mockToExam(recruitmentCycleService, majorService);
         exam = examService.save(exam);
         logger.info("New exam created: " + exam);
