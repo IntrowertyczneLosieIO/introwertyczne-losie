@@ -122,4 +122,13 @@ public class Faculty {
     public void setAcronym(String acronym) {
         this.acronym = acronym;
     }
+
+    @Override
+    public String toString() {
+        return "Faculty{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", acronym='" + acronym + '\'' +
+                '}';
+    }
 }

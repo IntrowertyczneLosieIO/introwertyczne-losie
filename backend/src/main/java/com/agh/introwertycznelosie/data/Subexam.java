@@ -49,4 +49,15 @@ public class Subexam {
     public void setTime(LocalTime time) { this.time = time; }
 
     public LocalTime getTime() { return time; }
+
+    @Override
+    public String toString() {
+        return "Subexam{" +
+                "id=" + id +
+                ", exam=" + exam +
+                ", room=" + room +
+                ", date=" + date +
+                ", time=" + time +
+                '}';
+    }
 }
