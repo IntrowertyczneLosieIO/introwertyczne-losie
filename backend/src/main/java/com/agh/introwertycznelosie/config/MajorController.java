@@ -2,11 +2,16 @@ package com.agh.introwertycznelosie.config;
 
 import com.agh.introwertycznelosie.data.Faculty;
 import com.agh.introwertycznelosie.data.Major;
+import com.agh.introwertycznelosie.data.Recruitment;
 import com.agh.introwertycznelosie.data.Room;
 import com.agh.introwertycznelosie.mockups.MajorMockup;
 import com.agh.introwertycznelosie.services.FacultyService;
 import com.agh.introwertycznelosie.services.MajorService;
 import com.agh.introwertycznelosie.services.PersonService;
+import com.agh.introwertycznelosie.services.RecruitmentService;
+import net.bytebuddy.implementation.auxiliary.AuxiliaryType;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,6 +25,10 @@ import java.util.List;
 @RequestMapping("/")
 public class MajorController {
 
+    Logger logger = LogManager.getLogger(MajorController.class);
+    Logger facultyLogger = LogManager.getLogger(FacultyController.class);
+
+
     @Autowired
     MajorService majorService;
 
@@ -29,11 +38,13 @@ public class MajorController {
     @Autowired
     PersonService personService;
 
+    @Autowired
+    RecruitmentService recruitmentService;
+
     @GetMapping(value = "/newest-majors", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MajorMockup> getMajors() {
         List<MajorMockup> list = new ArrayList<>();
-        for (
-                Major major : majorService.get()) {
+        for (Major major : majorService.get()) {
             list.add(new MajorMockup(major));
         }
         return list;
@@ -55,9 +66,11 @@ public class MajorController {
         Faculty faculty = facultyService.findByAcronym(major.getFaculty().getAcronym());
         if (faculty == null) {
             faculty = facultyService.save(major.getFaculty());
+            facultyLogger.info("New faculty created: " + faculty);
         }
         major.setFaculty(faculty);
         majorService.save(major);
+        logger.info("New major created" + major);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
@@ -65,12 +78,14 @@ public class MajorController {
     public MajorMockup updateMajor(@RequestBody MajorMockup majorMockup, @PathVariable Long id) {
         Major major = majorMockup.mockToMajor(personService, facultyService);
         Major majorDB = majorService.get(id);
+        Major oldMajor = majorDB;
         if (majorDB != null) {
             majorDB.setFullName(major.getFullName());
             majorDB.setShortName(major.getShortName());
             Faculty faculty = facultyService.findByAcronym(major.getFaculty().getAcronym());
             if (faculty == null) {
                 faculty = facultyService.save(major.getFaculty());
+                facultyLogger.info("New faculty created " + faculty);
             }
             majorDB.setFaculty(faculty);
             majorDB.setContactPerson1(major.getContactPerson1());
@@ -82,9 +97,11 @@ public class MajorController {
             majorDB.setAnnotations(major.getAnnotations());
             majorDB.setMixedField(major.isMixedField());
             majorDB = majorService.save(majorDB);
+            logger.info("Updated major " + oldMajor + " to " + majorDB);
             return new MajorMockup(majorDB);
         } else {
             major = majorService.save(major);
+            logger.info("New major created " + major);
             return new MajorMockup(major);
         }
     }
@@ -94,6 +111,7 @@ public class MajorController {
         Major currentMajor = majorService.get(id);
         if (currentMajor != null) {
             majorService.delete(id);
+            logger.info("Deleted major " + currentMajor);
         }
         return ResponseEntity.ok(HttpStatus.OK);
 
@@ -103,4 +121,16 @@ public class MajorController {
     public MajorMockup getMajor(@PathVariable(name = "id") Long id) {
         return new MajorMockup(majorService.get(id));
     }
+
+    @GetMapping(value = "/majors-from-recruitation/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<MajorMockup> majorsByRecruitation(@PathVariable Long id) {
+        Recruitment recruitment = recruitmentService.get(id);
+        List<MajorMockup> majors = new ArrayList<>();
+        for (Major major : recruitment.getMajors())
+        {
+            majors.add(new MajorMockup(major));
+        }
+        return majors;
+     }
+
 }

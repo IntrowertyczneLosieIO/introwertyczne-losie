@@ -7,11 +7,15 @@ import com.agh.introwertycznelosie.mockups.SubexamMockup;
 import com.agh.introwertycznelosie.services.ExamService;
 import com.agh.introwertycznelosie.services.RoomService;
 import com.agh.introwertycznelosie.services.SubexamService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.agh.introwertycznelosie.services.ExamService;
+import com.agh.introwertycznelosie.services.MajorService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +23,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/")
 public class SubexamController {
+
+    Logger logger = LogManager.getLogger(ExamController.class);
 
     @Autowired
     SubexamService subexamService;
@@ -33,6 +39,7 @@ public class SubexamController {
     public Long postNewSubexam(@RequestBody SubexamMockup subexamMockup) {
         Subexam subexam = subexamMockup.mockToSubexam(examService, roomService);
         subexam = subexamService.save(subexam);
+        logger.info("New subexam created " + subexam);
         return subexam.getId();
     }
 
@@ -51,6 +58,7 @@ public class SubexamController {
         Subexam currentSubexam = subexamService.get(id);
         if (currentSubexam != null) {
             subexamService.delete(id);
+            logger.info("Deleted subexam " + currentSubexam);
         }
         return ResponseEntity.ok(HttpStatus.OK);
 

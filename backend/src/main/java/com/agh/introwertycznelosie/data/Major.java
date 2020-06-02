@@ -14,6 +14,10 @@ public class Major {
 
     }
 
+
+    @ManyToOne
+    private Recruitment recruitment;
+
     @Id
     @GeneratedValue
     private Long id;
@@ -39,7 +43,7 @@ public class Major {
 
     public Major(Faculty faculty, String fullName, String shortName, ModeOfStudy mode,
                  int numberOfPlaces, Person contactPerson1, Person contactPerson2,
-                 boolean mixedField, String annotations) {
+                 boolean mixedField, String annotations, Recruitment recruitment) {
         this.faculty = faculty;
         this.fullName = fullName;
         this.shortName = shortName;
@@ -49,6 +53,15 @@ public class Major {
         this.contactPerson2 = contactPerson2;
         this.mixedField = mixedField;
         this.annotations = annotations;
+        this.recruitment = recruitment;
+    }
+
+    public Recruitment getRecruitment() {
+        return recruitment;
+    }
+
+    public void setRecruitment(Recruitment recruitment) {
+        this.recruitment = recruitment;
     }
 
     public Long getId() {
@@ -137,5 +150,21 @@ public class Major {
 
     public void setExams(List<Exam> exams) {
         this.exams = exams;
+    }
+
+    @Override
+    public String toString() {
+        return "Major{" +
+                "id=" + id +
+                ", faculty=" + faculty +
+                ", fullName='" + fullName + '\'' +
+                ", shortName='" + shortName + '\'' +
+                ", mode=" + mode +
+                ", numberOfPlaces=" + numberOfPlaces +
+                ", contactPerson1=" + contactPerson1 +
+                ", contactPerson2=" + contactPerson2 +
+                ", mixedField=" + mixedField +
+                ", annotations='" + annotations + '\'' +
+                '}';
     }
 }

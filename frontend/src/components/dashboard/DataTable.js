@@ -14,6 +14,7 @@ import DeleteFaculty from "../forms/DeleteFaculty";
 import EditExam from "../forms/EditExam";
 import DeleteSubexam from "../forms/DeleteSubexam";
 import ShowExam from "../forms/ShowExam";
+import EditFaculty from "../forms/EditFaculty";
 
 class DataTable extends React.Component {
     constructor(props) {
@@ -99,7 +100,7 @@ class DataTable extends React.Component {
             "Exams": EditExam,
             "Subexams": DeleteSubexam,
             "SubexamsNonEditable": DeleteSubexam,
-            "Faculties": ShowFaculty
+            "Faculties": EditFaculty
         };
 
         const nameComponentMappingDelete = {
