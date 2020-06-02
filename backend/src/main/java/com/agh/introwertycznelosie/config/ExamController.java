@@ -10,6 +10,8 @@ import com.agh.introwertycznelosie.services.ExamService;
 import com.agh.introwertycznelosie.services.MajorService;
 import com.agh.introwertycznelosie.services.RecruitmentCycleService;
 import com.agh.introwertycznelosie.services.RecruitmentService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,6 +24,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/")
 public class ExamController {
+
+    Logger logger = LogManager.getLogger(ExamController.class);
 
     @Autowired
     ExamService examService;
@@ -46,9 +50,10 @@ public class ExamController {
     }
 
     @PostMapping("/new-exam")
-    public Long postNewMajor(@RequestBody ExamMockup examMockup) {
+    public Long postNewExam(@RequestBody ExamMockup examMockup) {
         Exam exam = examMockup.mockToExam(recruitmentCycleService, majorService);
         exam = examService.save(exam);
+        logger.info("New exam created: " + exam);
         return exam.getId();
     }
 
@@ -56,6 +61,7 @@ public class ExamController {
     public ExamMockup updateExam(@RequestBody ExamMockup examMockup, @PathVariable Long id) {
         Exam exam = examMockup.mockToExam(recruitmentCycleService, majorService);
         Exam examDB = examService.get(id);
+        Exam oldExam = examDB;
         if (examDB != null) {
             examDB.setName(exam.getName());
             examDB.setRecruitmentCycle(exam.getRecruitmentCycle());
@@ -63,9 +69,11 @@ public class ExamController {
             examDB.setEndDate(exam.getEndDate());
             examDB.setMajor(exam.getMajor());
             examDB = examService.save(examDB);
+            logger.info("Updated exam " + oldExam + " to " + examDB);
             return new ExamMockup(examDB);
         } else {
             exam = examService.save(exam);
+            logger.info("New exam created " + exam);
             return new ExamMockup(exam);
         }
     }
@@ -75,6 +83,7 @@ public class ExamController {
         Exam currentExam = examService.get(id);
         if (currentExam != null) {
             examService.delete(id);
+            logger.info("Deleted exam " + currentExam);
         }
         return ResponseEntity.ok(HttpStatus.OK);
 

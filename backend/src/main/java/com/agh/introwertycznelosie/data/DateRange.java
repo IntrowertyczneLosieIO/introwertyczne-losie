@@ -79,4 +79,14 @@ public class DateRange {
             this.dateTo = dateTo;
         }
     }
+
+    @Override
+    public String toString() {
+        return "DateRange{" +
+                "id=" + id +
+                ", dateFrom=" + dateFrom +
+                ", dateTo=" + dateTo +
+                ", room=" + room +
+                '}';
+    }
 }

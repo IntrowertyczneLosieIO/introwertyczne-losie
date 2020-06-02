@@ -8,6 +8,8 @@ import com.agh.introwertycznelosie.repositories.UserRepository;
 import com.agh.introwertycznelosie.services.SecurityService;
 import com.agh.introwertycznelosie.services.UserDetailsServiceImpl;
 import com.agh.introwertycznelosie.services.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +17,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,6 +38,13 @@ public class LoginController {
     @Autowired
     RegistrationTokenRepository registrationTokenRepository;
 
+    Logger logger = LogManager.getLogger(LoginController.class);
+
+
+    @GetMapping("/home")
+    public String home() {
+        return "home";
+    }
 
     @RequestMapping(value = "/getCurrentUserRole", method = RequestMethod.GET)
     public String getRole() {
@@ -52,6 +58,7 @@ public class LoginController {
         try {
             UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
             securityService.autoLogin(userDetails.getUsername(), user.getPassword());
+            logger.info("Logged in user " + user);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not Found", e);
         }
@@ -69,7 +76,7 @@ public class LoginController {
         mailMessage.setText("Your registration "
                     +"http://localhost:8080/registration?token="+registrationToken.getToken());
         emailSenderService.sendEmail(mailMessage);
-
+        logger.info("Sent registration mail to: " + user);
         return ResponseEntity.ok(HttpStatus.OK);
 
     }
@@ -86,6 +93,7 @@ public class LoginController {
         User user = new User(token.getEmail(), userMockup.getPassword(), token.getRole());
         user.setPassword(bCryptPasswordEncoder.encode(userMockup.getPassword()));
         userRepository.save(user);
+        logger.info("Added user " + user);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 

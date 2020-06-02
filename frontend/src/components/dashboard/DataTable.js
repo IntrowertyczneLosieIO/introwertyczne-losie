@@ -9,6 +9,7 @@ import DeleteExam from "../forms/DeleteExam";
 import ShowMajor from "../forms/ShowMajor";
 import ShowRoom from "../forms/ShowRoom";
 import ShowFaculty from "../forms/ShowFaculty"
+import DeleteFaculty from "../forms/DeleteFaculty";
 
 import EditExam from "../forms/EditExam";
 import DeleteSubexam from "../forms/DeleteSubexam";
@@ -107,7 +108,7 @@ class DataTable extends React.Component {
             "Exams": DeleteExam,
             "Subexams": DeleteSubexam,
             "SubexamsNonEditable": DeleteSubexam,
-            "Faculties": ShowFaculty
+            "Faculties": DeleteFaculty
         };
 
         const nameComponentMappingShow = {
