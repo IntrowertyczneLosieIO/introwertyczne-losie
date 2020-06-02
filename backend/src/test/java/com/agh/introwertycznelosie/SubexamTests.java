@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -27,9 +28,14 @@ public class SubexamTests {
     private static Person person1, person2;
     private static RecruitmentCycle recruitmentCycle;
     private static Faculty wiet;
+    private static Recruitment recruitment;
+
+    @Autowired
+    private RecruitmentService recruitmentService;
 
     @Autowired
     private SubexamService subexamService;
+
     @Autowired
     private ExamService examService;
 
@@ -38,6 +44,7 @@ public class SubexamTests {
     
     @Autowired
     private MajorService majorService;
+
     @Autowired
     private RecruitmentCycleService recruitmentCycleService;
 
@@ -49,13 +56,15 @@ public class SubexamTests {
         LinkedList<DateRange> availableDates = new LinkedList<>();
         availableDates.add(new DateRange());
         availableDates.add(new DateRange());
-        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT");
+        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT", new ArrayList<>());
         person1 = new Person("Adam", "Kowalik", "666555444", "a.kowalik@agh.edu.pl");
         person2 = new Person("Janina", "Bosacka", "999888777", "j.bosacka@agh.edu.pl");
-
-        major1 = new Major(wiet, "Computer Science", "Inf", fullTime, 200, person1, person2, false, "");
+        recruitment = new Recruitment("LATO-2020", 2020, Semester.summer);
+        wiet.addRecruitment(recruitment);
+        major1 = new Major(wiet, "Computer Science", "Inf", fullTime, 200, person1, person2, false, "", recruitment);
         r1 = new Room(100, 200, "d17", "3.42", availableDates);
         recruitmentCycle = new RecruitmentCycle(null, 1);
+        recruitment.addRecruitmentCycle(recruitmentCycle);
         e1 = new Exam("analiza", major1, new Date(2020, 10, 10), new Date(2020, 10, 13), recruitmentCycle);
         e2 = new Exam("analiza", major1, new Date(2020, 10, 10), new Date(2020, 10, 13), recruitmentCycle);
         s1 = new Subexam(e1, r1, new Date(2020, 10, 10), LocalTime.NOON);
@@ -64,6 +73,7 @@ public class SubexamTests {
 
     @Test
     void testSubexamSave(){
+        recruitment = recruitmentService.save(recruitment);
         recruitmentCycle = recruitmentCycleService.save(recruitmentCycle);
         wiet = facultyService.save(wiet);
         major1 = majorService.save(major1);

@@ -2,10 +2,14 @@ package com.agh.introwertycznelosie.config;
 
 import com.agh.introwertycznelosie.data.Faculty;
 import com.agh.introwertycznelosie.data.Major;
+import com.agh.introwertycznelosie.data.Recruitment;
+import com.agh.introwertycznelosie.data.Room;
 import com.agh.introwertycznelosie.mockups.MajorMockup;
 import com.agh.introwertycznelosie.services.FacultyService;
 import com.agh.introwertycznelosie.services.MajorService;
 import com.agh.introwertycznelosie.services.PersonService;
+import com.agh.introwertycznelosie.services.RecruitmentService;
+import net.bytebuddy.implementation.auxiliary.AuxiliaryType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +37,9 @@ public class MajorController {
 
     @Autowired
     PersonService personService;
+
+    @Autowired
+    RecruitmentService recruitmentService;
 
     @GetMapping(value = "/newest-majors", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MajorMockup> getMajors() {
@@ -104,4 +111,16 @@ public class MajorController {
     public MajorMockup getMajor(@PathVariable(name = "id") Long id) {
         return new MajorMockup(majorService.get(id));
     }
+
+    @GetMapping(value = "/majors-from-recruitation/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<MajorMockup> majorsByRecruitation(@PathVariable Long id) {
+        Recruitment recruitment = recruitmentService.get(id);
+        List<MajorMockup> majors = new ArrayList<>();
+        for (Major major : recruitment.getMajors())
+        {
+            majors.add(new MajorMockup(major));
+        }
+        return majors;
+     }
+
 }

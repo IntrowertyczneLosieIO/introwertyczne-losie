@@ -2,10 +2,14 @@ package com.agh.introwertycznelosie.config;
 
 
 import com.agh.introwertycznelosie.data.Exam;
+import com.agh.introwertycznelosie.data.Major;
+import com.agh.introwertycznelosie.data.Recruitment;
+import com.agh.introwertycznelosie.data.RecruitmentCycle;
 import com.agh.introwertycznelosie.mockups.ExamMockup;
 import com.agh.introwertycznelosie.services.ExamService;
 import com.agh.introwertycznelosie.services.MajorService;
 import com.agh.introwertycznelosie.services.RecruitmentCycleService;
+import com.agh.introwertycznelosie.services.RecruitmentService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +32,9 @@ public class ExamController {
 
     @Autowired
     RecruitmentCycleService recruitmentCycleService;
+
+    @Autowired
+    RecruitmentService recruitmentService;
 
     @Autowired
     MajorService majorService;
@@ -80,6 +87,18 @@ public class ExamController {
         }
         return ResponseEntity.ok(HttpStatus.OK);
 
+    }
+
+    @GetMapping("exams-from-recruitation/{id}")
+    List<ExamMockup> examsByRecruitation(@PathVariable Long id) {
+        Recruitment recruitment = recruitmentService.get(id);
+        List<ExamMockup> examMockups = new ArrayList<>();
+        for (RecruitmentCycle recruitmentCycle : recruitment.getRecruitmentCycles()){
+            for (Exam exam : recruitmentCycle.getExams()){
+                examMockups.add(new ExamMockup(exam));
+            }
+        }
+        return examMockups;
     }
 
 }

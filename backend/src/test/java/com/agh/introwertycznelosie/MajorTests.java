@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+
 @SpringBootTest
 @Transactional
 public class MajorTests {
@@ -67,7 +69,7 @@ public class MajorTests {
     static void setupAll()
     {
         m1 = new Major();
-        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT");
+        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT", new ArrayList<>());
         m1.setFaculty(wiet);
         m1.setFullName("InformatykaTest");
         m1.setShortName("Infa-TEST");
@@ -75,7 +77,7 @@ public class MajorTests {
         m1.setNumberOfPlaces(200);
 
         m2 = new Major();
-        weaiib = new Faculty("Wydział Elektrotechniki, Automatyki, Informatyki i Inżynierii Biomedycznej", "WEAiIB");
+        weaiib = new Faculty("Wydział Elektrotechniki, Automatyki, Informatyki i Inżynierii Biomedycznej", "WEAiIB", new ArrayList<>());
         m2.setFaculty(weaiib);
         m2.setFullName("ElektrotechnikaTest");
         m2.setShortName("ET-TEST");
