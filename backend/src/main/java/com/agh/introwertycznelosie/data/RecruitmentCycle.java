@@ -57,4 +57,13 @@ public class RecruitmentCycle
     public void setIteration(int iteration) {
         this.iteration = iteration;
     }
+
+    @Override
+    public String toString() {
+        return "RecruitmentCycle{" +
+                "id=" + id +
+                ", recruitment=" + recruitment +
+                ", iteration=" + iteration +
+                '}';
+    }
 }

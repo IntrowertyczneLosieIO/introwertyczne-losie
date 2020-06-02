@@ -99,6 +99,14 @@ public class Faculty {
         this.acronym = acronym;
     }
 
+    public Long getId(){
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -113,5 +121,14 @@ public class Faculty {
 
     public void setAcronym(String acronym) {
         this.acronym = acronym;
+    }
+
+    @Override
+    public String toString() {
+        return "Faculty{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", acronym='" + acronym + '\'' +
+                '}';
     }
 }

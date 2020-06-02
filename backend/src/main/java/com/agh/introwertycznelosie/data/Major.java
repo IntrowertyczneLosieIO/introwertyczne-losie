@@ -138,4 +138,20 @@ public class Major {
     public void setExams(List<Exam> exams) {
         this.exams = exams;
     }
+
+    @Override
+    public String toString() {
+        return "Major{" +
+                "id=" + id +
+                ", faculty=" + faculty +
+                ", fullName='" + fullName + '\'' +
+                ", shortName='" + shortName + '\'' +
+                ", mode=" + mode +
+                ", numberOfPlaces=" + numberOfPlaces +
+                ", contactPerson1=" + contactPerson1 +
+                ", contactPerson2=" + contactPerson2 +
+                ", mixedField=" + mixedField +
+                ", annotations='" + annotations + '\'' +
+                '}';
+    }
 }
