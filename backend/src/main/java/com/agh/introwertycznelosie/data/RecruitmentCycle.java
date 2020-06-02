@@ -63,7 +63,6 @@ public class RecruitmentCycle
         return "RecruitmentCycle{" +
                 "id=" + id +
                 ", recruitment=" + recruitment +
-                ", exams=" + exams +
                 ", iteration=" + iteration +
                 '}';
     }

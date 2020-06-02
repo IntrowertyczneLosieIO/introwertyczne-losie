@@ -144,7 +144,6 @@ public class Major {
         return "Major{" +
                 "id=" + id +
                 ", faculty=" + faculty +
-                ", exams=" + exams +
                 ", fullName='" + fullName + '\'' +
                 ", shortName='" + shortName + '\'' +
                 ", mode=" + mode +
