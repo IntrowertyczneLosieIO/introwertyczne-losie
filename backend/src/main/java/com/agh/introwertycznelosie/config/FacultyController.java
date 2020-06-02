@@ -3,6 +3,7 @@ package com.agh.introwertycznelosie.config;
 import com.agh.introwertycznelosie.data.Faculty;
 import com.agh.introwertycznelosie.data.Recruitment;
 import com.agh.introwertycznelosie.mockups.FacultyMockup;
+import com.agh.introwertycznelosie.services.FacultyService;
 import com.agh.introwertycznelosie.services.RecruitmentService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
