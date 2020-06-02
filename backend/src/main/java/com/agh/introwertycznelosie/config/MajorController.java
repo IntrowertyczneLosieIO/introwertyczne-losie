@@ -3,13 +3,11 @@ package com.agh.introwertycznelosie.config;
 import com.agh.introwertycznelosie.data.Faculty;
 import com.agh.introwertycznelosie.data.Major;
 import com.agh.introwertycznelosie.data.Recruitment;
-import com.agh.introwertycznelosie.data.Room;
 import com.agh.introwertycznelosie.mockups.MajorMockup;
 import com.agh.introwertycznelosie.services.FacultyService;
 import com.agh.introwertycznelosie.services.MajorService;
 import com.agh.introwertycznelosie.services.PersonService;
 import com.agh.introwertycznelosie.services.RecruitmentService;
-import net.bytebuddy.implementation.auxiliary.AuxiliaryType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +49,7 @@ public class MajorController {
     }
 
     @GetMapping(value = "/all-majors", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<MajorMockup> getThatMajors() {
+    public List<MajorMockup> getAllMajors() {
         List<MajorMockup> list = new ArrayList<>();
         for (
                 Major major : majorService.getAll()) {

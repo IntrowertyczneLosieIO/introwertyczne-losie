@@ -49,6 +49,16 @@ public class ExamController {
         return list;
     }
 
+    @GetMapping(value="/all-exams", produces = MediaType.APPLICATION_JSON_VALUE)
+    List<ExamMockup> getAllExams() {
+        List<ExamMockup> list = new ArrayList<>();
+        for (Exam exam : examService.getAll())
+        {
+            list.add(new ExamMockup(exam));
+        }
+        return list;
+    }
+
     @PostMapping("/new-exam")
     public Long postNewExam(@RequestBody ExamMockup examMockup) {
         Exam exam = examMockup.mockToExam(recruitmentCycleService, majorService);

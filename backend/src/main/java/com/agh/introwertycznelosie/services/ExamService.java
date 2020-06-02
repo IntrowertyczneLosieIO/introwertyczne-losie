@@ -27,4 +27,8 @@ public class ExamService {
 
     public void delete(Exam exam){ examRepository.delete(exam); }
 
+    public List<Exam> getAll() {
+        return examRepository.findAllByOrderByIdDesc();
+    }
+
 }

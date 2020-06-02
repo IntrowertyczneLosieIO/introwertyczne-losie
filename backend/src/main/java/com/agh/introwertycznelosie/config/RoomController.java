@@ -32,6 +32,16 @@ public class RoomController {
         return list;
     }
 
+    @GetMapping(value="/all-rooms", produces = MediaType.APPLICATION_JSON_VALUE)
+    List<RoomMockup> getAllRooms() {
+        List<RoomMockup> list = new ArrayList<>();
+        for (Room room : roomService.getAll())
+        {
+            list.add(new RoomMockup(room));
+        }
+        return list;
+    }
+
     @PostMapping("/new-room")
     public ResponseEntity<HttpStatus> postNewRoom(@RequestBody RoomMockup roomMockup) {
         Room room = roomMockup.mockToRoom();

@@ -7,6 +7,8 @@ import SignIn from "./components/auth/SignIn";
 import Registration from "./components/auth/Registration"
 import LoggedInView from "./components/LoggedInView";
 import Majors from "./components/Majors";
+import Rooms from "./components/Rooms";
+import Exams from "./components/Exams";
 
 class App extends React.Component {
     constructor(props) {
@@ -50,6 +52,8 @@ class App extends React.Component {
                         <Route exact path={"/"} component={
                             (props) => <LoggedInView objects={this.state.objects} {...props} />}/>
                         <Route exact path={"/majors"} component={(props) => <Majors objects={this.state.objects} {...props} />}/>
+                        <Route exact path={"/rooms"} component={(props) => <Rooms objects={this.state.objects} {...props} />}/>
+                        <Route exact path={"/exams"} component={(props) => <Exams objects={this.state.objects} {...props} />}/>
                     </Container>
                 </div>
             </BrowserRouter>

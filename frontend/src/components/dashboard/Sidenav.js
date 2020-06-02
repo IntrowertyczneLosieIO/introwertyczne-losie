@@ -23,8 +23,8 @@ class Sidenav extends React.Component {
     render() {
         let nameUrlMapping = {
             "Majors": "/majors",
-            "Rooms": "/majors",
-            "Exams": "/majors"
+            "Rooms": "/rooms",
+            "Exams": "/exams"
         };
 
         let objectsList = this.props.objects.map((object) => {
@@ -35,6 +35,8 @@ class Sidenav extends React.Component {
         return (
             <>
             <Nav fill activeKey={"#"} className={"flex-column mt-3"}>
+                <Nav.Link href={"/"}><Button variant={"outline-dark"}
+                                             block size={"sm"}>Strona główna</Button></Nav.Link>
                 <Nav.Link href={"#"}><Button variant={"outline-dark"}
                                              block size={"sm"}>Rekrutacje</Button></Nav.Link>
                 {objectsList}
