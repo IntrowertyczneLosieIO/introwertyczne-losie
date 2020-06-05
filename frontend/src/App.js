@@ -9,6 +9,7 @@ import LoggedInView from "./components/LoggedInView";
 import Majors from "./components/Majors";
 import Rooms from "./components/Rooms";
 import Exams from "./components/Exams";
+import ChangePassword from "./components/auth/ChangePassword";
 
 class App extends React.Component {
     constructor(props) {
@@ -46,6 +47,7 @@ class App extends React.Component {
                 <div className="App bg-light">
                     <Container fluid className={"main-container"}>
                         <CentralNavbar/>
+                        <Route exact path={"/changePassword"} component={ChangePassword}/>
                         <Route exact path={"/registration"} component={Registration}/>
                         <Route exact path={"/login"} component={SignIn}/>
                         <Route exact path={"/logout"} component={SignIn}/>
