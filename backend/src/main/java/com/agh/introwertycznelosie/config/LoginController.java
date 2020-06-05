@@ -107,7 +107,7 @@ public class LoginController {
 
     }
 
-    @RequestMapping(value = {"/", "/login", "/majors", "/registration", "/logout", "/rooms", "/exams"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/login", "/majors", "/registration", "/logout", "/rooms", "/exams", "/changePassword"}, method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("../static/index");

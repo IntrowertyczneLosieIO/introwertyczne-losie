@@ -65,7 +65,8 @@ class CurrentDataOverview extends React.Component {
         let nameUrlMapping = {
             "Majors": "/majors",
             "Rooms": "/rooms",
-            "Exams": "/exams"
+            "Exams": "/exams",
+            "Faculties": "/"
         };
 
         const FormToRender = nameComponentMapping[this.props.name];
