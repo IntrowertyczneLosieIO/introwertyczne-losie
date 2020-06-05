@@ -21,13 +21,22 @@ class Sidenav extends React.Component {
     handleHide = () => this.setShowAddNew(false);
 
     render() {
+        let nameUrlMapping = {
+            "Majors": "/majors",
+            "Rooms": "/rooms",
+            "Exams": "/exams"
+        };
+
         let objectsList = this.props.objects.map((object) => {
-            return <Nav.Link href={"#"} key={object.key}><Button variant={"outline-dark"} block size={"sm"}>{object.displayName}</Button></Nav.Link>
+            return <Nav.Link href={nameUrlMapping[object.objectsSetName]} key={object.key}><Button
+                variant={"outline-dark"} block size={"sm"}>{object.displayName}</Button></Nav.Link>
         })
 
         return (
             <>
             <Nav fill activeKey={"#"} className={"flex-column mt-3"}>
+                <Nav.Link href={"/"}><Button variant={"outline-dark"}
+                                             block size={"sm"}>Strona główna</Button></Nav.Link>
                 <Nav.Link href={"#"}><Button variant={"outline-dark"}
                                              block size={"sm"}>Rekrutacje</Button></Nav.Link>
                 {objectsList}
