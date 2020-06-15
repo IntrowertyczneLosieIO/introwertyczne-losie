@@ -89,13 +89,6 @@ public class MajorMockup {
     {
         Major major = new Major();
         Faculty faculty = facultyService.findByAcronym(this.faculty);
-        if(faculty==null) {
-            try {
-                faculty = facultyService.save(new Faculty(this.faculty));
-            } catch (Faculty.InvalidFacultyException e) {
-                e.printStackTrace();
-            }
-        }
         major.setFaculty(faculty);
         major.setMixedField(mixedField);
         major.setAnnotations(annotations);

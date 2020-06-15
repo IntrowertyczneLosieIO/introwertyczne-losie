@@ -11,10 +11,7 @@ import org.springframework.context.annotation.Bean;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @SpringBootApplication
 public class IntrowertyczneLosieApplication {
@@ -61,18 +58,21 @@ public class IntrowertyczneLosieApplication {
         availableDates2.add(new DateRange("2020-08-13 09:00", "2020-08-13 13:00"));
         room1 = new Room(150, 170, "D17", "1.38", availableDates1);
         room2 = new Room(100, 120, "D17", "2.34", availableDates2);
-        faculty1 = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT");
-        faculty2 = new Faculty("Wydział Matematyki Stosowanej", "WMS");
         person1 = new Person("Janina", "Wędlina", "666777888", "j.wedlina@agh.edu.pl");
         person2 = new Person("Agata", "Sałata", "111222333", "a.salata@agh.edu.pl");
         person3 = new Person("Jan", "Chrzan", "110000222", "j.chrzan@agh.edu.pl");
         person4 = new Person("Wojciech", "Korzeń", null, "w.korzen@agh.edu.pl");
         person5 = new Person("Jurek", "Ogórek", null, "j.ogorek@agh.edu.pl");
-        major1 = new Major(faculty1, "Informatyka", "Inf", ModeOfStudy.fullTime, 170, person1, person2, true, "");
-        major2 = new Major(faculty1, "Data Science", "DS", ModeOfStudy.partTime, 30, person3, null, true, "Kierunek dla wybranych");
-        major3 = new Major(faculty2, "Teoria grafów", "Grafy", ModeOfStudy.partTime, 40, person4, person5, false, "");
         recruitment1 = new Recruitment("Rekrutacja LATO 2020/2021", 2020, Semester.winter);
         recruitment2 = new Recruitment("Rekrutacja ZIMA 2021/2022", 2021, Semester.summer);
+        faculty1 = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT", new ArrayList<>());
+        faculty2 = new Faculty("Wydział Matematyki Stosowanej", "WMS", new ArrayList<>());
+        faculty1.addRecruitment(recruitment1);
+        faculty2.addRecruitment(recruitment1);
+        faculty2.addRecruitment(recruitment2);
+        major1 = new Major(faculty1, "Informatyka", "Inf", ModeOfStudy.fullTime, 170, person1, person2, true, "", recruitment1);
+        major2 = new Major(faculty1, "Data Science", "DS", ModeOfStudy.partTime, 30, person3, null, true, "Kierunek dla wybranych", recruitment1);
+        major3 = new Major(faculty2, "Teoria grafów", "Grafy", ModeOfStudy.partTime, 40, person4, person5, false, "", recruitment2);
         recruitmentCycle1 = new RecruitmentCycle(recruitment1, 1);
         recruitmentCycle2 = new RecruitmentCycle(recruitment1, 2);
         recruitmentCycle3 = new RecruitmentCycle(recruitment2, 1);
@@ -97,15 +97,15 @@ public class IntrowertyczneLosieApplication {
     InitializingBean sendDatabase() {
         return () -> {
             setDatabase();
-            facultyRepository.save(faculty1);
-            facultyRepository.save(faculty2);
             roomRepository.save(room1);
             roomRepository.save(room2);
+            recruitment1 = recruitmentRepository.save(recruitment1);
+            recruitment2 = recruitmentRepository.save(recruitment2);
+            facultyRepository.save(faculty1);
+            facultyRepository.save(faculty2);
             majorRepository.save(major1);
             majorRepository.save(major2);
             majorRepository.save(major3);
-            recruitmentRepository.save(recruitment1);
-            recruitmentRepository.save(recruitment2);
             recruitmentCycleRepository.save(recruitmentCycle1);
             recruitmentCycleRepository.save(recruitmentCycle2);
             recruitmentCycleRepository.save(recruitmentCycle3);

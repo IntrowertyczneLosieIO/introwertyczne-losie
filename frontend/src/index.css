@@ -82,3 +82,24 @@ code {
 table {
   font-size: 14px;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 12% auto;
+  grid-template-areas: "sidebar main";
+  column-gap: 0;
+  justify-items: stretch;
+  align-items: stretch;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.main-content {
+  grid-area: main;
+  grid-column-start: 2;
+  grid-column-end: 3;
+}

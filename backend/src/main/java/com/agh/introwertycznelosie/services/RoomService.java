@@ -23,4 +23,8 @@ public class RoomService {
 
     public void delete(Room room) { roomRepository.delete(room);}
 
+    public List<Room> getAll() {
+        return roomRepository.findAllByOrderByIdDesc();
+    }
+
 }

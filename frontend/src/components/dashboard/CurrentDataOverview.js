@@ -7,6 +7,7 @@ import AddExam from "../forms/AddExam";
 import AddMajor from "../forms/AddMajor";
 import AddRoom from "../forms/AddRoom";
 import AddFaculty from "../forms/AddFaculty";
+import {Link} from "react-router-dom";
 
 class CurrentDataOverview extends React.Component {
     constructor(props) {
@@ -59,7 +60,15 @@ class CurrentDataOverview extends React.Component {
             "Rooms": "/newest-rooms",
             "Exams": "/newest-exams",
             "Faculties": "/newest-faculties"
-        }
+        };
+
+        let nameUrlMapping = {
+            "Majors": "/majors",
+            "Rooms": "/rooms",
+            "Exams": "/exams",
+            "Faculties": "/"
+        };
+
         const FormToRender = nameComponentMapping[this.props.name];
         return (
             <div>
@@ -76,7 +85,7 @@ class CurrentDataOverview extends React.Component {
                 </Row>
                 <Row className={"mb-4"}>
                     <Col xs={2}>
-                        <Button variant={"outline-dark"} size={"sm"} block>{this.props.more}</Button>
+                        <Link to={nameUrlMapping[this.props.name]}><Button variant={"outline-dark"} size={"sm"} block>{this.props.more}</Button></Link>
                     </Col>
                     <Col xs={2}>
 
