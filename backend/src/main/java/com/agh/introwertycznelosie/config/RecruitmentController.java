@@ -42,6 +42,30 @@ public class RecruitmentController {
         return recruitment.getId();
     }
 
+    @PutMapping("edit-recruitment/{id}")
+    RecruitmentMockup updateRecruitment(@RequestBody RecruitmentMockup recruitmentMockup, @PathVariable Long id) {
+        Recruitment recruitment = recruitmentMockup.mockupToRecruitment();
+        Recruitment currentRecruitment = recruitmentService.get(id);
+        Recruitment oldRecruitment = currentRecruitment;
+        if (currentRecruitment != null) {
+            currentRecruitment.setAcronym(recruitment.getAcronym());
+            currentRecruitment.setSemester(recruitment.getSemester());
+            currentRecruitment.setYear(recruitment.getYear());
+            currentRecruitment.setId(recruitment.getId());
+            currentRecruitment.setRecruitmentStatus(recruitment.getRecruitmentStatus());
+            currentRecruitment.setRecruitmentCycles(recruitment.getRecruitmentCycles());
+            currentRecruitment.setMajors(recruitment.getMajors());
+            currentRecruitment.setFaculties(recruitment.getFaculties());
+            currentRecruitment = recruitmentService.save(currentRecruitment);
+            logger.info("Updated recruitment " + oldRecruitment + " to " + currentRecruitment);
+            return new RecruitmentMockup(currentRecruitment);
+        } else {
+            recruitment = recruitmentService.save(recruitment);
+            logger.info("New recruitment created " + recruitment);
+            return new RecruitmentMockup(recruitment);
+        }
+    }
+
     @GetMapping(value = "/recruitment/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public RecruitmentMockup getRecruitment(@PathVariable Long id) {
         return new RecruitmentMockup(recruitmentService.get(id));

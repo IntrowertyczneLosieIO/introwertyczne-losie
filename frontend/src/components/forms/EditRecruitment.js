@@ -97,8 +97,8 @@ class EditRecruitment extends React.Component {
                 semester: this.state.semesterMapping[this.state.userData.semester]
             }
             // console.log(userDataToSend);
-            fetch("/new-recruitment", {
-                method: 'POST',
+            fetch(`/edit-recruitment/${this.props.initialInputValues.id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
