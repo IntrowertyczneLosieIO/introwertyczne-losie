@@ -14,9 +14,9 @@ class AddRecruitment extends React.Component {
             showConfirmationModal: false,
             userData: this.getInitialState(),
             semesterMapping: {
-                "letni": "summer",
-                "zimowy": "winter"
-            },
+                "zimowy": "winter",
+                "letni": "summer"
+            }
         };
     }
 
