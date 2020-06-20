@@ -25,7 +25,6 @@ class Sidenav extends React.Component {
             "Majors": "/majors",
             "Rooms": "/rooms",
             "Exams": "/exams",
-            "Recruitments": "/recruitments"
         };
 
         let objectsList = this.props.objects.map((object) => {

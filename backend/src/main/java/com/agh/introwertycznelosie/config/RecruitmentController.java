@@ -58,10 +58,10 @@ public class RecruitmentController {
         Recruitment currentRecruitment = recruitmentService.get(id);
         Recruitment oldRecruitment = currentRecruitment;
         if (currentRecruitment != null) {
+            currentRecruitment.setId(recruitment.getId());
             currentRecruitment.setAcronym(recruitment.getAcronym());
             currentRecruitment.setSemester(recruitment.getSemester());
             currentRecruitment.setYear(recruitment.getYear());
-            currentRecruitment.setId(recruitment.getId());
             currentRecruitment.setRecruitmentStatus(recruitment.getRecruitmentStatus());
             currentRecruitment.setRecruitmentCycles(recruitment.getRecruitmentCycles());
             currentRecruitment.setMajors(recruitment.getMajors());

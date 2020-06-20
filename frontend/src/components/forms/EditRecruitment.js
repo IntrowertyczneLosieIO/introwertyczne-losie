@@ -12,7 +12,7 @@ class EditRecruitment extends React.Component {
             show: true,
             validated: false,
             showConfirmationModal: false,
-            userData: {acronym: "la", year: "la", semester: ""},
+            userData: {acronym: "", year: "", semester: ""},
             semesterMapping: {
                 "letni": "summer",
                 "zimowy": "winter"
@@ -23,12 +23,6 @@ class EditRecruitment extends React.Component {
     componentDidMount() {
         this.setState({userData: this.props.initialInputValues}, () => console.log(this.state.userData));
     }
-
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     if(prevProps.initialInputValues !== this.props.initialInputValues){
-    //         this.setState({userData:this.props.initialInputValues});
-    //     }
-    // }
 
     setShowConfirmationModal = (show) => {
         this.setState({

@@ -28,8 +28,8 @@ class NewRecruitmentInfo extends React.Component {
                         <Form.Label>Semestr</Form.Label>
                         <Form.Control as={"select"} onChange={this.handleControlChange} required
                                       value={this.props.inputValuesFromState.semester}>
-                            <option>letni</option>
                             <option>zimowy</option>
+                            <option>letni</option>
                         </Form.Control>
                     </FormGroup>
                 </Form.Row>
