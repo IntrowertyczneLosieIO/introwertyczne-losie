@@ -16,7 +16,8 @@ class RecruitmentHelperInfo extends React.Component {
             showAddNew: false,
             showEdit: false,
             recruitments: [],
-            recruitment: this.props.currentRecruitment
+            recruitment: this.props.currentRecruitment,
+            currentID: 0
         }
     }
 
@@ -76,7 +77,8 @@ class RecruitmentHelperInfo extends React.Component {
     }
 
     render() {
-
+        console.log(this.state.recruitments)
+        console.log(this.state.recruitment)
         return (
             <Row className={"mb-4"}>
                 <Col xs={12}>
@@ -85,7 +87,7 @@ class RecruitmentHelperInfo extends React.Component {
                         <FormGroup as={Col} controlId={"newRecruitment"}>
                             <Form.Control as={"select"} style={{width: 600, marginTop: '10px'}} onChange={(e) => this.setState({recruitment: e.target.value})} required>
                                 {this.state.recruitments.map((r, index) => <option
-                                    key={index}>{r.acronym} </option>)}
+                                    key={index} value={r.id} >{r.acronym} </option>)}
                             </Form.Control>
                         </FormGroup>
 
@@ -101,7 +103,7 @@ class RecruitmentHelperInfo extends React.Component {
 
                 <Col xs={2}>
                     <Button variant={"info"} className={"mb-3"} size={"sm"} block onClick={()=>this.handleShowEdit()}>Edytuj rekrutację</Button>
-                    {this.state.showEdit && <EditRecruitment> </EditRecruitment>}
+                    {this.state.showEdit && <EditRecruitment initialInputValues={"testowo"}> </EditRecruitment>}
                 </Col>
             </Row>
         );

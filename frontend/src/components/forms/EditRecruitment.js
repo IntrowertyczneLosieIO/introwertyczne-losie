@@ -20,6 +20,12 @@ class EditRecruitment extends React.Component {
         };
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.initialInputValues !== this.props.initialInputValues){
+            this.setState({userData:this.props.initialInputValues});
+        }
+    }
+
     setShowConfirmationModal = (show) => {
         this.setState({
             showConfirmationModal: show
@@ -56,8 +62,8 @@ class EditRecruitment extends React.Component {
         }
         else {
             return {
-                acronym: "",
-                year: "",
+                acronym: "la",
+                year: "la",
                 semester: ""
             }
         }
@@ -125,6 +131,7 @@ class EditRecruitment extends React.Component {
     }
 
     render() {
+        console.log(this.state.userData)
         return (
             <>
                 <Modal show={this.state.show} dialogClassName={"custom-width-modal"} onHide={this.hideAndClearState}
