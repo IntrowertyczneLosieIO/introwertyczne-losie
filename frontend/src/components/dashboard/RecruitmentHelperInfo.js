@@ -92,7 +92,7 @@ class RecruitmentHelperInfo extends React.Component {
                     </Alert>
                 </Col>
                 <Col xs={2}>
-                    <Button variant={"outline-dark"} size={"sm"} block>Informacje o rekrutacji</Button>
+                    <Button variant={"outline-dark"} size={"sm"} block onClick={()=>this.handleShowAddNew()}>Informacje o rekrutacji</Button>
                 </Col>
                 <Col xs={2}>
                     <Button variant={"success"} className={"mb-3"} size={"sm"} block onClick={()=>this.handleShowAddNew()}>Dodaj nową rekrutację</Button>

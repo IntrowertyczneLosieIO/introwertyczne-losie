@@ -34,6 +34,16 @@ public class RecruitmentController {
         return recruitmentMockups;
     }
 
+    @GetMapping(value="/all-recruitments", produces = MediaType.APPLICATION_JSON_VALUE)
+    List<RecruitmentMockup> getAllRecruitments() {
+        List<RecruitmentMockup> list = new ArrayList<>();
+        for (Recruitment recruitment : recruitmentService.getAll())
+        {
+            list.add(new RecruitmentMockup(recruitment));
+        }
+        return list;
+    }
+
     @PostMapping("/new-recruitment")
     public Long postNewRecruitment(@RequestBody RecruitmentMockup recruitmentMockup) {
         Recruitment recruitment = recruitmentMockup.mockupToRecruitment();

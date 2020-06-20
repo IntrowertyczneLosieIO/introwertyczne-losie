@@ -29,4 +29,8 @@ public class RecruitmentService {
 
     public void delete(Recruitment recruitment) { recruitmentRepository.delete(recruitment);}
 
+    public List<Recruitment> getAll() {
+        return recruitmentRepository.findAllByOrderByIdDesc();
+    }
+
 }

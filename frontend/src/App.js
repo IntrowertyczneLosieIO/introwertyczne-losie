@@ -10,6 +10,7 @@ import Majors from "./components/Majors";
 import Rooms from "./components/Rooms";
 import Exams from "./components/Exams";
 import ChangePassword from "./components/auth/ChangePassword";
+import Recruitments from "./components/Recruitments";
 
 class App extends React.Component {
     constructor(props) {
@@ -37,6 +38,7 @@ class App extends React.Component {
                 this.addNewObject("Rooms", "Sale", "Więcej sal...", "Dodaj salę", 2),
                 this.addNewObject("Exams", "Egzaminy", "Więcej egzaminów...", "Dodaj egzamin", 3),
                 this.addNewObject("Faculties", "Wydziały", "Więcej wydziałów...", "Dodaj wydział", 4)
+                // this.addNewObject("Recruitments", "Rekruracje", "Więcej rekrutacji...", "Dodaj rekrutację", 5)
             ]
         })
     }
@@ -56,6 +58,7 @@ class App extends React.Component {
                         <Route exact path={"/majors"} component={(props) => <Majors objects={this.state.objects} {...props} />}/>
                         <Route exact path={"/rooms"} component={(props) => <Rooms objects={this.state.objects} {...props} />}/>
                         <Route exact path={"/exams"} component={(props) => <Exams objects={this.state.objects} {...props} />}/>
+                        <Route exact path={"/recruitments"} component={(props) => <Recruitments objects={this.state.objects} {...props} />}/>
                     </Container>
                 </div>
             </BrowserRouter>
