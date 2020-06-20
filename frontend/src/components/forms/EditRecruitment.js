@@ -12,7 +12,7 @@ class EditRecruitment extends React.Component {
             show: true,
             validated: false,
             showConfirmationModal: false,
-            userData: this.getInitialState(),
+            userData: {acronym: "la", year: "la", semester: ""},
             semesterMapping: {
                 "letni": "summer",
                 "zimowy": "winter"
@@ -20,11 +20,15 @@ class EditRecruitment extends React.Component {
         };
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.initialInputValues !== this.props.initialInputValues){
-            this.setState({userData:this.props.initialInputValues});
-        }
+    componentDidMount() {
+        this.setState({userData: this.props.initialInputValues}, () => console.log(this.state.userData));
     }
+
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     if(prevProps.initialInputValues !== this.props.initialInputValues){
+    //         this.setState({userData:this.props.initialInputValues});
+    //     }
+    // }
 
     setShowConfirmationModal = (show) => {
         this.setState({
@@ -40,7 +44,9 @@ class EditRecruitment extends React.Component {
         promise.then(
             this.handleOpenConfirmationModal
         ).catch(
-            () => {console.log("err")}
+            () => {
+                console.log("err")
+            }
         )
     }
 
@@ -59,13 +65,8 @@ class EditRecruitment extends React.Component {
     getInitialState = () => {
         if (this.props.initialInputValues) {
             return this.props.initialInputValues;
-        }
-        else {
-            return {
-                acronym: "la",
-                year: "la",
-                semester: ""
-            }
+        } else {
+            return {acronym: "la", year: "la", semester: ""};
         }
     }
 
@@ -94,8 +95,7 @@ class EditRecruitment extends React.Component {
         if (!form.checkValidity()) {
             this.setValidated(true);
             reject();
-        }
-        else {
+        } else {
             this.setShow(false);
             let userDataToSend = {
                 acronym: this.state.userData.acronym,
@@ -131,22 +131,25 @@ class EditRecruitment extends React.Component {
     }
 
     render() {
-        console.log(this.state.userData)
+        console.log(this.state.userData, this.state.initialInputValues);
         return (
             <>
                 <Modal show={this.state.show} dialogClassName={"custom-width-modal"} onHide={this.hideAndClearState}
                        backdrop={"static"} keyboard={false}>
                     <Modal.Header closeButton className={"modal-form-bg-color"}>
-                        <Modal.Title className={"custom-margins custom-font text-light"}>Edytowanie rekrutacji</Modal.Title>
+                        <Modal.Title className={"custom-margins custom-font text-light"}>Edytowanie
+                            rekrutacji</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={"custom-margins"}>
                         <Form noValidate validated={this.state.validated} ref={this.formRef}>
-                            <NewRecruitmentInfo getFormData={this.getFormData} inputValuesFromState={this.state.userData}/>
+                            <NewRecruitmentInfo getFormData={this.getFormData}
+                                                inputValuesFromState={this.state.userData}/>
                         </Form>
                     </Modal.Body>
                     <Modal.Footer className={"modal-form-bg-color"}>
                         <Button variant={"danger"} onClick={this.hideAndClearState}> Anuluj </Button>
-                        <Button variant={"success"} className={"custom-margins"} onClick={this.handleSaveAndOpenConfirm}>
+                        <Button variant={"success"} className={"custom-margins"}
+                                onClick={this.handleSaveAndOpenConfirm}>
                             Zapisz zmiany
                         </Button>
                     </Modal.Footer>
@@ -156,7 +159,8 @@ class EditRecruitment extends React.Component {
                         <h4 className={"text-center"}>Rekrutacja została edytowana pomyślnie</h4>
                     </Modal.Body>
                     <Modal.Footer className={"modal-form-bg-color"}>
-                        <Button variant={"success"} onClick={this.handleCloseConfirmationModal} block size={"sm"}>OK</Button>
+                        <Button variant={"success"} onClick={this.handleCloseConfirmationModal} block
+                                size={"sm"}>OK</Button>
                     </Modal.Footer>
                 </Modal>
             </>
