@@ -42,12 +42,11 @@ class ExamTest {
 
     @BeforeAll
     public static void createClasses() {
-        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT", new ArrayList<>());
+        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT", recruitment);
         person1 = new Person("Adam", "Kowalik", "666555444", "a.kowalik@agh.edu.pl");
         person2 = new Person("Janina", "Bosacka", "999888777", "j.bosacka@agh.edu.pl");
         person3 = new Person("Janina", "Bosacka", "999888777", "j.bosacka@agh.edu.pl");
         recruitment = new Recruitment("LATO-2020", 2020, Semester.summer);
-        wiet.addRecruitment(recruitment);
         major1 = new Major(wiet, "Computer Science", "Inf", fullTime, 200, person1, null, false, "", recruitment);
         major2 = new Major(wiet, "Electronics", "Inf", fullTime, 200, person2, person3, false, "", recruitment);
         recruitmentCycle = new RecruitmentCycle(null, 1);

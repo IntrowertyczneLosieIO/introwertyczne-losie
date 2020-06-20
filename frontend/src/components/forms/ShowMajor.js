@@ -90,6 +90,20 @@ class ShowMajor extends React.Component {
         this.props.handleHide();
     }
 
+    downloadReport = () => {
+        fetch(`/report/major/${this.props.initialInputValues.id}`)
+            .then(response => {
+                const filename =  response.headers.get('Content-Disposition').split('filename=')[1];
+                response.blob().then(blob => {
+                    let url = window.URL.createObjectURL(blob);
+                    let a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename;
+                    a.click();
+                });
+            });
+    }
+
 
     render() {
         return (
@@ -108,6 +122,9 @@ class ShowMajor extends React.Component {
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
+                        <Button variant={"success"} className={"custom-margins"} onClick={this.downloadReport}>
+                            Pobierz raport
+                        </Button>
                         <Button variant={"info"} className={"custom-margins"} onClick={this.hideAndClearState}>
                             Zamknij
                         </Button>

@@ -69,7 +69,7 @@ public class MajorTests {
     static void setupAll()
     {
         m1 = new Major();
-        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT", new ArrayList<>());
+        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT", null);
         m1.setFaculty(wiet);
         m1.setFullName("InformatykaTest");
         m1.setShortName("Infa-TEST");
@@ -77,7 +77,7 @@ public class MajorTests {
         m1.setNumberOfPlaces(200);
 
         m2 = new Major();
-        weaiib = new Faculty("Wydział Elektrotechniki, Automatyki, Informatyki i Inżynierii Biomedycznej", "WEAiIB", new ArrayList<>());
+        weaiib = new Faculty("Wydział Elektrotechniki, Automatyki, Informatyki i Inżynierii Biomedycznej", "WEAiIB", null);
         m2.setFaculty(weaiib);
         m2.setFullName("ElektrotechnikaTest");
         m2.setShortName("ET-TEST");

@@ -82,27 +82,4 @@ public class FacultyController {
         }
         return faculties;
     }
-
-    private static final String SERVER_LOCATION = "/";
-
-    @GetMapping(path = "/download/faculty/{id}")
-    public ResponseEntity<Resource> download( @PathVariable Long id) throws IOException {
-        File file = new File(SERVER_LOCATION + File.separator + id + ".txt");
-
-        HttpHeaders header = new HttpHeaders();
-        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=raport.txt");
-        header.add("Cache-Control", "no-cache, no-store, must-revalidate");
-        header.add("Pragma", "no-cache");
-        header.add("Expires", "0");
-
-        Path path = Paths.get(file.getAbsolutePath());
-        ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(path));
-
-        return ResponseEntity.ok()
-                .headers(header)
-                .contentLength(file.length())
-                .contentType(MediaType.parseMediaType("application/octet-stream"))
-                .body(resource);
-    }
-
 }

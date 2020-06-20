@@ -37,7 +37,7 @@ class MajorTest {
     @BeforeAll
     static void setup() {
         m1 = new Major();
-        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT", new ArrayList<>());
+        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT", null);
         Person contact1 = new Person("Anna", "Nowak", "667452082", "anowak@agh.edu.pl");
         Person contact2 = new Person("Tomasz", "Kowalski", "525908712", "tkowalski@agh.edu.pl");
         m1.setFaculty(wiet);
@@ -50,7 +50,7 @@ class MajorTest {
 
 
         m2 = new Major();
-        weaiib = new Faculty("Wydział Elektrotechniki, Automatyki, Informatyki i Inżynierii Biomedycznej", "WEAiIB", new ArrayList<>());
+        weaiib = new Faculty("Wydział Elektrotechniki, Automatyki, Informatyki i Inżynierii Biomedycznej", "WEAiIB", null);
         Person contact3 = new Person("Maria", "Pisak", "983782130", "mpisak@agh.edu.pl");
         m2.setFaculty(weaiib);
         m2.setFullName("Automatyka i Robotyka");
