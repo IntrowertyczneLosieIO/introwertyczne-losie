@@ -4,15 +4,15 @@ import com.agh.introwertycznelosie.data.*;
 import com.agh.introwertycznelosie.services.FacultyService;
 import com.agh.introwertycznelosie.services.MajorService;
 import com.agh.introwertycznelosie.services.SubexamService;
+import com.qkyrie.markdown2pdf.Markdown2PdfConverter;
+import com.qkyrie.markdown2pdf.internal.exceptions.ConversionException;
+import com.qkyrie.markdown2pdf.internal.exceptions.Markdown2PdfLogicException;
+import com.qkyrie.markdown2pdf.internal.reading.SimpleStringMarkdown2PdfReader;
+import com.qkyrie.markdown2pdf.internal.writing.SimpleFileMarkdown2PdfWriter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
@@ -40,11 +38,30 @@ public class ReportController {
     @Autowired
     SubexamService subexamService;
 
-    @GetMapping(path = "report/major/{id}")
-    public void download_major_report(@PathVariable Long id, HttpServletResponse response) throws IOException {
-        File file = this.createFile();
+    @GetMapping(path = "report/major/pdf/{id}")
+    public void download_major_report_pdf(@PathVariable Long id, HttpServletResponse response) throws IOException {
+        File file = this.createFile("pdf");
         String report = create_major_report(id, true);
-        this.writeReport(file, report);
+        this.writeReportPDF(file, report);
+
+        response.setHeader("Content-disposition", "attachment; filename=raport_kierunek.pdf");
+
+
+        OutputStream out = response.getOutputStream();
+        if (file != null) {
+            FileInputStream in = new FileInputStream(file);
+
+            IOUtils.copy(in, out);
+            out.close();
+            in.close();
+            file.delete();
+        }
+    }
+    @GetMapping(path = "report/major/md/{id}")
+    public void download_major_report_md(@PathVariable Long id, HttpServletResponse response) throws IOException {
+        File file = this.createFile("md");
+        String report = create_major_report(id, true);
+        this.writeReportMD(file, report);
 
         response.setHeader("Content-disposition", "attachment; filename=raport_kierunek.md");
 
@@ -56,15 +73,34 @@ public class ReportController {
             IOUtils.copy(in, out);
             out.close();
             in.close();
-//            file.delete();
+            file.delete();
         }
     }
 
-    @GetMapping(path = "report/faculty/{id}")
-    public void download_faculty_report(@PathVariable Long id, HttpServletResponse response) throws IOException {
-        File file = this.createFile();
+    @GetMapping(path = "report/faculty/pdf/{id}")
+    public void download_faculty_report_pdf(@PathVariable Long id, HttpServletResponse response) throws IOException {
+        File file = this.createFile("pdf");
         String report = create_faculty_report(id);
-        this.writeReport(file, report);
+        this.writeReportPDF(file, report);
+
+        response.setHeader("Content-disposition", "attachment; filename=raport_wydzial.pdf");
+
+        OutputStream out = response.getOutputStream();
+        if (file != null) {
+            FileInputStream in = new FileInputStream(file);
+
+            IOUtils.copy(in, out);
+            out.close();
+            in.close();
+            file.delete();
+        }
+    }
+
+    @GetMapping(path = "report/faculty/md/{id}")
+    public void download_faculty_report_md(@PathVariable Long id, HttpServletResponse response) throws IOException {
+        File file = this.createFile("md");
+        String report = create_faculty_report(id);
+        this.writeReportMD(file, report);
 
         response.setHeader("Content-disposition", "attachment; filename=raport_wydzial.md");
 
@@ -81,11 +117,11 @@ public class ReportController {
     }
 
 
-    private File createFile() {
+    private File createFile(String extension) {
         try {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             String reportNo = sdf.format(timestamp.getTime());
-            File file = new File("reports/report" + reportNo + ".md");
+            File file = new File("reports/report" + reportNo + "." + extension);
             if (file.createNewFile()) {
                 return file;
             } else {
@@ -98,14 +134,28 @@ public class ReportController {
         return null;
     }
 
-    private void writeReport(File file, String report) {
+    private void writeReportPDF(File file, String report) {
+        byte[] bytes = report.getBytes(StandardCharsets.US_ASCII);
+
+        String newReport = new String(bytes, StandardCharsets.UTF_8);
         try {
-            FileWriter myWriter = new FileWriter(file);
-            myWriter.write(report);
-            myWriter.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
+            Markdown2PdfConverter.
+                    newConverter()
+                    .readFrom(new SimpleStringMarkdown2PdfReader(newReport))
+                    .writeTo(new SimpleFileMarkdown2PdfWriter(file))
+                    .doIt();
+        } catch (ConversionException | Markdown2PdfLogicException e) {
             e.printStackTrace();
+        }
+    }
+    private void writeReportMD(File file, String report) {
+        try {
+        FileWriter myWriter = new FileWriter(file);
+        myWriter.write(report);
+        myWriter.close();
+        } catch (IOException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
         }
     }
 
@@ -193,4 +243,5 @@ public class ReportController {
         logger.info("Created report for major " + faculty.toString());
         return reportBuilder.toString();
     }
+
 }

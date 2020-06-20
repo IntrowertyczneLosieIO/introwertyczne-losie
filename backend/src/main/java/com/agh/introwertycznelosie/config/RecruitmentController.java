@@ -3,13 +3,11 @@ package com.agh.introwertycznelosie.config;
 import com.agh.introwertycznelosie.data.Recruitment;
 import com.agh.introwertycznelosie.mockups.RecruitmentMockup;
 import com.agh.introwertycznelosie.services.RecruitmentService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
