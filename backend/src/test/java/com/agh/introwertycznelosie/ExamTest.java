@@ -1,15 +1,13 @@
 package com.agh.introwertycznelosie;
 
 import com.agh.introwertycznelosie.data.*;
-import com.agh.introwertycznelosie.services.ExamService;
-import com.agh.introwertycznelosie.services.FacultyService;
-import com.agh.introwertycznelosie.services.MajorService;
-import com.agh.introwertycznelosie.services.RecruitmentCycleService;
+import com.agh.introwertycznelosie.services.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -25,6 +23,10 @@ class ExamTest {
     private static Major major1, major2;
     private static RecruitmentCycle recruitmentCycle;
     private static Faculty wiet;
+    private static Recruitment recruitment;
+
+    @Autowired
+    private RecruitmentService recruitmentService;
 
     @Autowired
     private ExamService examService;
@@ -34,28 +36,29 @@ class ExamTest {
 
     @Autowired
     private FacultyService facultyService;
+
     @Autowired
     private RecruitmentCycleService recruitmentCycleService;
 
     @BeforeAll
     public static void createClasses() {
-        try {
-            wiet = new Faculty("WIEiT");
-        } catch (Faculty.InvalidFacultyException e) {
-            e.printStackTrace();
-        }
+        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT", new ArrayList<>());
         person1 = new Person("Adam", "Kowalik", "666555444", "a.kowalik@agh.edu.pl");
         person2 = new Person("Janina", "Bosacka", "999888777", "j.bosacka@agh.edu.pl");
         person3 = new Person("Janina", "Bosacka", "999888777", "j.bosacka@agh.edu.pl");
-        major1 = new Major(wiet, "Computer Science", "Inf", fullTime, 200, person1, null, false, "");
-        major2 = new Major(wiet, "Electronics", "Inf", fullTime, 200, person2, person3, false, "");
+        recruitment = new Recruitment("LATO-2020", 2020, Semester.summer);
+        wiet.addRecruitment(recruitment);
+        major1 = new Major(wiet, "Computer Science", "Inf", fullTime, 200, person1, null, false, "", recruitment);
+        major2 = new Major(wiet, "Electronics", "Inf", fullTime, 200, person2, person3, false, "", recruitment);
         recruitmentCycle = new RecruitmentCycle(null, 1);
+        recruitment.addRecruitmentCycle(recruitmentCycle);
         exam1 = new Exam("Computer Science", major1, new Date(2021, Calendar.SEPTEMBER, 1), new Date(2021, Calendar.SEPTEMBER, 8), recruitmentCycle);
         exam2 = new Exam("Electronics", major2, new Date(2021, Calendar.SEPTEMBER, 8), new Date(2021, Calendar.SEPTEMBER, 16), recruitmentCycle);
     }
 
     @Test
     void testAddingExamToDatabase(){
+        recruitment = recruitmentService.save(recruitment);
         recruitmentCycle = recruitmentCycleService.save(recruitmentCycle);
         wiet = facultyService.save(wiet);
         major1 = majorService.save(major1);

@@ -25,7 +25,7 @@ class AdminLinks extends React.Component {
             // </ul>
             <Nav>
                 <div className={"mr-5"}>
-                    <Button variant="outline-light">Ustawienia konta</Button>
+                    <Link to={"/changePassword"}> <Button variant="outline-light">Zmiana hasła</Button></Link>
                 </div>
                 <div className={"mr-5"}>
                     <Button variant="outline-light">Pomoc</Button>
@@ -33,7 +33,8 @@ class AdminLinks extends React.Component {
                 <div className={"ml-5"}>
                     <Link to={"/logout"}><Button variant="outline-light" onClick={() => {
                         fetch("/logout")
-                            .error((error) => console.log(error));
+                            .then((response) => response.json())
+                            .catch((error) => console.log(error));
                     }
                     }> Wyloguj się</Button></Link>
                 </div>

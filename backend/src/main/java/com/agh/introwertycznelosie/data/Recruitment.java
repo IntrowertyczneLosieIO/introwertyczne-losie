@@ -1,9 +1,7 @@
 package com.agh.introwertycznelosie.data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +20,16 @@ public class Recruitment {
     @OneToMany(mappedBy = "recruitment")
     private List<RecruitmentCycle> recruitmentCycles;
 
+    @OneToMany(mappedBy = "recruitment")
+    private List<Major> majors;
+
+    /*
+    @OneToMany(mappedBy = "recruitment")
+    private List<Room> rooms;
+    */
+    @ManyToMany(mappedBy = "recruitments")
+    private List<Faculty> faculties;
+
     public Recruitment() {
     }
 
@@ -30,6 +38,12 @@ public class Recruitment {
         this.recruitmentStatus = RecruitmentStatus.in_preparation;
         setYear(year);
         this.semester = semester;
+        recruitmentCycles = new ArrayList<>();
+        faculties = new ArrayList<>();
+    }
+
+    public void addFaculty(Faculty faculty) {
+        this.faculties.add(faculty);
     }
 
     public boolean isEditable() {
@@ -71,11 +85,23 @@ public class Recruitment {
         this.year = year;
     }
 
+    public List<RecruitmentCycle> getRecruitmentCycles(){
+        return this.recruitmentCycles;
+    }
+
     private int getCurrentYear() {
         Date today = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(today);
         return calendar.get(Calendar.YEAR);
+    }
+
+    public List<Major> getMajors() {
+        return majors;
+    }
+
+    public List<Faculty> getFaculties() {
+        return faculties;
     }
 
     public Semester getSemester() {
@@ -84,6 +110,20 @@ public class Recruitment {
 
     public void setSemester(Semester semester) {
         this.semester = semester;
+    }
+
+    public void setRecruitmentCycles(List<RecruitmentCycle> recruitmentCycles) {
+        this.recruitmentCycles = recruitmentCycles;
+    }
+
+    public void addRecruitmentCycle(RecruitmentCycle recruitmentCycle) { recruitmentCycles.add(recruitmentCycle); }
+
+    public void setMajors(List<Major> majors) {
+        this.majors = majors;
+    }
+
+    public void setFaculties(List<Faculty> faculties) {
+        this.faculties = faculties;
     }
 
     @Override

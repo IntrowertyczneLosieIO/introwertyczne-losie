@@ -97,7 +97,17 @@ public class LoginController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @RequestMapping(value = {"/*"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/changePassword", method = RequestMethod.PUT)
+    public ResponseEntity<HttpStatus> changePassword(@RequestBody UserMockup userMockup) {
+        UserDetails userDetails = securityService.findLoggedInUser();
+        User user = userRepository.findByUsername(userDetails.getUsername());
+        user.setPassword(bCryptPasswordEncoder.encode(userMockup.getPassword()));
+        userRepository.save(user);
+        return ResponseEntity.ok(HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = {"/", "/login", "/majors", "/registration", "/logout", "/rooms", "/exams", "/changePassword"}, method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("../static/index");
