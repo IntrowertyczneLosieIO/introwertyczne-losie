@@ -33,21 +33,23 @@ public class FacultyMockup {
         return acronym;
     }
 
-    public Long getRecruitmentIds() { return recruitmentId; }
+    public Long getRecruitmentId() { return recruitmentId; }
 
 
     public FacultyMockup(Faculty faculty) {
         id = faculty.getId();
         name = faculty.getName();
         acronym = faculty.getAcronym();
-        recruitmentId = faculty.getRecruitment().getId();
+        if(faculty.getRecruitment() != null)
+            recruitmentId = faculty.getRecruitment().getId();
     }
 
     public Faculty mockToFaculty(RecruitmentService recruitmentService){
         Faculty faculty = new Faculty();
         faculty.setName(name);
         faculty.setAcronym(acronym);
-        faculty.setRecruitment(recruitmentService.get(id));
+        //TODO: setting recruitment
+        //faculty.setRecruitment(recruitmentService.get(recruitmentId));
         return faculty;
     }
 

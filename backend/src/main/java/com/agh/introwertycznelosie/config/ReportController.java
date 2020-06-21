@@ -166,8 +166,9 @@ public class ReportController {
         if (header)
             reportBuilder.append("# RAPORT: ")
                 .append(major.getFaculty().getName())
-                .append("\n## Rekrutacja: ")
-                .append(major.getRecruitment().getAcronym());
+                .append("\n## Rekrutacja: ");
+        if (major.getRecruitment() != null)
+                reportBuilder.append(major.getRecruitment().getAcronym());
         reportBuilder
             .append("\n\n\n# Kierunek: ")
             .append(major.getFullName())
@@ -233,8 +234,9 @@ public class ReportController {
         StringBuilder reportBuilder = new StringBuilder(report);
         reportBuilder.append("# RAPORT: ")
                 .append(faculty.getName())
-                .append("\n## Rekrutacja: ")
-                .append(faculty.getRecruitment().getAcronym())
+                .append("\n## Rekrutacja: ");
+        if (faculty.getRecruitment() != null)
+                reportBuilder.append(faculty.getRecruitment().getAcronym())
                 .append("\n");
         for (Major major: majorService.findByFacultyId(id)) {
             reportBuilder.append(create_major_report(major.getId(), false))
