@@ -14,7 +14,7 @@ class RecruitmentHelperInfo extends React.Component {
         this.state = {
             showAddNew: false,
             recruitments: [],
-            recruitment: this.props.currentRecruitment
+            recruitment: null
         }
     }
 
@@ -45,7 +45,11 @@ class RecruitmentHelperInfo extends React.Component {
 
 
     componentDidMount() {
-        this.getRecruitments()
+        this.getRecruitments();
+        let currentRecruitment = localStorage.getItem('selectedRecruitment') || this.props.currentRecruitment;
+        this.setState({
+            recruitment: currentRecruitment
+        })
     }
 
     getRecruitments = () => {
@@ -69,7 +73,10 @@ class RecruitmentHelperInfo extends React.Component {
                     <Alert variant={"primary"} className={"mt-3"}>
                         <div style={{marginLeft: '17px'}}>Aktualna Rekrutacja: <strong>{this.state.recruitment}</strong></div>
                         <FormGroup as={Col} controlId={"newRecruitment"}>
-                            <Form.Control as={"select"} style={{width: 600, marginTop: '10px'}} onChange={(e) => this.setState({recruitment: e.target.value})} required>
+                            <Form.Control as={"select"} style={{width: 600, marginTop: '10px'}} onChange={(e) =>
+                            { this.setState({recruitment: e.target.value});
+                            localStorage.setItem('selectedRecruitment', e.target.value);
+                            }} required>
                                 {this.state.recruitments.map((r, index) => <option
                                     key={index}>{r.acronym} </option>)}
                             </Form.Control>
