@@ -65,11 +65,8 @@ public class IntrowertyczneLosieApplication {
         person5 = new Person("Jurek", "Ogórek", null, "j.ogorek@agh.edu.pl");
         recruitment1 = new Recruitment("Rekrutacja LATO 2020/2021", 2020, Semester.winter);
         recruitment2 = new Recruitment("Rekrutacja ZIMA 2021/2022", 2021, Semester.summer);
-        faculty1 = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT", new ArrayList<>());
-        faculty2 = new Faculty("Wydział Matematyki Stosowanej", "WMS", new ArrayList<>());
-        faculty1.addRecruitment(recruitment1);
-        faculty2.addRecruitment(recruitment1);
-        faculty2.addRecruitment(recruitment2);
+        faculty1 = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT", recruitment1);
+        faculty2 = new Faculty("Wydział Matematyki Stosowanej", "WMS", recruitment2);
         major1 = new Major(faculty1, "Informatyka", "Inf", ModeOfStudy.fullTime, 170, person1, person2, true, "", recruitment1);
         major2 = new Major(faculty1, "Data Science", "DS", ModeOfStudy.partTime, 30, person3, null, true, "Kierunek dla wybranych", recruitment1);
         major3 = new Major(faculty2, "Teoria grafów", "Grafy", ModeOfStudy.partTime, 40, person4, person5, false, "", recruitment2);

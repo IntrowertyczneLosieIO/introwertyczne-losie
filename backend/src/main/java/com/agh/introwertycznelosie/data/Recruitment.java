@@ -27,7 +27,7 @@ public class Recruitment {
     @OneToMany(mappedBy = "recruitment")
     private List<Room> rooms;
     */
-    @ManyToMany(mappedBy = "recruitments")
+    @ManyToMany(mappedBy = "recruitment")
     private List<Faculty> faculties;
 
     public Recruitment() {

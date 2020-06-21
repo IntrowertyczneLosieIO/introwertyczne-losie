@@ -23,7 +23,7 @@ public class FacultyMockup {
     private Long id;
     private String name;
     private String acronym;
-    private List<Long> recruitmentIds;
+    private Long recruitmentId;
 
     public String getName() {
         return name;
@@ -33,28 +33,23 @@ public class FacultyMockup {
         return acronym;
     }
 
-    public List<Long> getRecruitmentIds() { return recruitmentIds; }
+    public Long getRecruitmentId() { return recruitmentId; }
 
 
     public FacultyMockup(Faculty faculty) {
         id = faculty.getId();
         name = faculty.getName();
         acronym = faculty.getAcronym();
-        recruitmentIds = new ArrayList<>();
-        for (Recruitment recruitment : faculty.getRecruitments())
-        {
-            recruitmentIds.add(recruitment.getId());
-        }
+        if(faculty.getRecruitment() != null)
+            recruitmentId = faculty.getRecruitment().getId();
     }
 
     public Faculty mockToFaculty(RecruitmentService recruitmentService){
         Faculty faculty = new Faculty();
         faculty.setName(name);
         faculty.setAcronym(acronym);
-        faculty.setRecruitments(new ArrayList<>());
-        for (Long id : this.recruitmentIds) {
-            faculty.addRecruitment(recruitmentService.get(id));
-        }
+        //TODO: setting recruitment
+        //faculty.setRecruitment(recruitmentService.get(recruitmentId));
         return faculty;
     }
 

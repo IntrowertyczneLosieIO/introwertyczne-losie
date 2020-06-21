@@ -10,8 +10,8 @@ import java.util.List;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Faculty {
 
-    @ManyToMany
-    private List<Recruitment> recruitments;
+    @ManyToOne(cascade = {CascadeType.MERGE})
+    private Recruitment recruitment;
 
     @Id
     @GeneratedValue
@@ -22,18 +22,15 @@ public class Faculty {
 
     public Faculty(){}
 
-    public Faculty(String name, String acronym, List<Recruitment> recruitments){
+    public Faculty(String name, String acronym, Recruitment recruitment){
         this.name = name;
         this.acronym = acronym;
-        this.recruitments = recruitments;
+        this.recruitment = recruitment;
     }
 
-    public void setRecruitments(List<Recruitment> recruitments) { recruitments = recruitments; }
+    public void setRecruitment(Recruitment recruitment) { this.recruitment = recruitment; }
 
-    public List<Recruitment> getRecruitments() { return recruitments; }
-
-    public void addRecruitment(Recruitment recruitment) {
-        recruitments.add(recruitment);}
+    public Recruitment getRecruitment() { return recruitment; }
 
     public Long getId(){
         return id;
@@ -65,6 +62,7 @@ public class Faculty {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", acronym='" + acronym + '\'' +
+                ", recruitment=" + recruitment + '\'' +
                 '}';
     }
 }

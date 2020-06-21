@@ -38,4 +38,6 @@ public class MajorService {
     public List<Major> getAll() {
         return majorRepository.findAllByOrderByIdDesc();
     }
+
+    public List<Major> findByFacultyId(Long id) { return majorRepository.findByFacultyId(id); }
 }

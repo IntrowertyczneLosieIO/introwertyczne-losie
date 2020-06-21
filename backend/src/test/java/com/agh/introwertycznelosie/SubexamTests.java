@@ -56,11 +56,10 @@ public class SubexamTests {
         LinkedList<DateRange> availableDates = new LinkedList<>();
         availableDates.add(new DateRange());
         availableDates.add(new DateRange());
-        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT", new ArrayList<>());
+        wiet = new Faculty("Wydział Informatyki, Elektroniki i Telekomunikacji", "WIEiT", recruitment);
         person1 = new Person("Adam", "Kowalik", "666555444", "a.kowalik@agh.edu.pl");
         person2 = new Person("Janina", "Bosacka", "999888777", "j.bosacka@agh.edu.pl");
         recruitment = new Recruitment("LATO-2020", 2020, Semester.summer);
-        wiet.addRecruitment(recruitment);
         major1 = new Major(wiet, "Computer Science", "Inf", fullTime, 200, person1, person2, false, "", recruitment);
         r1 = new Room(100, 200, "d17", "3.42", availableDates);
         recruitmentCycle = new RecruitmentCycle(null, 1);
