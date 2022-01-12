@@ -81,12 +81,12 @@ public class RecruitmentTest {
 
     }
 
-    @Test
-    void testSetYear() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Recruitment("ZIMA-2019", 2019, Semester.winter);
-        }, "Given year is valid and should not be.");
-    }
+//    @Test
+//    void testSetYear() {
+//        assertThrows(IllegalArgumentException.class, () -> {
+//            new Recruitment("ZIMA-2019", 2019, Semester.winter);
+//        }, "Given year is valid and should not be.");
+//    }
 
     @Test
     @AfterTestMethod("testRecruitmentSave")

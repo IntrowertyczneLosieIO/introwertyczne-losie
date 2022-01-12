@@ -79,9 +79,9 @@ public class Recruitment {
     }
 
     public void setYear(int year) {
-        if(year < getCurrentYear()) {
-            throw new IllegalArgumentException("Set year cannot be earlier than current");
-        }
+//        if(year < getCurrentYear()) {
+//            throw new IllegalArgumentException("Set year cannot be earlier than current");
+//        }
         this.year = year;
     }
 
